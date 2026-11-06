@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GGST Ramlethal Combo Book</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--panel:#1a1c25;--panel2:#222531;--line:#343746;--text:#f3f4f8;--muted:#a7abba;--accent:#d7a7ff;--green:#a7e2bd;--yellow:#f1d28a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#12131a,#171421 55%,#101116);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:26px max(18px,calc((100vw - 1120px)/2));border-bottom:1px solid var(--line);background:#151620dd}
+.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.16em;font-weight:800}h1{margin:5px 0 4px;font-size:clamp(25px,5vw,38px)}header p{margin:0;color:var(--muted)}
+main{max-width:1120px;margin:auto;padding:22px 18px 60px}.toolbar,.filters,.stats,.cardgrid{display:grid;gap:12px}.toolbar{grid-template-columns:1fr auto auto;margin-bottom:14px}.filters{grid-template-columns:repeat(4,minmax(0,1fr));padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:15px}
+input,select,textarea,button{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}input:focus,select:focus,textarea:focus{outline:2px solid #bd8be8}
+button{cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:#21152a;border-color:var(--accent)}button:hover{filter:brightness(1.1)}
+.stats{grid-template-columns:repeat(3,1fr);margin:14px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px}.stat b{display:block;font-size:22px}.stat span{color:var(--muted);font-size:12px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;margin:22px 0 10px}.sectionhead h2{font-size:19px;margin:0}.sectionhead small{color:var(--muted)}
+.cardgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.cardtop{display:flex;justify-content:space-between;gap:8px;align-items:start}.card h3{margin:0;font-size:17px}.pill{font-size:11px;padding:3px 8px;border-radius:99px;background:#343044;color:#e5caff;white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:7px}.tag{font-size:12px;color:var(--muted);background:#252834;padding:4px 8px;border-radius:7px}
+.recipe{background:#101219;border:1px solid #343746;padding:12px;border-radius:10px;font:600 14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{background:#222531;border-radius:9px;padding:9px}.metric span{display:block;color:var(--muted);font-size:11px}.metric b{font-size:15px}
+.note{color:var(--muted);font-size:13px}.cardactions{display:flex;gap:8px;margin-top:auto}.cardactions button{font-size:12px;padding:7px 10px}
+.status{font-size:11px;color:var(--yellow)}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px}
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#d8b4ff}
+@media(max-width:720px){.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.filters{grid-template-columns:1fr 1fr}.cardgrid{grid-template-columns:1fr}.stats{gap:7px}.stat{padding:9px}.stat b{font-size:18px}form .formgrid{grid-template-columns:1fr}form label.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1>RAMLETHAL COMBO BOOK</h1><p>ラムレザルの実戦コンボを、状況・ダメージ・実戦評価で管理。</p></header>
+<main>
+<div class="toolbar">
+<input id="search" placeholder="コンボ名・始動技・コマンドで検索">
+<button class="primary" id="addBtn">＋ コンボを追加</button>
+<button id="exportBtn">バックアップ</button>
+<button id="importBtn">復元</button>
+<input id="fileInput" type="file" accept="application/json" hidden>
+</div>
+<div class="filters">
+<select id="situation"><option value="">すべての状況</option><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select>
+<select id="position"><option value="">位置：すべて</option><option>画面中央</option><option>画面端</option><option>どこでも</option><option>要確認</option></select>
+<select id="rating"><option value="">実戦評価：すべて</option><option value="5">★★★★★</option><option value="4">★★★★☆以上</option><option value="3">★★★☆☆以上</option><option value="2">★★☆☆☆以上</option></select>
+<select id="sort"><option value="recommended">おすすめ順</option><option value="damage">ダメージ順</option><option value="easy">簡単な順</option></select>
+</div>
+<div class="stats">
+<div class="stat"><b id="count">0</b><span>登録コンボ</span></div>
+<div class="stat"><b id="recommended">0</b><span>実戦評価 ★★★★☆以上</span></div>
+<div class="stat"><b id="favorites">0</b><span>お気に入り</span></div>
+</div>
+<div class="sectionhead"><h2>コンボ一覧</h2><small id="resultCount"></small></div>
+<div class="cardgrid" id="cards"></div>
+<footer>
+<strong>初期データについて</strong><br>
+初期登録はDustloopのVer.2.00およびVer.2.03欄に掲載されたルートに限定しています。ダメージは掲載値、実戦評価は難易度・汎用性を合わせた暫定評価です。トレーニングモードで再現確認してから「確認済み」に変更してください。<br><br>
+参考：<a href="https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos" target="_blank" rel="noreferrer">Dustloop – Ramlethal Combos</a> ／
+<a href="https://dashfight.com/ggst/characters/ramlethal-1519/guides" target="_blank" rel="noreferrer">DashFight – Ramlethal Guides</a>
+</footer>
+</main>
+<dialog id="editor">
+<form id="comboForm">
+<h2 id="dialogTitle">コンボを追加</h2><input type="hidden" id="editId">
+<div class="formgrid">
+<label>コンボ名<input id="name" required placeholder="例：近S始動・基本"></label>
+<label>始動技<input id="starter" placeholder="例：近S / 2K / 6P"></label>
+<label>状況<select id="kind"><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select></label>
+<label>位置<select id="pos"><option>どこでも</option><option>画面中央</option><option>画面端</option><option>要確認</option></select></label>
+<label>実戦評価<select id="score"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></label>
+<label>ダメージ（未計測なら空欄）<input id="damage" type="number" min="0" placeholder="未計測"></label>
+<label class="full">コマンド<textarea id="recipe" required placeholder="例：近S > 遠S > HS"></textarea></label>
+<label class="full">メモ<textarea id="notes" placeholder="成立条件・注意点・練習メモなど"></textarea></label>
+<label>対応バージョン<select id="version"><option>2.00</option><option>2.03</option><option>2.04以降</option><option>未確認</option></select></label>
+<label>検証状態<select id="verified"><option value="unverified">未検証（パッチ2.00）</option><option value="tested">トレモ確認済み</option></select></label>
+<label>お気に入り<select id="favorite"><option value="false">通常</option><option value="true">お気に入り</option></select></label>
+</div><div class="dialogactions"><button type="button" id="cancelBtn">キャンセル</button><button class="primary" type="submit">保存</button></div>
+</form>
+</dialog>
+<script>
+const seed=[
+{id:"v203-1",name:"5H > 214K / 214H",starter:"5H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:78,recipe:"5H > 214K（78） / 5H > 214H（100）",notes:"Ver.2.03掲載。剣を消費しない基本ルート。214Kは最遠距離では空振りする場合あり。ダメージはルート順に78 / 100。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-2",name:"2H > エラルルーモ",starter:"2H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:127,recipe:"2H > 214P~4P~4P",notes:"Ver.2.03掲載。非常に簡単なダウン奪取ルート。剣を消費しない。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-3",name:"2H > ダウロ > c.S",starter:"2H",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:153,recipe:"2H > 623P > c.S > 2H > 214P~4P~4P",notes:"Ver.2.03掲載。基本ルートよりダメージと運びを伸ばす。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-4",name:"6H > ダウロ",starter:"6H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:91,recipe:"6H > 623P",notes:"Ver.2.03掲載。簡単な追撃で、起き攻めにつなげやすい。剣を消費しない。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-5",name:"6H > ダウロ > エラルルーモ",starter:"6H",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:154,recipe:"6H > 623P > c.S > 214P~4P~4P",notes:"Ver.2.03掲載。画面端への運びとダウンを両立。剣を消費しない。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-6",name:"2D > ダウロ",starter:"2D",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:55,recipe:"2D > 623P",notes:"Ver.2.03掲載。シンプルなダウン奪取ルート。剣を消費しない。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-7",name:"CH 2D > エラルルーモ",starter:"2D",kind:"カウンターヒット",pos:"どこでも",score:4,damage:105,recipe:"CH 2D > 214P~4P~4P",notes:"Ver.2.03掲載。近距離では5Kを挟むと111ダメージ。最遠距離では5Kが空振りする。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-8",name:"2S > 5H > 214K / 214H",starter:"2S",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:99,recipe:"2S > 5H > 214K（99） / 214H（117）",notes:"Ver.2.03掲載。剣を消費しない基本ルート。214Kは起き攻めを狙いやすく、214Hはダメージ重視。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v200-1",name:"5K / 2K > 2D > エラルルーモ",starter:"5K / 2K",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:61,recipe:"5K / 2K > 2D > 214P（61 / 48）",notes:"Ver.2.00掲載。2D後の214Pは追い打ちになり、ダッシュキャンセルから起き攻めを狙える。ダメージは5K / 2K始動の順。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
+{id:"v200-2",name:"5K / 2K > 6P / 2D > ダウロ",starter:"5K / 2K",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:68,recipe:"5K / 2K > 6P / 2D > 623P",notes:"Ver.2.00掲載。防御・立ち回りの両方で使う標準ルート。分岐ごとのダメージは68 / 68 / 53 / 54。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
+{id:"v200-3",name:"6P対空 > 214H",starter:"6P",kind:"対空",pos:"どこでも",score:5,damage:74,recipe:"対空6P > 214H",notes:"Ver.2.00掲載。相手がラムレザルより上にいる必要あり。地上CH始動でも最遠距離以外で成立。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
+{id:"v200-4",name:"c.S > 2H > エラルルーモ",starter:"近S（c.S）",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:150,recipe:"c.S > 2H > 214P~4P~4P",notes:"Ver.2.00掲載。簡単な近S始動。エンハンス版エラルルーモ3でダウンを奪い、どこでも起き攻めを狙える。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
+{id:"v200-5",name:"f.S > 5H > 214H",starter:"遠S（f.S）",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:120,recipe:"f.S > 5H > 214H",notes:"Ver.2.00掲載。非常に簡単で確認もしやすい遠S始動。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
+{id:"v200-6",name:"CH 5K > ダウロ > 追撃",starter:"5K",kind:"カウンターヒット",pos:"どこでも",score:3,damage:114,recipe:"CH 5K > 623P > 2K > 6H > 214H",notes:"Ver.2.00掲載。カウンターヒット時のヒットストップを利用。ダメージと画面端への運びを伸ばせる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00",version:"2.00"}
+]
+let stored=[];
+try { const data=JSON.parse(localStorage.getItem("ramComboBook")||"null"); if(Array.isArray(data)) stored=data; } catch(e) { console.warn("保存データの読み込みに失敗",e); }
+// 以前の空データや旧バージョンの保存データでも、標準コンボを必ず表示する。
+let combos=[...stored,...seed.filter(c=>!stored.some(x=>x.id===c.id))];
+const $=id=>document.getElementById(id);
+const save=()=>{try{localStorage.setItem("ramComboBook",JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
+const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
+function render(){
+let q=$("search").value.toLowerCase(),sit=$("situation").value,pos=$("position").value,rat=+$("rating").value||0,sort=$("sort").value;
+let arr=combos.filter(c=>(!q||[c.name,c.starter,c.recipe,c.notes].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&(!pos||c.pos===pos)&&(!rat||c.score>=rat));
+arr.sort((a,b)=>sort==="damage"?(b.damage||0)-(a.damage||0):sort==="easy"?b.score-a.score:b.score-a.score||((b.damage||0)-(a.damage||0)));
+$("count").textContent=combos.length;$("recommended").textContent=combos.filter(c=>c.score>=4).length;$("favorites").textContent=combos.filter(c=>c.favorite).length;$("resultCount").textContent=`${arr.length} 件表示`;
+$("cards").innerHTML=arr.length?arr.map(c=>`<article class="card"><div class="cardtop"><h3>${esc(c.name)}</h3><span class="pill">${c.favorite?"★ お気に入り":"ラムレザル"}</span></div><div class="meta"><span class="tag">${esc(c.kind)}</span><span class="tag">${esc(c.pos)}</span><span class="tag">${esc(c.starter||"始動未設定")}始動</span><span class="tag">Ver. ${esc(c.version||"未設定")}</span></div><div class="metrics"><div class="metric"><span>実戦評価（簡単さ＋汎用性）</span><b>${stars(c.score)}</b></div><div class="metric"><span>ダメージ</span><b>${c.damage==null?"未計測":c.damage}</b></div></div><div class="recipe">${esc(c.recipe)}</div><div class="note">${esc(c.notes||"メモなし")}</div><div class="status">${c.verified==="tested"?"✓ トレモ確認済み":"⚠ トレモ未検証"}${c.source?" ・参考："+esc(c.source):""}</div><div class="cardactions"><button onclick="toggleFav('${c.id}')">${c.favorite?"★ お気に入り解除":"☆ お気に入り"}</button><button onclick="editCombo('${c.id}')">編集</button><button onclick="deleteCombo('${c.id}')">削除</button></div></article>`).join(""):'<div class="empty">該当するコンボがありません。条件を変えるか、新しく追加してください。</div>';
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function toggleFav(id){let c=combos.find(x=>x.id===id);c.favorite=!c.favorite;save();render()}
+function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textContent="コンボを編集";$("editId").value=c.id;for(let k of ["name","starter","kind","pos","score","damage","recipe","notes","verified","favorite","version"]){let el=$(k);el.value=c[k]??(k==="damage"?"":el.value)}$("editor").showModal()}
+function deleteCombo(id){if(confirm("このコンボを削除しますか？")){combos=combos.filter(c=>c.id!==id);save();render()}}
+$("addBtn").onclick=()=>{$("comboForm").reset();$("dialogTitle").textContent="コンボを追加";$("editId").value="";$("editor").showModal()};
+$("cancelBtn").onclick=()=>$("editor").close();
+$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,pos:$("pos").value,score:+$("score").value,damage:$("damage").value===""?null:+$("damage").value,recipe:$("recipe").value,notes:$("notes").value,verified:$("verified").value,favorite:$("favorite").value==="true",version:$("version").value,source:old?.source||"ユーザー登録"};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
+["search","situation","position","rating","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
+$("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({game:"GGST",character:"Ramlethal",combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="ggst-ramlethal-combos.json";a.click();URL.revokeObjectURL(a.href)};
+$("importBtn").onclick=()=>$("fileInput").click();
+$("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();render()}}catch{alert("JSONファイルを読み込めませんでした")};e.target.value=""};
+render();
+</script>
+</body></html>
