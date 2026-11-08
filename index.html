@@ -9,7 +9,7 @@
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#12131a,#171421 55%,#101116);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
 header{padding:26px max(18px,calc((100vw - 1120px)/2));border-bottom:1px solid var(--line);background:#151620dd}
 .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.16em;font-weight:800}h1{margin:5px 0 4px;font-size:clamp(25px,5vw,38px)}header p{margin:0;color:var(--muted)}
-main{max-width:1120px;margin:auto;padding:22px 18px 60px}.toolbar,.filters,.stats,.cardgrid{display:grid;gap:12px}.toolbar{grid-template-columns:1fr auto auto;margin-bottom:14px}.filters{grid-template-columns:repeat(4,minmax(0,1fr));padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:15px}
+main{max-width:1120px;margin:auto;padding:22px 18px 60px}.toolbar,.filters,.stats,.cardgrid{display:grid;gap:12px}.toolbar{grid-template-columns:1fr repeat(4,auto);margin-bottom:14px}.filters{grid-template-columns:repeat(5,minmax(0,1fr));padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:15px}
 input,select,textarea,button{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}input:focus,select:focus,textarea:focus{outline:2px solid #bd8be8}
 button{cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:#21152a;border-color:var(--accent)}button:hover{filter:brightness(1.1)}
 .stats{grid-template-columns:repeat(3,1fr);margin:14px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px}.stat b{display:block;font-size:22px}.stat span{color:var(--muted);font-size:12px}
@@ -28,33 +28,41 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 </style>
 </head>
 <body>
-<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1>RAMLETHAL COMBO BOOK</h1><p>ラムレザルの実戦コンボを、状況・ダメージ・実戦評価で管理。</p></header>
+<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1>RAMLETHAL COMBO BOOK</h1><p>まず主力候補6ルートから。現行Ver.2.03での成立・ダメージ・起き攻めは順次検証。</p></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
+<button id="viewToggle" aria-pressed="true">全件を表示</button>
 <button class="primary" id="addBtn">＋ コンボを追加</button>
 <button id="exportBtn">バックアップ</button>
 <button id="importBtn">復元</button>
 <input id="fileInput" type="file" accept="application/json" hidden>
 </div>
 <div class="filters">
-<select id="situation"><option value="">すべての状況</option><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select>
+<select id="topicFilter"><option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>その他</option></select>
+<select id="situation"><option value="">始動分類：すべて</option><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select>
 <select id="position"><option value="">位置：すべて</option><option>画面中央</option><option>画面端</option><option>どこでも</option><option>要確認</option></select>
 <select id="rating"><option value="">実戦評価：すべて</option><option value="5">★★★★★</option><option value="4">★★★★☆以上</option><option value="3">★★★☆☆以上</option><option value="2">★★☆☆☆以上</option></select>
 <select id="sort"><option value="recommended">おすすめ順</option><option value="damage">ダメージ順</option><option value="easy">簡単な順</option></select>
 </div>
 <div class="stats">
 <div class="stat"><b id="count">0</b><span>登録コンボ</span></div>
-<div class="stat"><b id="recommended">0</b><span>実戦評価 ★★★★☆以上</span></div>
+<div class="stat"><b id="mainCount">0</b><span>主力候補</span></div>
 <div class="stat"><b id="favorites">0</b><span>お気に入り</span></div>
 </div>
 <div class="sectionhead"><h2>コンボ一覧</h2><small id="resultCount"></small></div>
 <div class="cardgrid" id="cards"></div>
 <footer>
-<strong>初期データについて</strong><br>
-初期登録はDustloopのVer.2.00およびVer.2.03欄に掲載されたルートに限定しています。ダメージは掲載値、実戦評価は難易度・汎用性を合わせた暫定評価です。トレーニングモードで再現確認してから「確認済み」に変更してください。<br><br>
-参考：<a href="https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos" target="_blank" rel="noreferrer">Dustloop – Ramlethal Combos</a> ／
-<a href="https://dashfight.com/ggst/characters/ramlethal-1519/guides" target="_blank" rel="noreferrer">DashFight – Ramlethal Guides</a>
+<strong>バージョンと検証状態</strong><br>
+現行はVer.2.03（Battle Ver.5.03）。登録14件はDustloopのVer.2.00／2.03掲載ルートを引き継いだ候補です。ダメージは掲載値で、すべて現行トレーニング環境では未検証です。起き攻めも確認できるまでは未検証として表示します。Ver.2.00では長距離牽制や無敵技後のリターン、ラムレザルのダウロ・エラルルーモ後の浮きなどが変更されています。<br><br>
+<strong>ラムレザル専門・上位プレイヤーの実戦参考</strong><br>
+RedDitto（ラムレザル）対 Verix：<a href="https://www.youtube.com/watch?v=D0URjpLOG2k" target="_blank" rel="noreferrer">EVO 2026 Grand Final</a> ／
+RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" target="_blank" rel="noreferrer">GGST Ver.2.00 対戦</a> ／
+ラムレザルプレイヤーSQ：<a href="https://www.youtube.com/user/ISQuirrel147/videos" target="_blank" rel="noreferrer">YouTube動画一覧</a><br>
+これらは実戦での始動・判断を見る参考資料で、個別コンボの成立証明ではありません。<br><br>
+パッチ資料：<a href="https://www.guiltygear.com/ggst/en/news/post-2851/" target="_blank" rel="noreferrer">Arc System Works – Ver.2.00</a> ／
+<a href="https://www.guiltygear.com/ggst/jp/news/post-8366/" target="_blank" rel="noreferrer">Arc System Works – Ver.2.03</a> ／
+<a href="https://www.dustloop.com/w/GGST/Ramlethal_Valentine/Combos" target="_blank" rel="noreferrer">Dustloop – Ramlethal Combos</a>
 </footer>
 </main>
 <dialog id="editor">
@@ -64,13 +72,14 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <label>コンボ名<input id="name" required placeholder="例：近S始動・基本"></label>
 <label>始動技<input id="starter" placeholder="例：近S / 2K / 6P"></label>
 <label>状況<select id="kind"><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select></label>
+<label>実戦状況<select id="comboTopic"><option>その他</option><option>無敵技ガード後の確反</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option></select></label>
 <label>位置<select id="pos"><option>どこでも</option><option>画面中央</option><option>画面端</option><option>要確認</option></select></label>
 <label>実戦評価<select id="score"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></label>
 <label>ダメージ（未計測なら空欄）<input id="damage" type="number" min="0" placeholder="未計測"></label>
 <label class="full">コマンド<textarea id="recipe" required placeholder="例：近S > 遠S > HS"></textarea></label>
 <label class="full">メモ<textarea id="notes" placeholder="成立条件・注意点・練習メモなど"></textarea></label>
 <label>対応バージョン<select id="version"><option>2.00</option><option>2.03</option><option>2.04以降</option><option>未確認</option></select></label>
-<label>検証状態<select id="verified"><option value="unverified">未検証（パッチ2.00）</option><option value="tested">トレモ確認済み</option></select></label>
+<label>検証状態<select id="verified"><option value="unverified">未検証（現行版）</option><option value="tested">トレモ確認済み</option></select></label>
 <label>お気に入り<select id="favorite"><option value="false">通常</option><option value="true">お気に入り</option></select></label>
 </div><div class="dialogactions"><button type="button" id="cancelBtn">キャンセル</button><button class="primary" type="submit">保存</button></div>
 </form>
@@ -92,28 +101,50 @@ const seed=[
 {id:"v200-5",name:"f.S > 5H > 214H",starter:"遠S（f.S）",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:120,recipe:"f.S > 5H > 214H",notes:"Ver.2.00掲載。非常に簡単で確認もしやすい遠S始動。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
 {id:"v200-6",name:"CH 5K > ダウロ > 追撃",starter:"5K",kind:"カウンターヒット",pos:"どこでも",score:3,damage:114,recipe:"CH 5K > 623P > 2K > 6H > 214H",notes:"Ver.2.00掲載。カウンターヒット時のヒットストップを利用。ダメージと画面端への運びを伸ばせる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00",version:"2.00"}
 ]
+const curation={
+ "v200-5":{main:true,topic:"牽制ヒット",difficulty:"易（暫定）",meter:0,shared:"2S始動と後半の5H > 214Hを共通化",reason:"使用頻度の高い遠S始動。短く、2S始動と同じ締めを覚えられる。",oki:"要検証（締め後の距離・剣状態を確認）"},
+ "v203-8":{main:true,topic:"牽制ヒット",difficulty:"易（暫定）",meter:0,shared:"遠S始動と後半の5H > 214Hを共通化",reason:"遠Sと同じ後半を使うため追加の習得負担が小さい。",oki:"要検証（214K／214Hで比較）"},
+ "v200-1":{main:true,topic:"小技ヒット",difficulty:"易（暫定）",meter:0,shared:"2D > 214Pを使う基本締め",reason:"小技からの短いルート。ゲージを使わず、安定してダウンを取る候補。",oki:"要検証（ダッシュキャンセル後を確認）"},
+ "v200-4":{main:true,topic:"近距離ヒット",difficulty:"易（暫定）",meter:0,shared:"追加候補の2H始動とエラルルーモ部分を共通化",reason:"近距離でリターンを取る基本候補。起き攻め通常技ヒットや確反への適性は未確認。",oki:"要検証（締め後の起き攻めを確認）"},
+ "v203-4":{main:true,topic:"近距離ヒット",difficulty:"易（暫定）",meter:0,shared:"6H始動の短いダウロ追撃",reason:"短く、追加習得負担が小さい6Hヒット時の候補。",oki:"要検証（距離・起き攻めを確認）"},
+ "v200-3":{main:true,topic:"対空",difficulty:"易（暫定）",meter:0,shared:"他の主力ルートと共通パーツなし",reason:"対空成功時に覚える専用ルートを1本に絞る候補。",oki:"要検証（相手の高さ別に確認）"},
+ "v203-1":{topic:"その他",difficulty:"易（暫定）",meter:0,oki:"要検証（214K／214Hで比較）"},
+ "v203-2":{topic:"近距離ヒット",difficulty:"易（暫定）",meter:0,oki:"要検証（ダウン後の距離・剣状態を確認）"},
+ "v203-3":{topic:"近距離ヒット",difficulty:"中（暫定）",meter:0,oki:"要検証（近S後を確認）"},
+ "v203-5":{topic:"近距離ヒット",difficulty:"中（暫定）",meter:0,oki:"要検証（画面端運び後を確認）"},
+ "v203-6":{topic:"小技ヒット",difficulty:"易（暫定）",meter:0,oki:"要検証（ダッシュキャンセル後を確認）"},
+ "v203-7":{topic:"カウンターヒット",difficulty:"易（暫定）",meter:0,oki:"要検証（距離別に確認）"},
+ "v200-2":{topic:"小技ヒット",difficulty:"中（暫定）",meter:0,oki:"要検証（分岐・距離別に確認）"},
+ "v200-6":{topic:"カウンターヒット",difficulty:"中（暫定）",meter:0,oki:"要検証（画面端運びを含めて確認）"}
+};
+seed.forEach(c=>Object.assign(c,curation[c.id]||{}));
 let stored=[];
 try { const data=JSON.parse(localStorage.getItem("ramComboBook")||"null"); if(Array.isArray(data)) stored=data; } catch(e) { console.warn("保存データの読み込みに失敗",e); }
 // 以前の空データや旧バージョンの保存データでも、標準コンボを必ず表示する。
-let combos=[...stored,...seed.filter(c=>!stored.some(x=>x.id===c.id))];
+const storedById=new Map(stored.map(c=>[c.id,c]));
+let combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
 const $=id=>document.getElementById(id);
 const save=()=>{try{localStorage.setItem("ramComboBook",JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
 const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
+let mainOnly=true;
+const difficultyRank=c=>String(c.difficulty||"").startsWith("易")?0:String(c.difficulty||"").startsWith("中")?1:2;
+$("viewToggle").onclick=()=>{mainOnly=!mainOnly;$("viewToggle").textContent=mainOnly?"全件を表示":"主力6件だけ表示";$("viewToggle").setAttribute("aria-pressed",String(mainOnly));render()};
 function render(){
-let q=$("search").value.toLowerCase(),sit=$("situation").value,pos=$("position").value,rat=+$("rating").value||0,sort=$("sort").value;
-let arr=combos.filter(c=>(!q||[c.name,c.starter,c.recipe,c.notes].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&(!pos||c.pos===pos)&&(!rat||c.score>=rat));
-arr.sort((a,b)=>sort==="damage"?(b.damage||0)-(a.damage||0):sort==="easy"?b.score-a.score:b.score-a.score||((b.damage||0)-(a.damage||0)));
-$("count").textContent=combos.length;$("recommended").textContent=combos.filter(c=>c.score>=4).length;$("favorites").textContent=combos.filter(c=>c.favorite).length;$("resultCount").textContent=`${arr.length} 件表示`;
-$("cards").innerHTML=arr.length?arr.map(c=>`<article class="card"><div class="cardtop"><h3>${esc(c.name)}</h3><span class="pill">${c.favorite?"★ お気に入り":"ラムレザル"}</span></div><div class="meta"><span class="tag">${esc(c.kind)}</span><span class="tag">${esc(c.pos)}</span><span class="tag">${esc(c.starter||"始動未設定")}始動</span><span class="tag">Ver. ${esc(c.version||"未設定")}</span></div><div class="metrics"><div class="metric"><span>実戦評価（簡単さ＋汎用性）</span><b>${stars(c.score)}</b></div><div class="metric"><span>ダメージ</span><b>${c.damage==null?"未計測":c.damage}</b></div></div><div class="recipe">${esc(c.recipe)}</div><div class="note">${esc(c.notes||"メモなし")}</div><div class="status">${c.verified==="tested"?"✓ トレモ確認済み":"⚠ トレモ未検証"}${c.source?" ・参考："+esc(c.source):""}</div><div class="cardactions"><button onclick="toggleFav('${c.id}')">${c.favorite?"★ お気に入り解除":"☆ お気に入り"}</button><button onclick="editCombo('${c.id}')">編集</button><button onclick="deleteCombo('${c.id}')">削除</button></div></article>`).join(""):'<div class="empty">該当するコンボがありません。条件を変えるか、新しく追加してください。</div>';
+let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFilter").value,pos=$("position").value,rat=+$("rating").value||0,sort=$("sort").value;
+let arr=combos.filter(c=>(!mainOnly||c.main)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&(!topic||c.topic===topic)&&(!pos||c.pos===pos)&&(!rat||c.score>=rat));
+arr.sort((a,b)=>sort==="damage"?(b.damage||0)-(a.damage||0):sort==="easy"?difficultyRank(a)-difficultyRank(b):Number(!!b.main)-Number(!!a.main)||b.score-a.score||((b.damage||0)-(a.damage||0)));
+$("count").textContent=combos.length;$("mainCount").textContent=combos.filter(c=>c.main).length;$("favorites").textContent=combos.filter(c=>c.favorite).length;$("resultCount").textContent=`${arr.length} 件表示`;
+$("cards").innerHTML=arr.length?arr.map(c=>`<article class="card"><div class="cardtop"><h3>${esc(c.name)}</h3><span class="pill">${c.main?"主力候補":c.favorite?"★ お気に入り":"追加候補"}</span></div><div class="meta"><span class="tag">${esc(c.topic||c.kind)}</span><span class="tag">${esc(c.pos)}</span><span class="tag">${esc(c.starter||"始動未設定")}始動</span><span class="tag">${esc(c.difficulty||"難度未評価")}</span></div><div class="metrics"><div class="metric"><span>掲載ダメージ</span><b>${c.damage==null?"未計測":esc(c.damage)}</b></div><div class="metric"><span>ゲージ</span><b>${c.meter===0?"なし":c.meter?esc(c.meter)+"%":"未確認"}</b></div></div><div class="recipe">${esc(c.recipe)}</div><div class="status">${c.verified==="tested"?"✓ トレモ確認済み":"⚠ Ver."+esc(c.version||"未確認")+"掲載・現行未検証"}</div><details><summary>採用理由・条件・起き攻め</summary><div class="note">${esc(c.reason||c.notes||"条件を要確認")}</div>${c.shared?`<p class="note"><strong>共通ルート：</strong>${esc(c.shared)}</p>`:""}<p class="note"><strong>起き攻め：</strong>${esc(c.oki||"要検証")}</p><p class="note"><strong>位置：</strong>${esc(c.pos)} ／ <strong>元データ：</strong>${esc(c.source||"ユーザー登録")}</p>${c.notes?`<p class="note"><strong>元メモ：</strong>${esc(c.notes)}</p>`:""}</details><div class="cardactions"><button data-action="favorite" data-id="${esc(c.id)}">${c.favorite?"★ お気に入り解除":"☆ お気に入り"}</button><button data-action="edit" data-id="${esc(c.id)}">編集</button><button data-action="delete" data-id="${esc(c.id)}">削除</button></div></article>`).join(""):'<div class="empty">該当するコンボがありません。条件を変えるか、「全14件を表示」に切り替えてください。</div>';
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+$("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-action]");if(!button)return;const {action,id}=button.dataset;if(action==="favorite")toggleFav(id);if(action==="edit")editCombo(id);if(action==="delete")deleteCombo(id)});
 function toggleFav(id){let c=combos.find(x=>x.id===id);c.favorite=!c.favorite;save();render()}
-function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textContent="コンボを編集";$("editId").value=c.id;for(let k of ["name","starter","kind","pos","score","damage","recipe","notes","verified","favorite","version"]){let el=$(k);el.value=c[k]??(k==="damage"?"":el.value)}$("editor").showModal()}
+function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textContent="コンボを編集";$("editId").value=c.id;for(let k of ["name","starter","kind","pos","score","damage","recipe","notes","verified","favorite","version"]){let el=$(k);el.value=c[k]??(k==="damage"?"":el.value)}$("comboTopic").value=c.topic||"その他";$("editor").showModal()}
 function deleteCombo(id){if(confirm("このコンボを削除しますか？")){combos=combos.filter(c=>c.id!==id);save();render()}}
 $("addBtn").onclick=()=>{$("comboForm").reset();$("dialogTitle").textContent="コンボを追加";$("editId").value="";$("editor").showModal()};
 $("cancelBtn").onclick=()=>$("editor").close();
-$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,pos:$("pos").value,score:+$("score").value,damage:$("damage").value===""?null:+$("damage").value,recipe:$("recipe").value,notes:$("notes").value,verified:$("verified").value,favorite:$("favorite").value==="true",version:$("version").value,source:old?.source||"ユーザー登録"};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
-["search","situation","position","rating","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
+$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,score:+$("score").value,damage:$("damage").value===""?null:+$("damage").value,recipe:$("recipe").value,notes:$("notes").value,verified:$("verified").value,favorite:$("favorite").value==="true",version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,oki:old?.oki||"要検証"};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
+["search","situation","topicFilter","position","rating","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
 $("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({game:"GGST",character:"Ramlethal",combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="ggst-ramlethal-combos.json";a.click();URL.revokeObjectURL(a.href)};
 $("importBtn").onclick=()=>$("fileInput").click();
 $("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();render()}}catch{alert("JSONファイルを読み込めませんでした")};e.target.value=""};
