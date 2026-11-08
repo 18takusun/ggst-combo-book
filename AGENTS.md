@@ -5,7 +5,7 @@
 - This is a GGST-only reference site. Expose only Ramlethal, Bridget, and Elphelt in the character picker. SF6 and all other character pages are out of scope.
 - Keep existing GGST local storage keys (`${characterId}ComboBook`) unchanged so personal selections remain available.
 - Keep the simple responsive layout usable on desktop and iPhone Safari. Combo learning progress tracking is out of scope.
-- Keep the three views: Combos, Oki, and Pressure. Oki can derive from non-placeholder combo `oki` data; additional Oki and pressure notes are per-character in `${characterId}ReferenceBook`, and are included in backups.
+- Keep the three views: Combos, Oki, and Pressure. Oki can derive from non-placeholder combo `oki` data; additional Oki and pressure notes are stored per character in `${characterId}ReferenceBook`.
 
 ## Combo data
 
