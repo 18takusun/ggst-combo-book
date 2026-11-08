@@ -270,6 +270,19 @@ function loadCharacter(character){
  }
  const storedById=new Map(stored.map(c=>[c.id,c]));
  combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
+ if(character==="bridget"){
+  const seen=new Map();
+  const normalizeRoute=value=>String(value||"").replace(/[>~]+/g," ").replace(/\s+/g," ").trim().toLowerCase();
+  const before=combos.length;
+  combos=combos.filter(route=>{
+   const key=[normalizeRoute(route.starter),normalizeRoute(route.kind),normalizeRoute(route.recipe)].join("|");
+   const existing=seen.get(key);
+   if(!existing){seen.set(key,route);return true}
+   existing.customSelected=!!(existing.customSelected||route.customSelected);
+   return false;
+  });
+  if(combos.length!==before)save();
+ }
  combos.forEach(c=>delete c.favorite);
  references=pressureSeeds[character]||[];
  try{const key=referenceStorageKey(),savedReferences=JSON.parse(localStorage.getItem(key)||"[]"),versionKey=`${key}SeedVersion`;if(Array.isArray(savedReferences)){if(localStorage.getItem(versionKey)!==referenceSeedVersion){const seededIds=new Set(references.map(reference=>reference.id));references=[...references,...savedReferences.filter(reference=>!seededIds.has(reference.id))];localStorage.setItem(key,JSON.stringify(references));localStorage.setItem(versionKey,referenceSeedVersion)}else references=savedReferences}}catch(e){console.warn("参照データの読み込みに失敗",e)}
@@ -332,3 +345,4 @@ populateCharacterPicker();
 loadCharacter("ram");
 </script>
 </body></html>
+
