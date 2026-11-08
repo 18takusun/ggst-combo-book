@@ -253,6 +253,21 @@ function loadCharacter(character){
  const seed=base.map(c=>({...c,...curation[c.id],sourceUrl:c.sourceUrl||meta.sourceUrl}));
  let stored=[];
  try{const data=JSON.parse(localStorage.getItem(storageKey())||"null");if(Array.isArray(data))stored=data}catch(e){console.warn("保存データの読み込みに失敗",e)}
+ if(character==="bridget"){
+  const legacy=stored.find(route=>route.id==="bridget-fs-poke");
+  if(legacy){
+   const fields={name:"遠S始動",starter:"遠S",starterLabel:"遠S",kind:"地上通常ヒット",topic:"牽制ヒット",pos:"どこでも",damage:94,recipe:"遠S~S > 236K[6] > K",notes:"牽制から短く締めて有利を取る。",source:"Dustloop（キャラ別コンボ資料）",version:"2.02",oki:"+10〜15Fから攻めを継続。",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"};
+   const saved=stored.find(route=>route.id==="bridget-fs");
+   const base=saved||seed.find(route=>route.id==="bridget-fs");
+   if(base){
+    const merged={...legacy,...base,id:"bridget-fs",customSelected:!!(legacy.customSelected||base.customSelected)};
+    for(const [field,value] of Object.entries(fields))if(legacy[field]!==undefined&&legacy[field]!==value)merged[field]=legacy[field];
+    stored=saved?stored.map(route=>route.id==="bridget-fs"?merged:route):[...stored,merged];
+   }
+   stored=stored.filter(route=>route.id!=="bridget-fs-poke");
+   try{localStorage.setItem(storageKey(),JSON.stringify(stored))}catch(e){console.warn("保存データの移行に失敗",e)}
+  }
+ }
  const storedById=new Map(stored.map(c=>[c.id,c]));
  combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
  combos.forEach(c=>delete c.favorite);
