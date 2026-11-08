@@ -216,6 +216,8 @@ const builtInCharacters=[{id:"ram",name:"ラムレザル",group:"ゲーム本編
 const allCharacters=[...builtInCharacters,...extraCharacters];
 const maiSourceUrl="https://sf6-lab.net/fighters/mai/combo";
 const vegaSourceUrl="https://sf6-genten.com/character/vega";
+const blankaSourceUrl="https://sf6-lab.net/fighters/blanka/combo";
+const blankaSetplayUrl="https://takukakugamer.com/sf6-blanka-setup/";
 const sf6Characters=[
  {id:"sf6-mai",name:"舞",group:"ストリートファイター6",title:"MAI",game:"sf6",sourceUrl:maiSourceUrl,sourceTitle:"舞 コンボ・起き攻め・セットプレイ｜Year4最新版（2026年8月調整対応）",routes:[
   {id:"mai-2lk",name:"下段小技",starter:"2LK",starterLabel:"2LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"2LK > 2LP > 2LP > 236LK",notes:"下段からヒット確認して弱忍蜂で締める基本。ガード時に弱忍蜂まで出すと反撃を受けるため、ヒット確認する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"弱忍蜂後に前ステップで接近して起き攻め。",main:true},
@@ -235,13 +237,27 @@ const sf6Characters=[
   {id:"vega-5mp-sa2",name:"中攻撃・SA2締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:3940,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA2",notes:"ドライブ2本とSAゲージ2本を使う。倒し切れる場面で選ぶ。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"2本"}],oki:"SA2後に起き攻め。"},
   {id:"vega-5mp-sa3",name:"中攻撃・SA3締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:4440,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA3",notes:"ドライブ2本とSAゲージ3本を使う最大SA締め候補。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"3本"}],oki:"SA3後に攻めを継続。"},
   {id:"vega-2mk-drive",name:"下段からドライブラッシュ",starter:"2MK",starterLabel:"2MK",kind:"ゲージ使用",topic:"牽制ヒット",pos:"どこでも",damage:1898,recipe:"2MK > DR > 5MP > 2HP > 214HP",notes:"下段からドライブラッシュでつなぎ、強バックフィストコンボでサイコマインを付ける。ドライブ3本を使う。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"サイコマイン付き、約+31F。前ステップから起き攻め。"}
+ ]},
+ {id:"sf6-blanka",name:"ブランカ",group:"ストリートファイター6",title:"BLANKA",game:"sf6",sourceUrl:blankaSourceUrl,sourceTitle:"ブランカ コンボ・起き攻め・セットプレイ｜Year4（2026年8月調整対応）",routes:[
+  {id:"blanka-5lk",name:"小技・起き攻め重視",starter:"5LK",starterLabel:"5LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"5LK > 2LP > 214HP",notes:"5LKから強電撃で締める基本。電撃後の起き攻めを重視する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"電撃後は約+39F。前ステップなどから起き攻め。",main:true},
+  {id:"blanka-2lk",name:"下段小技",starter:"2LK",starterLabel:"2LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"2LK > 2LP > 214HP",notes:"下段から電撃で締める。ヒット後に約+39Fを取り、起き攻めへ移行。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"電撃後の前ステップ重ね。",main:true},
+  {id:"blanka-5lk-roll",name:"小技・ダメージ重視",starter:"5LK",starterLabel:"5LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"5LK > 5LK > 4~6MP",notes:"電撃締めよりダメージを取る中ローリングルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03"},
+  {id:"blanka-4mk-electric",name:"ワイルドエッジから電撃",starter:"4MK",starterLabel:"4MK",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"4MK > 5MK > 214HP",notes:"4中Kがヒットした時の基本追撃。ガード時は+2Fで攻めを続けられる。空振りのリスクが増えているので置き技として振りすぎない。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"強電撃後に起き攻め。",main:true},
+  {id:"blanka-4mk-roll",name:"ワイルドエッジから中ロリ",starter:"4MK",starterLabel:"4MK",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"4MK > 2MK > 4~6MP",notes:"4中Kから中ローリングで締めるダメージ寄りの選択肢。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03"},
+  {id:"blanka-2mp-roll",name:"2中Pから中ロリ",starter:"2MP",starterLabel:"2MP",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"2MP > 4~6MP",notes:"2中Pから短く中ローリングで締める。電撃締めよりダメージを優先。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",main:true},
+  {id:"blanka-2mp-electric",name:"2中Pから電撃",starter:"2MP",starterLabel:"2MP",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"2MP > 214P",notes:"2中Pから電撃で締めて起き攻めへ。中ロリよりダメージは控えめだが、攻めを継続しやすい。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"電撃後に起き攻め。"},
+  {id:"blanka-2mp-drive",name:"主力キャンセルラッシュ",starter:"2MP",starterLabel:"2MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:null,recipe:"2MP > CDR > 5HK > 5HP > 2PP > P（ワイルドリフト） > 2~8MK",notes:"キャンセルラッシュを使う運びルート。中バーチカルで締めてダメージを取り、アマゾンリバーラン締めに変えると起き攻め状況を重視できる。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"アマゾンリバーラン締めなら約+29F。",main:true},
+  {id:"blanka-5hk-pc",name:"確反・パニッシュカウンター",starter:"5HK",starterLabel:"5HK PC",kind:"カウンターヒット",topic:"パニッシュカウンター",pos:"どこでも",damage:null,recipe:"5HK PC > 5HP > 2PP > P（ワイルドリフト） > 2~8MK",notes:"大きな隙への基本反撃。中バーチカルで締める。起き攻め状況を取りたい時はアマゾンリバーラン締めに変更。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"中バーチカル後は約+42F。",main:true},
+  {id:"blanka-6hp-pc",name:"飛び道具への反撃",starter:"6HP PC",starterLabel:"6HP PC",kind:"カウンターヒット",topic:"パニッシュカウンター",pos:"どこでも",damage:null,recipe:"6HP PC > DR > 5HP > 2PP > P（ワイルドリフト） > 3HP（アマゾンリバーラン）",notes:"飛び道具へのパニッシュカウンターから運ぶ。空中ヒットになると締め後の有利が伸びる場合がある。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"1本"}],oki:"空中ヒット時は前ステップやサプライズフォワードから起き攻め。"},
+  {id:"blanka-corner-bomb",name:"画面端・ブランカちゃん設置",starter:"5HP",starterLabel:"5HP",kind:"画面端",topic:"画面端",pos:"画面端",damage:null,recipe:"5HP > 2PP > P（ワイルドリフト） > 22P（ブランカちゃん爆弾）",notes:"ノーゲージで人形を設置して起き攻めへ。設置動作が長いため、主に画面端でダウンを取った時に狙う。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"設置後は約+5F。",main:true},
+  {id:"blanka-sa2",name:"SA2・中央基本",starter:"5HP",starterLabel:"5HP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:null,recipe:"5HP > SA2 > 5HP > 2~8LK > 3P（ローリングキャノン） > 2~8LK > 遅らせ3P（ローリングキャノン）",notes:"SA2中はローリング系の溜めが不要。ローリングキャノンの派生方向と遅らせ入力で追撃する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"SA",value:"2本"}]}
  ]}
 ];
 let characterById=new Map([...allCharacters,...sf6Characters].map(c=>[c.id,c]));
 let activeGame="ggst";
 const storageKey=()=>`${activeCharacter}ComboBook`;
 const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
-const referenceSeedVersion="reference-20261108-v4";
+const referenceSeedVersion="reference-20261108-v5";
 const pressureSeeds={
  ram:[
   {id:"ram-pressure-low",kind:"pressure",name:"中距離の下段択",sequence:"5K > 2K > 2D",notes:"5Kから下段へ。2Dはガードされると反撃を受けるため、相手が固まる場面で使い、普段は5K・2Kの遅らせや投げも混ぜる。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"},
@@ -288,6 +304,19 @@ const sf6ReferenceSeeds={
   {id:"vega-pressure-mine",kind:"pressure",name:"サイコマインをガード起爆",sequence:"サイコマイン付与 > 4~6LP / MP（サイコクラッシャー）",notes:"ガードさせて誘爆すると弱・中版は+6F、強版は+5F。普段は反撃される技でも、マイン起爆で有利を取れる。",sourceUrl:vegaSourceUrl},
   {id:"vega-pressure-plus6",kind:"pressure",name:"誘爆後の+6Fから打撃・投げ",sequence:"誘爆で+6F > 4HK / 2MP / 遅らせ投げ",notes:"4HKは4F暴れと相打ちになっても2MPへつながる。最速投げは空振りする状況があるため、少し遅らせる。",sourceUrl:vegaSourceUrl},
   {id:"vega-pressure-center-bf",kind:"pressure",name:"中央・弱中バックフィスト後の再接近",sequence:"214LP / 214MP > DR 2MK > 214MP",notes:"後ろ受け身には通常技が重ならないため、ドライブラッシュから下段を重ねてマインを誘爆させる。ガードされても誘爆後に有利を取りやすい。",sourceUrl:vegaSourceUrl}
+ ],
+ "sf6-blanka":[
+  {id:"blanka-oki-electric-dash",kind:"oki",name:"電撃後の前ステップ重ね",sequence:"214P（約+39F） > 前ステップ×2 > 5LK",notes:"2回目の前ステップ後は約+1F。5LKで4F暴れを抑える。1回だけ前ステップして約+20Fからサプライズフォワードへ行き、5HP重ねや歩き投げに分ける形もある。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-oki-electric-corner",kind:"oki",name:"画面端・電撃から4MK持続重ね",sequence:"214P（約+39F） > 4MK空振り > 4MK持続",notes:"持続重ねはヒット時約+13F、ガード時約+7F。ヒットすれば5HPにつながる。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-oki-vertical-safejump",kind:"oki",name:"中バーチカル後の詐欺飛び",sequence:"2~8MK（低空ヒット・約+42F） > 前ジャンプHK",notes:"基本の安全飛び込み。相手との距離や受け身で裏回る場合があるので、怪しい時はジャンプ中Kへ調整する。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-oki-amazon",kind:"oki",name:"アマゾンリバーラン後の中段",sequence:"3HP（地上ヒット・約+29F） > DR 6MP",notes:"その場・後方受け身の両方に中段重ねを狙う。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-oki-bomb",kind:"oki",name:"端でブランカちゃんを設置",sequence:"5HP > 2PP > P（ワイルドリフト） > 22P",notes:"ノーゲージの設置ルート。設置後は約+5Fで、OD電撃を重ねて人形を起動し、中段・下段を迫る。人形起動後にブランカ本体が攻撃を受けると人形は消えるので、攻めを急ぐ。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-oki-throw",kind:"oki",name:"前投げ後の起き攻め",sequence:"LP+LK > 6KKK（サプライズフォワード・約+3F）",notes:"投げ間合いからは外れるため、5LKなどの小技、立ち強K、パリィラッシュからの中段・下段を使い分ける。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-pressure-4mk",kind:"pressure",name:"4MKガード後の択",sequence:"4MK（ガード+2F） > 5LK / 投げ / 214PP（OD電撃）",notes:"4MKを当ててガードさせた後の暴れ潰し・投げ・OD電撃の分岐。Year4では空振り時の隙が増えたため、置き技として振り回さない。",sourceUrl:blankaSourceUrl},
+  {id:"blanka-pressure-light",kind:"pressure",name:"小技からの暴れ潰し",sequence:"2LK > 5LK / 2LP",notes:"5LKは届かない距離がある。2LPは届きやすいが、相手の4F暴れに相打ちになる場合があるので間合いを見て選ぶ。",sourceUrl:blankaSetplayUrl},
+  {id:"blanka-pressure-electric",kind:"pressure",name:"電撃ガード後の間合い調整",sequence:"214P（ガード-3F） > しゃがみガード / 立ちガード",notes:"電撃は強度と先端距離で押し戻しが変わる。反撃を意識して基本はしゃがみガードし、相手の最速技が空振りしそうな距離では立ちガードや後ろ歩きで差し返す。",sourceUrl:blankaSetplayUrl},
+  {id:"blanka-pressure-doll",kind:"pressure",name:"画面端・人形OD起動の中下段",sequence:"ブランカちゃん設置 > 214PP（OD電撃） > 6MK / 2MK",notes:"OD電撃と人形の1段目は連続ガード。人形の2段目に合わせて6MKの中段か2MKの下段を選ぶ。OD電撃をパリィされていないことを見てから出す。",sourceUrl:blankaSetplayUrl},
+  {id:"blanka-pressure-sa2",kind:"pressure",name:"SA2からローリングキャノン連係",sequence:"5HP > SA2 > 5HP > 4~6HP > 3P（ローリングキャノン）×2",notes:"初段の派生には隙間があるが、2回目の同方向派生まで続けると連続ガードになり約+7F。ジャストパリィや無敵対空を読む時は下方向派生で軌道を変える。",sourceUrl:blankaSourceUrl}
  ]
 };
 function populateCharacterPicker(){
