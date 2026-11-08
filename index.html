@@ -204,8 +204,9 @@ const characterById=new Map(allCharacters.map(c=>[c.id,c]));
 const storageKey=()=>`${activeCharacter}ComboBook`;
 function populateCharacterPicker(){
  const preferredOrder=["ゲーム本編","Season Pass 1","Season Pass 2","Season Pass 3","Season Pass 4","Season Pass 5"];
+ const baseRosterOrder=["sol","ky","may","axl","chipp","potemkin","faust","millia","zato","ram","leo","nago","gio","anji","ino"];
  const groups=[...new Set(allCharacters.map(c=>c.group))].sort((a,b)=>preferredOrder.indexOf(a)-preferredOrder.indexOf(b));
- $("characterSelect").innerHTML=groups.map(group=>`<optgroup label="${esc(group)}">${allCharacters.filter(c=>c.group===group).map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</optgroup>`).join("");
+ $("characterSelect").innerHTML=groups.map(group=>{const characters=allCharacters.filter(c=>c.group===group);if(group==="ゲーム本編")characters.sort((a,b)=>baseRosterOrder.indexOf(a.id)-baseRosterOrder.indexOf(b.id));return `<optgroup label="${esc(group)}">${characters.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</optgroup>`}).join("");
 }
 const save=()=>{try{localStorage.setItem(storageKey(),JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
 function loadCharacter(character){
