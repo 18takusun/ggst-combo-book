@@ -238,7 +238,7 @@ const sf6Characters=[
   {id:"vega-5mp-sa3",name:"中攻撃・SA3締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:4440,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA3",notes:"ドライブ2本とSAゲージ3本を使う最大SA締め候補。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"3本"}],oki:"SA3後に攻めを継続。"},
   {id:"vega-2mk-drive",name:"下段からドライブラッシュ",starter:"2MK",starterLabel:"2MK",kind:"ゲージ使用",topic:"牽制ヒット",pos:"どこでも",damage:1898,recipe:"2MK > DR > 5MP > 2HP > 214HP",notes:"下段からドライブラッシュでつなぎ、強バックフィストコンボでサイコマインを付ける。ドライブ3本を使う。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"サイコマイン付き、約+31F。前ステップから起き攻め。"}
  ]},
- {id:"sf6-blanka",name:"ブランカ",group:"ストリートファイター6",title:"BLANKA",game:"sf6",sourceUrl:blankaSourceUrl,sourceTitle:"ブランカ コンボ・起き攻め・セットプレイ｜Year4（2026年8月調整対応）",routes:[
+ {id:"sf6-blanka",name:"ブランカ",group:"ストリートファイター6",title:"BLANKA",game:"sf6",sourceUrl:blankaSourceUrl,sourceTitle:"ブランカ コンボ・起き攻め・セットプレイ｜Year4（2026年8月調整対応）",referenceLinks:[{url:"https://youtu.be/l_aZgMkq8Gs",title:"MR2100ブランカのコンボ・起き攻め解説（Year4）"},{url:"https://youtu.be/8WkpwdzbOSg",title:"ブランカ基本コンボ（Year3・旧バージョン）"}],routes:[
   {id:"blanka-5lk",name:"小技・起き攻め重視",starter:"5LK",starterLabel:"5LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"5LK > 2LP > 214HP",notes:"5LKから強電撃で締める基本。電撃後の起き攻めを重視する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"電撃後は約+39F。前ステップなどから起き攻め。",main:true},
   {id:"blanka-2lk",name:"下段小技",starter:"2LK",starterLabel:"2LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"2LK > 2LP > 214HP",notes:"下段から電撃で締める。ヒット後に約+39Fを取り、起き攻めへ移行。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"電撃後の前ステップ重ね。",main:true},
   {id:"blanka-5lk-roll",name:"小技・ダメージ重視",starter:"5LK",starterLabel:"5LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"5LK > 5LK > 4~6MP",notes:"電撃締めよりダメージを取る中ローリングルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03"},
@@ -388,7 +388,7 @@ $("characterSelect").value=character;
  $("ramSources").hidden=!isRam;
  $("solSources").hidden=true;
  $("otherSources").hidden=isRam;
- if(!isRam){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"キャラ別コンボ資料")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>${isSF6?"現行Year4資料をもとにした候補です。入力はクラシック操作のテンキー表記です。":"記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。"}`}
+ if(!isRam){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"キャラ別コンボ資料")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}${(meta.referenceLinks||[]).map(link=>`<br><a href="${esc(link.url)}" target="_blank" rel="noreferrer">▶ ${esc(link.title)}</a>`).join("")}<br>${isSF6?"現行Year4資料をもとにした候補です。入力はクラシック操作のテンキー表記です。":"記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。"}`}
  $("referenceNav").hidden=false;
  $("referenceNav").setAttribute("aria-label",isSF6?"SF6の参照内容":"GGSTの参照内容");
  $("gameEyebrow").textContent=isSF6?"STREET FIGHTER 6 / COMBO DATABASE":"GUILTY GEAR -STRIVE- / COMBO DATABASE";
