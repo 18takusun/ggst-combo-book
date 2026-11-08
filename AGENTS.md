@@ -1,50 +1,22 @@
-# Fighting Game Combo Book
+# Project instructions
 
-## Project scope
+## Scope
 
-- Maintain one simple combo reference web app with an in-page GGST / Street Fighter 6 switch. Keep the two games' character lists, combo collections, and personal My Combos separate. Include currently playable characters only.
-- Keep GGST route data and its existing `${characterId}ComboBook` browser storage keys intact. SF6 data lives in `sf6.js` and its personal selections use `sf6-${characterId}ComboBook` keys.
-- SF6 uses Classic notation and character-specific Year4 sources; label the source and applicable patch date. A source-backed candidate is not the same as in-game lab verification.
-- Support desktop and iPhone Safari layouts. Combo learning progress tracking is out of scope.
-- Cover game version 2.0 and later. Keep source/version metadata available in the details, but do not show practical-rating or training-verification labels in the browsing UI.
+- This is a GGST-only reference site. Expose only Ramlethal, Bridget, and Elphelt in the character picker. SF6 and all other character pages are out of scope.
+- Keep existing GGST local storage keys (`${characterId}ComboBook`) unchanged so personal selections remain available.
+- Keep the simple responsive layout usable on desktop and iPhone Safari. Combo learning progress tracking is out of scope.
+- Keep the three views: Combos, Oki, and Pressure. Oki can derive from non-placeholder combo `oki` data; additional Oki and pressure notes are per-character in `${characterId}ReferenceBook`, and are included in backups.
 
-## Combo selection
+## Combo data
 
-- The combo database can grow beyond the initial set. Let the user mark routes as part of their personal list on the page and offer a view containing only those selected routes.
-- Use the personal My Combos selection as the only user-managed route list, separate from curated main candidates. Persist the selection in the current browser's local storage and include it in backup exports.
-- Keep existing researched route data when adding routes; distinguish overlapping options by their practical difference.
-- Organize routes by real match situations, including punish after blocking an invincible reversal, poke hit, normal hit during offense, anti-air, and corner situations.
-- Prioritize the main routes within each situation.
-- Choose routes by balancing damage, execution difficulty, how often and reliably the opportunity can be recognized in a match, extra learning burden, shared route sections, and the post-combo oki situation.
-- Do not create meterless and meter-using versions for every situation. Include meter routes only when the added reward is meaningful and the route is practical to land.
-- Include useful post-combo oki notes when available. Omit empty or unverified placeholders from the browsing UI.
+- Keep sourced route data. Prefer character specialists and professional/high-level footage for context. Mark outdated or unverified routes clearly; a source-backed candidate is not the same as in-game verification.
+- Organize routes by practical situation and starter. Balance damage, execution, match opportunity, learning burden, shared route sections, and post-combo oki. Avoid duplicate options serving the same purpose.
+- Include meter routes where the added reward is practical and worthwhile. Do not invent damage or unresolved route details.
+- Keep the My Combos selection as the user's only curated list; there is no favorites or progress tracking.
 
-## Research and evidence
+## Changes and delivery
 
-- Prefer character specialists' explanations and professional or high-level match footage for the character being documented. General character roundups are secondary references.
-- Use specialist explanations to understand route intent and match footage to judge what is practical for each character.
-- Check that a route applies to version 2.0 or later before marking it current. Keep older-version references clearly identified as historical context.
-- Add source links for researched routes. Distinguish directly verified details from estimates or unresolved questions.
-
-## Interface and delivery
-
-- Keep the interface simple and responsive. Show character, situation, route, damage and meter where known, execution or setup conditions, post-combo oki, and supporting source/video links without requiring progress tracking.
-- When modifying the app, run the relevant checks and tests, then commit the changes locally.
-- Push to GitHub only when the user has approved publishing. The user approved publishing in this conversation; that approval remains valid for this project.
-- Keep game switching visible above character selection. Use a distinct but restrained SF6 accent color, retain desktop/iPhone layouts, and ensure filters and backups apply to the active game only.
-- GGST also has separate Combo, Oki, and Pressure reference views. Derive Oki entries from non-placeholder combo `oki` data; store additional Oki and pressure notes per character in `${characterId}ReferenceBook`, and include them in GGST backups. Keep these views out of SF6 unless requested.
-
-## Handoff status
-
-- The GitHub repository is `18takusun/ggst-combo-book`; its default branch is `main`.
-- The Ramlethal collection retains its 28 current routes and existing route data. User selections remain in `ramComboBook`.
-- The Sol collection starts with 19 routes based on a Sol player's Ver.2.0 combo and oki guide, Dustloop combo data, and the official Ver.2.03 Sidewinder Ignited adjustment. User selections and backups are isolated in `solComboBook`.
-- `roster.js` contains 295 researched or explicitly provisional routes across the other 32 available characters (83 added in the November 2026 expansion). Together with Ramlethal's 28 and Sol's 19, the current catalog has 342 routes across all 34 released characters. The expanded pool includes practical starters, counter hits, anti-airs, meter routes, corner routes, and advanced options so users can curate their own My Combos list. Do not include the two not-yet-released Season 5 fighters until launch.
-- The character selector groups fighters by base-game and season-pass roster and switches between independent combo collections. Starter groups are collapsible with route counts; groups containing main candidates open by default. Each collection keeps compact horizontal rows, hit/CH/anti-air/meter variants, expanded conditions/oki/sources, and its own personal My Combos view.
-- Character-specific selections/backups use independent `${characterId}ComboBook` storage keys. Ramlethal and Sol retain their existing `ramComboBook` and `solComboBook` keys.
-- Johnny candidates and one Axl route remain explicitly marked as not yet checked against current-version references. Baiken includes combo and safe-jump options from AxolotlBaiken's Ver.2.0 guide; its simple 2D routes remain provisional. The larger November 2026 expansion adds current Dustloop starter, counter-hit, anti-air, corner, and meter choices for Goldlewis, May, Nagoriyuki, Giovanna, Unika, Jam, Bedman?, I-No, A.B.A, Bridget, and Millia. A few pages carry update-in-progress or patch-version caveats; retain their source/version labels rather than presenting them as in-game verified.
-- Treat sourced routes as researched candidates rather than independent in-game tests. Keep route damage blank when the available source does not provide a directly usable value.
-- The Ramlethal collection retains its links to RedDitto/SQ match footage and the specialist RAMLETHAL COMBOS Ver.2.01 guide. The Sol collection links to a current practical-combo video, Sol player Tatuma's videos, a 2.0 route guide, Dustloop, and the official 2.03 patch notes. Other character sets link their routes to individual Dustloop combo references and specialist material when available.
-- Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.
-- SF6 is now an additional game in the same page. `sf6.js` contains the Street Fighter 6 roster in official order and Year4/Classic route candidates with per-character source links. Routes currently seeded for the first implementation are a starter pool; fill out remaining characters over time from character-specific current references. Do not invent routes for empty character sets.
+- Before changing the site, compare the current implementation with this scope and report material differences.
+- Make the requested changes, run relevant checks, then commit locally.
+- GitHub publishing is allowed only after the user approves it. The user has approved publishing for this project.
 
