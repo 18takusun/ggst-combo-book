@@ -272,10 +272,10 @@ function loadCharacter(character){
  combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
  if(character==="bridget"){
   const seen=new Map();
-  const normalizeRoute=value=>String(value||"").replace(/[>~]+/g," ").replace(/\s+/g," ").trim().toLowerCase();
+  const normalizeRoute=value=>String(value||"").replace(/\bf\.s\b/gi,"遠S").replace(/[>~]+/g," ").replace(/\s+/g," ").trim().toLowerCase();
   const before=combos.length;
   combos=combos.filter(route=>{
-   const key=[normalizeRoute(route.starter),normalizeRoute(route.kind),normalizeRoute(route.recipe)].join("|");
+   const key=[normalizeRoute(route.starterLabel||route.starter),normalizeRoute(route.kind),normalizeRoute(route.recipe)].join("|");
    const existing=seen.get(key);
    if(!existing){seen.set(key,route);return true}
    existing.customSelected=!!(existing.customSelected||route.customSelected);
