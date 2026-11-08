@@ -33,8 +33,9 @@
 
 - The GitHub repository is `18takusun/ggst-combo-book`; its default branch is `main`.
 - The page retains all 14 seed entries and their existing route data. Six entries are marked as provisional main candidates and are shown first; the main set is not gameplay-verified.
-- All 14 routes remain marked unverified in the current training environment. Damage and route notes are inherited from Dustloop version 2.00 or 2.03 references.
-- The page groups candidates by match situation, shows provisional difficulty, meter use, shared route notes, and explicitly unverified post-combo oki. It links specialist/high-level match footage as context, not as proof of individual routes.
-- The current 14 entries do not yet provide verified routes for punish after blocking an invincible reversal, a normal hit during offense, or corner-specific situations. Add these only after checking a current-version source or in-game testing.
+- All 14 routes remain unverified in the current training environment. Eight entries are now cross-referenced against the Ver.2.03 combo list; several Ver.2.00 entries are still historical references.
+- The page groups candidates by match situation, shows difficulty ratings attributed to Dustloop, meter use, shared route notes, and post-combo oki notes with in-game verification clearly outstanding. It links specialist/high-level match footage as context, not as proof of individual routes.
+- A current Dustloop guide identifies the c.S route as a basic punish after blocking unsafe moves such as supers or reversals. This is a sourced candidate, not an independent in-game test. Normal-hit conversions during offense and corner-specific routes still need review.
+- Combo clips are linked on the cards where a route-specific Dustloop clip was available. The general RedDitto/SQ YouTube references remain match context rather than route validation.
 - The situation selector already includes those categories so verified entries can be added without changing the interface.
 - Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.
