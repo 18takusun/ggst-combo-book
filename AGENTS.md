@@ -9,7 +9,7 @@
 ## Combo selection
 
 - The combo database can grow beyond the initial set. Let the user mark routes as part of their personal list on the page and offer a view containing only those selected routes.
-- Keep personal selection separate from favorites and curated main candidates. Persist the selection in the current browser's local storage and include it in backup exports.
+- Use the personal My Combos selection as the only user-managed route list, separate from curated main candidates. Persist the selection in the current browser's local storage and include it in backup exports.
 - Keep existing researched route data when adding routes; distinguish overlapping options by their practical difference.
 - Organize routes by real match situations, including punish after blocking an invincible reversal, poke hit, normal hit during offense, anti-air, and corner situations.
 - Prioritize the main routes within each situation.
