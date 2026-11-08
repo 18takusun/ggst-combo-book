@@ -213,6 +213,26 @@ const allCharacters=[...builtInCharacters,...extraCharacters];
 let characterById=new Map(allCharacters.map(c=>[c.id,c]));
 const storageKey=()=>`${activeCharacter}ComboBook`;
 const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
+const referenceSeedVersion="pressure-20261108";
+const pressureSeeds={
+ ram:[
+  {id:"ram-pressure-low",kind:"pressure",name:"中距離の下段択",sequence:"5K > 2K > 2D",notes:"5Kから下段へ。2Dはガードされると反撃を受けるため、相手が固まる場面で使い、普段は5K・2Kの遅らせや投げも混ぜる。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"},
+  {id:"ram-pressure-stagger",kind:"pressure",name:"5K・2Kの刻みと投げ",sequence:"5K / 2K > 少し遅らせて 5K / 2K / 投げ",notes:"5K・2Kはガード時-2。連続で出すタイミングをずらして暴れを誘い、相手が固まったら投げる。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"},
+  {id:"ram-pressure-ondo",kind:"pressure",name:"近距離から有利を取る",sequence:"c.S > 2S / 遠S > 5H > 236K",notes:"通常技を遅らせて暴れを抑えつつ、最後を236Kにして+7Fを取る。相手との距離を見て通常技を省く。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"},
+  {id:"ram-pressure-corner",kind:"pressure",name:"画面端の剣設置",sequence:"画面端：c.S > 236H > ダッシュ2K / ダッシュ投げ",notes:"H剣が使えるときの端連携。爆発のガードクラッシュを盾に接近し、ジャンプには2K、固まる相手には投げ。爆発前に逃げる選択肢もあるので、剣の回収まで同じ形を続けない。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"}
+ ],
+ bridget:[
+  {id:"bridget-pressure-yoyo",kind:"pressure",name:"中距離のヨーヨー設置",sequence:"c.S > 2S > 5H > 236S / 214S",notes:"通常技でガードさせてからヨーヨーを出し、設置後の攻めにつなぐ基本形。相手との距離を見て236S（前方）と214S（戻り）を使い分ける。",source:"Dustloop・Bridget Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Strategy"},
+  {id:"bridget-pressure-roll",kind:"pressure",name:"ロールからの空中択",sequence:"ヨーヨー設置後：214K~j.P / ~j.S",notes:"ロールを早めに空中攻撃で止めると、6Pや無敵技への対策になる。214Kを遅らせる・溜める選択は相手の暴れを誘えるが、遅らせ暴れには負けることがある。距離とタイミングで使い分ける。",source:"Dustloop・Bridget Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Strategy"},
+  {id:"bridget-pressure-fd",kind:"pressure",name:"FDに合わせて2Sを遅らせる",sequence:"66 > c.S > 遅らせ2S(1) > 214K > …",notes:"FDで押し戻されるときの連携。2Sの遅らせ幅は中央のほうが長く、端では短め。214S!から214Kへつなぐ部分はFDで隙間ができるため、連打せず相手の反応を見る。",source:"Dustloop・Bridget Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Strategy"},
+  {id:"bridget-pressure-brc",kind:"pressure",name:"青RCからヨーヨー設置（50%）",sequence:"c.S / 5K > dc. > 66BRC > c.S(1) > dc. > 214S > 66 > c.S",notes:"青ロマンキャンセルで相手を固めながらヨーヨーを設置し、再接近する。通常ガードには連続ガードになりやすいが、FDには押し戻されるので中央・端と相手の距離を見て使う。",source:"Dustloop・Bridget Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Strategy"}
+ ],
+ elphelt:[
+  {id:"elphelt-pressure-main",kind:"pressure",name:"近距離の基本連携",sequence:"c.S > 2S > 5H / 2H > 214S~P/K~H",notes:"近距離でガードさせてChain Lollipopへ。5Hはリーチが長く暴れを止めやすい一方、6Pに負ける。2HはFDで押し戻されにくいが、投げや6Pに割り込まれやすくなる。距離と相手の防御を見て選ぶ。",source:"Dustloop・Elphelt Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Strategy"},
+  {id:"elphelt-pressure-lollipop",kind:"pressure",name:"Chain Lollipopの分岐",sequence:"214S~P（上段） / 214S~K（下段） > 214S~H（締め）",notes:"PとKでガード方向を揺さぶり、Hで連携を終える。相手の割り込みやガード方法で状況が変わるため単純な二択ではない。出す順番やタイミングを変えて対応を見て、同じ形を続けない。",source:"Dustloop・Elphelt Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Strategy"},
+  {id:"elphelt-pressure-bomb",kind:"pressure",name:"ボムから空中攻撃で有利を維持",sequence:"214H > j.S / j.H",notes:"ボムの爆発に合わせて空中攻撃を重ねる。j.Sはガード後に有利を取りやすく、j.Hはさらに有利だが相手側を向いている必要がある。",source:"Dustloop・Elphelt Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Strategy"}
+ ]
+};
 function populateCharacterPicker(){
  const preferredOrder=["ゲーム本編","Season Pass 1","Season Pass 2","Season Pass 3","Season Pass 4","Season Pass 5"];
  const baseRosterOrder=["ram","bridget","elphelt"];
@@ -233,8 +253,8 @@ function loadCharacter(character){
  const storedById=new Map(stored.map(c=>[c.id,c]));
  combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
  combos.forEach(c=>delete c.favorite);
- references=[];
- try{const savedReferences=JSON.parse(localStorage.getItem(referenceStorageKey())||"[]");if(Array.isArray(savedReferences))references=savedReferences}catch(e){console.warn("参照データの読み込みに失敗",e)}
+ references=pressureSeeds[character]||[];
+ try{const key=referenceStorageKey(),savedReferences=JSON.parse(localStorage.getItem(key)||"[]"),versionKey=`${key}SeedVersion`;if(Array.isArray(savedReferences)){if(localStorage.getItem(versionKey)!==referenceSeedVersion){const seededIds=new Set(references.map(reference=>reference.id));references=[...references,...savedReferences.filter(reference=>!seededIds.has(reference.id))];localStorage.setItem(key,JSON.stringify(references));localStorage.setItem(versionKey,referenceSeedVersion)}else references=savedReferences}}catch(e){console.warn("参照データの読み込みに失敗",e)}
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
