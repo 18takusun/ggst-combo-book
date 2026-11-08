@@ -1,9 +1,9 @@
-# GGST Ramlethal Combo Book
+# GGST Combo Book
 
 ## Project scope
 
-- Maintain a simple combo reference web app for Ramlethal Valentine in Guilty Gear -Strive-.
-- Optimize the page for iPhone Safari. Combo learning progress tracking is out of scope.
+- Maintain a simple combo reference web app for multiple Guilty Gear -Strive- characters. Ramlethal remains the original character; add characters one at a time.
+- Support desktop and iPhone Safari layouts. Combo learning progress tracking is out of scope.
 - Cover game version 2.0 and later. Keep source/version metadata available in the details, but do not show practical-rating or training-verification labels in the browsing UI.
 
 ## Combo selection
@@ -19,25 +19,23 @@
 
 ## Research and evidence
 
-- Prefer YouTube material from Ramlethal specialists and professional or high-level players who use Ramlethal in matches. General character roundups are secondary references.
-- Use specialist explanations to understand route intent and match footage to judge what is practical.
+- Prefer character specialists' explanations and professional or high-level match footage for the character being documented. General character roundups are secondary references.
+- Use specialist explanations to understand route intent and match footage to judge what is practical for each character.
 - Check that a route applies to version 2.0 or later before marking it current. Keep older-version references clearly identified as historical context.
 - Add source links for researched routes. Distinguish directly verified details from estimates or unresolved questions.
 
 ## Interface and delivery
 
-- Keep the interface simple and usable in iPhone Safari. Show situation, route, damage and meter where known, execution or setup conditions, post-combo oki, and supporting video links without requiring progress tracking.
+- Keep the interface simple and responsive. Show character, situation, route, damage and meter where known, execution or setup conditions, post-combo oki, and supporting source/video links without requiring progress tracking.
 - When modifying the app, run the relevant checks and tests, then commit the changes locally.
 - Do not push to GitHub until the user explicitly approves the push.
 
 ## Handoff status
 
 - The GitHub repository is `18takusun/ggst-combo-book`; its default branch is `main`.
-- The page retains the original 14 seed entries and their existing route data, plus 13 researched additions for 28 routes total. Seven entries are marked as provisional main candidates and appear first; personal selection is stored separately.
-- The source material for the 28 routes is cross-referenced against Dustloop Ver.2.00/2.03, with added RC, counter-hit, route-extension, and wall-break candidates. Ver.2.00-only entries are visibly marked as unconfirmed on the current patch.
-- The page groups candidates by match situation and starter, shows damage and meter, and keeps route conditions, oki notes, and source links in the expanded details. It links specialist/high-level match footage as context, not as proof of individual routes.
-- The default list shows all routes grouped by starter, with main candidates ordered first. A toggle shows only the routes the user selected as their personal list. Label overlapping routes with their practical difference (for example, easy/short, damage/corner carry, or a meter-use wall break), and keep normal hit, counter hit, anti-air, and meter-use variants separate.
-- A current Dustloop guide identifies the c.S route as a basic punish after blocking unsafe moves such as supers or reversals. Recent additions include abare, counter-hit, damage-focused, corner, and Roman Cancel routes. Ver.2.00-only candidates are marked as unconfirmed on the current patch. These are sourced candidates, not independent in-game tests.
-- Combo clips are linked on the cards where a route-specific Dustloop clip was available. RedDitto/SQ match videos and the specialist RAMLETHAL COMBOS Ver.2.01 guide provide context; they are not treated as proof of individual current routes.
-- The situation selector already includes those categories so verified entries can be added without changing the interface.
+- The Ramlethal collection retains its 28 current routes and existing route data. User selections remain in `ramComboBook`.
+- The Sol collection starts with 19 routes based on a Sol player's Ver.2.0 combo and oki guide, Dustloop combo data, and the official Ver.2.03 Sidewinder Ignited adjustment. User selections and backups are isolated in `solComboBook`.
+- Character tabs switch between independent combo collections. Each keeps the shared situation/starter grouping, compact horizontal rows, expanded conditions/oki/sources, and its own personal My Combos view.
+- Treat sourced routes as researched candidates rather than independent in-game tests. Keep route damage blank when the available source does not provide a directly usable value.
+- The Ramlethal collection retains its links to RedDitto/SQ match footage and the specialist RAMLETHAL COMBOS Ver.2.01 guide. The Sol collection links to a current practical-combo video, Sol player Tatuma's videos, a 2.0 route guide, Dustloop, and the official 2.03 patch notes.
 - Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.

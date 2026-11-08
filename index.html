@@ -23,12 +23,13 @@ details summary{cursor:pointer;color:var(--muted);font-size:11px;list-style-posi
 .status{font-size:11px;color:var(--yellow)}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px}
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#d8b4ff}
+.character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#21152a;border-color:var(--accent)}
 @media(max-width:900px){main{padding:16px 16px 44px}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){main{padding:12px 12px 36px}.toolbar{grid-template-columns:1fr 1fr;gap:7px}.toolbar input{grid-column:1/-1}.toolbar button{padding:8px 7px;font-size:13px}.filters{grid-template-columns:1fr 1fr;gap:7px;padding:8px}.filters select{padding:8px 7px;font-size:12px}.situation-head{align-items:flex-start;flex-direction:column;gap:5px}.card{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:8px 9px}.route-main{grid-column:1/-1}.metrics{grid-column:1;grid-row:2;gap:12px}.cardactions{grid-column:2;grid-row:2}.recipe{font-size:12px}.cardactions button{padding:4px 7px;font-size:10px}form .formgrid{grid-template-columns:1fr}form label.full{grid-column:auto}}
 </style>
 </head>
 <body>
-<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1>RAMLETHAL COMBO BOOK</h1><p>状況別・始動技別に整理。主力候補を優先表示。</p></header>
+<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><nav class="character-tabs" aria-label="キャラクター切替"><button class="character-tab" id="ramButton" aria-pressed="true">ラムレザル</button><button class="character-tab" id="solButton" aria-pressed="false">ソル</button></nav></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
@@ -47,6 +48,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <div class="sectionhead"><h2>コンボ一覧</h2><small id="resultCount"></small></div>
 <div class="cardgrid" id="cards"></div>
 <footer>
+<section id="ramSources">
 <strong>ラムレザル専門・上位プレイヤーの実戦参考</strong><br>
 RedDitto（ラムレザル）対 Verix：<a href="https://www.youtube.com/watch?v=D0URjpLOG2k" target="_blank" rel="noreferrer">EVO 2026 Grand Final</a> ／
 RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" target="_blank" rel="noreferrer">GGST Ver.2.00 対戦</a> ／
@@ -56,6 +58,15 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 パッチ資料：<a href="https://www.guiltygear.com/ggst/en/news/post-2851/" target="_blank" rel="noreferrer">Arc System Works – Ver.2.00</a> ／
 <a href="https://www.guiltygear.com/ggst/jp/news/post-8366/" target="_blank" rel="noreferrer">Arc System Works – Ver.2.03</a> ／
 <a href="https://www.dustloop.com/w/GGST/Ramlethal_Valentine/Combos" target="_blank" rel="noreferrer">Dustloop – Ramlethal Combos</a>
+</section>
+<section id="solSources" hidden>
+<strong>ソルの現行版参考資料</strong><br>
+ソル使用者が対戦で使う2.0コンボ例：<a href="https://www.youtube.com/watch?v=e-kygvLs4Ys" target="_blank" rel="noreferrer">tyichi「Sol Badguy combos GGST 2.0」</a> ／
+ソル使いtatumaの対戦動画：<a href="https://www.youtube.com/@oktatuma6564/videos" target="_blank" rel="noreferrer">YouTube動画一覧</a><br>
+コンボ・起き攻め整理：<a href="https://note.com/uni_d4_rip0/n/na2739dc31a53" target="_blank" rel="noreferrer">ソル使用者の2.0まとめ（2026年4月）</a> ／
+<a href="https://www.dustloop.com/w/GGST/Sol_Badguy/Combos" target="_blank" rel="noreferrer">Dustloop – Sol Combos</a><br>
+現行版の確認：<a href="https://www.guiltygear.com/ggst/jp/news/post-8366/" target="_blank" rel="noreferrer">公式 Ver.2.03更新内容</a>。Sidewinder Ignitedのクリーンヒット判定が拡大されています。対戦動画は実戦の参考で、個別ルートの成立証明には使っていません。
+</section>
 </footer>
 </main>
 <dialog id="editor">
@@ -67,7 +78,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 <label>状況<select id="kind"><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select></label>
 <label>実戦状況<select id="comboTopic"><option>その他</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option></select></label>
 <label>位置<select id="pos"><option>どこでも</option><option>画面中央</option><option>画面端</option><option>要確認</option></select></label>
-<label>ダメージ（未計測なら空欄）<input id="damage" type="number" min="0" placeholder="未計測"></label>
+<label>ダメージ（不明なら空欄）<input id="damage" type="text" inputmode="numeric" placeholder="例：120 / 90〜110"></label>
 <label class="full">コマンド<textarea id="recipe" required placeholder="例：近S > 遠S > HS"></textarea></label>
 <label class="full">メモ<textarea id="notes" placeholder="成立条件・注意点・練習メモなど"></textarea></label>
 <label>対応バージョン<select id="version"><option>2.00</option><option>2.03</option><option>2.04以降</option><option>未確認</option></select></label>
@@ -75,7 +86,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 </form>
 </dialog>
 <script>
-const seed=[
+const ramSeed=[
 {id:"v203-1",name:"5H > 214K / 214H",starter:"5H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:78,recipe:"5H > 214K（78） / 5H > 214H（100）",notes:"Ver.2.03掲載。剣を消費しない基本ルート。214Kは最遠距離では空振りする場合あり。ダメージはルート順に78 / 100。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
 {id:"v203-2",name:"2H > エラルルーモ",starter:"2H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:127,recipe:"2H > 214P~4P~4P",notes:"Ver.2.03掲載。非常に簡単なダウン奪取ルート。剣を消費しない。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
 {id:"v203-3",name:"2H > ダウロ > c.S",starter:"2H",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:153,recipe:"2H > 623P > c.S > 2H > 214P~4P~4P",notes:"Ver.2.03掲載。基本ルートよりダメージと運びを伸ばす。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
@@ -105,7 +116,7 @@ const seed=[
 {id:"v203-19",name:"6H > ダウロ > バヨネートH",starter:"6H",kind:"地上通常ヒット",pos:"画面中央",score:3,damage:218,recipe:"6H > 623P > 近S > 6H > 236H > ダッシュ遠S > H! > 214P~en.4P WS~en.4P",notes:"Ver.2.03資料掲載。通常ヒットから剣を使い壁割りまで運ぶルート。壁までの距離や遠Sのタイミングで壁張り付きが早まることがある。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
 {id:"v203-20",name:"CH 5H > バヨネートK > エラルルーモ",starter:"5HS（5H）",kind:"カウンターヒット",pos:"どこでも",score:3,damage:152,recipe:"CH 5H > 236K > 5K > 214P~en.4P~en.4P",notes:"Ver.2.03資料掲載。5Hカウンターヒット時に、壁割りを無理に狙わずハードノックダウンと起き攻めを取る簡単なルート。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"}
 ]
-const curation={
+const ramCuration={
  "v200-5":{main:true,topic:"牽制ヒット",starterLabel:"遠S",difficulty:"易（Dustloop評価）",meter:0,shared:"2S始動と5H > 214K/214Hを共通化",reason:"現行DustloopのBasic Far Slash Comboでも紹介される簡単な遠S始動。2Sと共通ルートで習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。",sourceMatched:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
  "v203-8":{main:true,topic:"牽制ヒット",starterLabel:"2S",difficulty:"易（Dustloop評価）",meter:0,shared:"遠S始動と5H > 214K/214Hを共通化",reason:"Ver.2.03資料で99/117ダメージ。2Sと遠Sで後半が共通し、追加の習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
  "v200-1":{main:true,topic:"小技ヒット",difficulty:"易（暫定）",meter:0,routeLabel:"基本：短く、起き攻め重視",shared:"2D > 214Pを使う基本締め",reason:"小技からの短いルート。ゲージを使わず、安定してダウンを取る候補。",oki:"要検証（ダッシュキャンセル後を確認）"},
@@ -135,21 +146,86 @@ const curation={
  "v203-19":{starterLabel:"6H",topic:"近距離ヒット",difficulty:"中",meter:0,routeLabel:"剣使用・壁割り",reason:"既存の短いダウロ締めやエラルルーモ締めから、剣を使って壁割りまで伸ばす。",oki:"壁張り付き後は強化エラルルーモで締める。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
  "v203-20":{starterLabel:"5HS（5H）",topic:"カウンターヒット",difficulty:"易",meter:0,routeLabel:"CH時：ダウン重視",reason:"通常ヒットの5H伸ばしと用途を分け、CH時は剣を温存してダウンと起き攻めを優先。",oki:"強化版エラルルーモ3でハードノックダウン。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"}
 };
-seed.forEach(c=>Object.assign(c,curation[c.id]||{}));
-let stored=[];
-try { const data=JSON.parse(localStorage.getItem("ramComboBook")||"null"); if(Array.isArray(data)) stored=data; } catch(e) { console.warn("保存データの読み込みに失敗",e); }
-// 以前の空データや旧バージョンの保存データでも、標準コンボを必ず表示する。
-const storedById=new Map(stored.map(c=>[c.id,c]));
-let combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
-combos.forEach(c=>delete c.favorite);
+const solGuideUrl="https://note.com/uni_d4_rip0/n/na2739dc31a53";
+const solDustloopUrl="https://www.dustloop.com/w/GGST/Sol_Badguy/Combos";
+const solSeed=[
+{id:"sol-2p",name:"2P連打 > バンディットリヴォルヴァー",starter:"2P",kind:"地上通常ヒット",pos:"どこでも",damage:null,recipe:"2P × n > 236K > 236K",notes:"相手の攻めへの割り込み用。近いときは2Pを増やし、離れているときは少なくする。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-2k",name:"2K > 2D > バンディットリヴォルヴァー",starter:"2K",kind:"地上通常ヒット",pos:"どこでも",damage:"49〜65",recipe:"2K > 2D > 236K",notes:"小技からダウンを取る基本。追加攻撃を出さず短く締める。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-5k",name:"5K > 2D > バンディットリヴォルヴァー",starter:"5K",kind:"地上通常ヒット",pos:"どこでも",damage:"49〜65",recipe:"5K > 2D > 236K(K)",notes:"5Kの割り込みから使う基本ルート。追加入力で攻めを継続しやすい。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-fs",name:"遠S > 5HS > バンディットリヴォルヴァー",starter:"遠S",kind:"地上通常ヒット",pos:"どこでも",damage:98,recipe:"遠S > 5HS > 236K(K)",notes:"牽制ヒットの基本。確認しやすく、追加入力後はダッシュから遠Sを重ねて攻めを続けられる。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-6s",name:"6S > バンディットリヴォルヴァー",starter:"6S",kind:"地上通常ヒット",pos:"どこでも",damage:79,recipe:"6S > 236K(K)",notes:"長いリーチを活かした牽制ヒット確認。先端では236Kの初段を省く必要がある。",source:"Dustloop・Sol Combos",version:"2.03"},
+{id:"sol-fs-oki",name:"遠S > ナイトレイドヴォルテックス",starter:"遠S",kind:"地上通常ヒット",pos:"どこでも",damage:null,recipe:"遠S > 214S > 5K(2) > 6S > 214S（最大溜め）",notes:"バンディットリヴォルヴァー締めと用途を分け、起き攻めを重視するルート。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-2k-ch",name:"CH 2K > 6S > バンディットリヴォルヴァー",starter:"2K",kind:"カウンターヒット",pos:"どこでも",damage:null,recipe:"CH 2K > 6S > 236K(K)",notes:"2Kカウンター、または相手がしゃがみ・空中のときに使える確認ルート。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-cs-punish",name:"近S > 遠S > 5HS > バンディットリヴォルヴァー",starter:"近S",kind:"地上通常ヒット",pos:"どこでも",damage:125,recipe:"近S > 遅らせ遠S > 5HS > 236K(K)",notes:"無敵技などをガードした後の確反に使いやすい基本ルート。近Sから遠Sを少し遅らせる。",source:"Dustloop・Sol Combos",version:"2.03"},
+{id:"sol-cs-corner",name:"近S > 2HS > ナイトレイドヴォルテックス",starter:"近S",kind:"地上通常ヒット",pos:"画面端",damage:null,recipe:"近S > 2HS > 214S > 近S > 2HS > 41236H",notes:"画面端で安定を優先するルート。Fafnirで壁割りまで狙える。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-fs-ch",name:"CH 遠S > 近S > ナイトレイドヴォルテックス",starter:"遠S",kind:"カウンターヒット",pos:"画面中央",damage:null,recipe:"CH 遠S > ダッシュ近S > 2HS > 微溜め214S > 近S > 623H > 214H（Clean Hit）",notes:"カウンターヒットから運び、Sidewinder Ignitedで締める。Clean Hitを逃しても起き攻めを狙える。",source:"ソル2.0コンボまとめ／Ver.2.03調整",version:"2.03"},
+{id:"sol-2s-ch-corner",name:"CH 2S > 遠S > Sidewinder Ignited",starter:"2S",kind:"カウンターヒット",pos:"画面端",damage:null,recipe:"CH 2S > 遠S > 623H > 214H（Clean Hit） > 5K(2) > 6S > 41236H",notes:"画面端が近いときのCH高リターン。Sidewinder後にFafnirまでつなぐ。",source:"ソル2.0コンボまとめ／Ver.2.03調整",version:"2.03"},
+{id:"sol-5hs",name:"5HS > ナイトレイドヴォルテックス > Sidewinder Ignited",starter:"5HS",kind:"地上通常ヒット",pos:"どこでも",damage:null,recipe:"5HS > 214S > 5K(1) > 623H > 214H（Clean Hit）",notes:"5HSからの基本追撃。相手との距離に応じてClean Hitのタイミングを調整する。",source:"ソル2.0コンボまとめ／Ver.2.03調整",version:"2.03"},
+{id:"sol-5hs-ch",name:"CH 5HS > Fafnir連係",starter:"5HS",kind:"カウンターヒット",pos:"画面端",damage:null,recipe:"CH 5HS > 214S > 5HS > 41236H（Clean Hit） > 5HS > 41236H",notes:"画面端のCH限定。Sidewinderルートより安定を優先した締め方。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-aa5p-carry",name:"対空5P > 空中追撃",starter:"対空5P",kind:"対空",pos:"画面中央",damage:null,recipe:"対空5P > 微ダッシュ5K(2) > j.D > ADC > j.K > j.D > 5HS > 41236H",notes:"対空から大きく運ぶルート。相手との距離が遠いと空中追撃が届かないため、対空後にしっかり走る。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-aa5p-easy",name:"対空5P > 近S拾い",starter:"対空5P",kind:"対空",pos:"どこでも",damage:null,recipe:"対空5P > 微ダッシュ5K(2) > 6S > 微溜め214S > 近S > 2HS > 41236H",notes:"運び重視ルートより簡単。画面端が近ければ壁割りも狙える。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-jhs",name:"空対空 j.HS > 追撃",starter:"空中j.HS",kind:"空中始動",pos:"どこでも",damage:null,recipe:"j.HS > j.D > ADC > j.K > j.D > ダッシュ5K(2) > 6S > 41236H",notes:"空中で相手を捕まえたときの運び用。",source:"ソル2.0コンボまとめ",version:"2.03"},
+{id:"sol-dust",name:"溜めダスト > ホーミングジャンプ",starter:"5D",kind:"ダスト",pos:"どこでも",damage:228,recipe:"5[D] > 8 > j.D > jc > j.D > j.S > j.D > j.S > jc > j.DD",notes:"大きな隙への確反向け。最後のFinish Blow後に近Sを重ねられる。",source:"Dustloop・Sol Combos",version:"2.03"},
+{id:"sol-fs-rc",name:"遠S > 赤RC > 壁割り",starter:"遠S",kind:"ゲージ使用",pos:"画面中央",damage:null,recipe:"遠S > 5HS > 236K(K) > 66RRC(c) > j.K > j.S > j.HS(2) > j.D > 623H > 214H（Clean Hit）",notes:"50%ゲージ使用。赤RCで追撃し、端まで運んでSidewinder Ignitedで締める高リターンルート。",source:"ソル2.0コンボまとめ／Ver.2.03調整",version:"2.03"},
+{id:"sol-charge-corner",name:"溜めダスト > 赤RC > 画面端追撃",starter:"5D",kind:"ゲージ使用",pos:"どこでも",damage:null,recipe:"5[D] > 66RRC > 近S > j.D > ADC > j.K > j.D > 近S > 623H > 214H（Clean Hit）",notes:"50%ゲージ使用。溜めダストから赤RCで追撃し、画面位置に応じてSidewinder Ignitedの壁割りを狙う。",source:"ソル2.0コンボまとめ／Ver.2.03調整",version:"2.03"}
+];
+const solCuration={
+"sol-2p":{main:true,starterLabel:"2P",topic:"割り込み",meter:0,reason:"ソルの素早い小技から反撃する基本。距離でPの回数を調整する。",oki:"BRの追加入力でソフトノックダウン。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-2k":{main:true,starterLabel:"2K",topic:"小技ヒット",meter:0,reason:"小技から短くダウンを取る。",oki:"2D締めからBRにつなぎ、次の攻めへ。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-5k":{main:true,starterLabel:"5K",topic:"割り込み",meter:0,reason:"5Kで相手の攻めを止めた後の基本ルート。",oki:"BR追加入力後に遠Sを重ねて攻めを続ける。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-fs":{main:true,starterLabel:"遠S",topic:"牽制ヒット",meter:0,reason:"遠Sから5HSへつなぐ標準確認。",oki:"BR追加入力後、ダッシュ遠Sを重ねる。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-6s":{main:true,starterLabel:"6S",topic:"牽制ヒット",meter:0,reason:"長いリーチを活かす簡単なヒット確認。先端では初段を省く。",oki:"BR後に遠Sで攻めを継続。",currentSource:true,sourceUrl:solDustloopUrl},
+"sol-fs-oki":{starterLabel:"遠S",topic:"起き攻め通常技ヒット",meter:0,reason:"通常のBR締めから切り替え、近S重ねの起き攻めを優先する。",oki:"最大溜め214S後に垂直ジャンプから近Sを重ねる。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-2k-ch":{starterLabel:"2K",topic:"カウンターヒット",meter:0,reason:"2Kカウンター時、または相手がしゃがみ・空中のときだけ使える伸ばし方。",oki:"BR追加入力から運びを狙う。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-cs-punish":{main:true,starterLabel:"近S",topic:"無敵技ガード後の確反",meter:0,reason:"無敵技などをガードした後の近S始動。遠Sを遅らせて確認しやすい。",oki:"BR後の遠S重ねで攻めを続ける。",currentSource:true,sourceUrl:solDustloopUrl},
+"sol-cs-corner":{starterLabel:"近S",topic:"画面端",meter:0,reason:"画面端で安定して壁割りを狙う。",oki:"Fafnirで壁を割る。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-fs-ch":{main:true,starterLabel:"遠S",topic:"カウンターヒット",meter:0,reason:"遠Sカウンターから近Sを拾い、Sidewinderで端へ運ぶ。Ver.2.03でClean Hit範囲が拡大。",oki:"Clean Hitなら高ダメージ。外れても着地後の起き攻めを狙える。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-2s-ch-corner":{starterLabel:"2S",topic:"カウンターヒット",meter:0,reason:"画面端付近の2Sカウンター時に狙う高リターンルート。",oki:"Fafnirで壁割り。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-5hs":{starterLabel:"5HS",topic:"近距離ヒット",meter:0,reason:"5HSからVortexで拾い、Sidewinderで締める。",oki:"Clean Hit後は近S重ねを狙える。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-5hs-ch":{starterLabel:"5HS",topic:"カウンターヒット",meter:0,reason:"画面端のCH限定。Clean Hit Fafnirを使った安定ルート。",oki:"Fafnirで壁割り。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-aa5p-carry":{main:true,starterLabel:"対空5P",topic:"対空",meter:0,reason:"対空からの運び重視。遠い場合は空中追撃が届かないので距離調整が必要。",oki:"Fafnirでダウンを取る。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-aa5p-easy":{starterLabel:"対空5P",topic:"対空",meter:0,reason:"対空5Pのもう一つの選択。空中追撃を減らし、近S拾いを狙う。",oki:"Fafnir締め。端が近ければ壁割り。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-jhs":{starterLabel:"空中j.HS",topic:"対空",meter:0,reason:"空対空やジャンプ攻撃が当たったときの運び用。",oki:"Fafnirでダウンを取る。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-dust":{starterLabel:"5D",topic:"無敵技ガード後の確反",meter:0,reason:"溜めダストが確定する大きな隙への高ダメージ追撃。",oki:"Finish Blow後に近Sを重ねる。",currentSource:true,sourceUrl:solDustloopUrl},
+"sol-fs-rc":{main:true,starterLabel:"遠S",topic:"ゲージ使用",meter:50,reason:"50%ゲージを使い、牽制ヒットから大きく運ぶ高リターンルート。",oki:"Sidewinder締めから起き攻め。",currentSource:true,sourceUrl:solGuideUrl},
+"sol-charge-corner":{starterLabel:"5D",topic:"ゲージ使用",meter:50,reason:"溜めダストから50%ゲージを使って追撃。壁の位置が近ければ壁割りまで狙う。",oki:"Sidewinder締め。",currentSource:true,sourceUrl:solGuideUrl}
+};
+let combos=[];
+let activeCharacter="ram";
 const $=id=>document.getElementById(id);
-const save=()=>{try{localStorage.setItem("ramComboBook",JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
-let selectedOnly=false;
+const storageKey=()=>activeCharacter==="sol"?"solComboBook":"ramComboBook";
+const save=()=>{try{localStorage.setItem(storageKey(),JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
+function loadCharacter(character){
+ activeCharacter=character;
+ const base=character==="sol"?solSeed:ramSeed;
+ const curation=character==="sol"?solCuration:ramCuration;
+ const seed=base.map(c=>({...c,...curation[c.id]}));
+ let stored=[];
+ try{const data=JSON.parse(localStorage.getItem(storageKey())||"null");if(Array.isArray(data))stored=data}catch(e){console.warn("保存データの読み込みに失敗",e)}
+ const storedById=new Map(stored.map(c=>[c.id,c]));
+ combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
+ combos.forEach(c=>delete c.favorite);
+ selectedOnly=false;
+ for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
+ $("sort").value="recommended";
+ const isSol=character==="sol";
+ $("pageTitle").textContent=isSol?"SOL BADGUY COMBO BOOK":"RAMLETHAL COMBO BOOK";
+ $("pageDescription").textContent=isSol?"Ver.2.03対応資料を基準に、始動技と状況ごとに整理。":"状況別・始動技別に整理。主力候補を優先表示。";
+ $("ramButton").setAttribute("aria-pressed",String(!isSol));
+ $("solButton").setAttribute("aria-pressed",String(isSol));
+ $("ramSources").hidden=isSol;
+ $("solSources").hidden=!isSol;
+ document.title=`GGST ${isSol?"Sol":"Ramlethal"} Combo Book`;
+ render();
+}
+$("ramButton").onclick=()=>loadCharacter("ram");
+$("solButton").onclick=()=>loadCharacter("sol");let selectedOnly=false;
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
 function render(){
 let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFilter").value,pos=$("position").value,sort=$("sort").value;
 let arr=combos.filter(c=>(!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&(!topic||c.topic===topic)&&(!pos||c.pos===pos));
-arr.sort((a,b)=>sort==="damage"?(b.damage||0)-(a.damage||0):Number(!!b.main)-Number(!!a.main)||((b.damage||0)-(a.damage||0)));
+const damageScore=c=>{const value=String(c.damage??"").match(/\d+/);return value?Number(value[0]):0};
+arr.sort((a,b)=>sort==="damage"?damageScore(b)-damageScore(a):Number(!!b.main)-Number(!!a.main)||damageScore(b)-damageScore(a));
 $("resultCount").textContent=`${arr.length} 件表示`; $("viewToggle").textContent=selectedOnly?"全コンボを見る":"マイコンボだけ表示（"+combos.filter(c=>c.customSelected).length+"）"; $("viewToggle").setAttribute("aria-pressed",String(selectedOnly));
 const renderCard=c=>`<article class="card"><div class="route-main"><div class="recipe">${esc(c.recipe)}</div><details><summary>条件・起き攻め・出典など</summary>${(c.reason||c.notes)?`<div class="note">${esc(c.reason||c.notes)}</div>`:""}${c.shared?`<p class="note"><strong>共通ルート：</strong>${esc(c.shared)}</p>`:""}${c.oki && !/^(要検証|要確認)/.test(c.oki)?`<p class="note"><strong>起き攻め：</strong>${esc(c.oki)}</p>`:""}${c.videoUrl?`<p class="note"><a href="${esc(c.videoUrl)}" target="_blank" rel="noreferrer">▶ ${esc(c.videoTitle||"コンボ動画を見る")}</a></p>`:""}<p class="note"><strong>位置：</strong>${esc(c.pos)} ／ <strong>元データ：</strong>${c.sourceUrl?`<a href="${esc(c.sourceUrl)}" target="_blank" rel="noreferrer">${esc(c.source||"Dustloop")}</a>`:esc(c.source||"ユーザー登録")}</p><div class="cardtools"><button data-action="edit" data-id="${esc(c.id)}">編集</button><button data-action="delete" data-id="${esc(c.id)}">削除</button></div></details></div><div class="metrics">${c.damage!=null?`<div class="metric"><span>ダメージ</span><b>${esc(c.damage)}</b></div>`:""}<div class="metric"><span>ゲージ</span><b>${c.meter===0?"なし":c.meter?esc(c.meter)+"%":"—"}</b></div></div><div class="cardactions"><button data-action="select" data-id="${esc(c.id)}" aria-label="${c.customSelected?"マイコンボから外す":"マイコンボに追加"}" title="${c.customSelected?"マイコンボから外す":"マイコンボに追加"}">${c.customSelected?"✓ 追加済み":"＋ マイコンボ"}</button></div></article>`;
 const starterFor=c=>c.starterLabel||c.starter||"始動未設定";
@@ -165,11 +241,11 @@ function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textCont
 function deleteCombo(id){if(confirm("このコンボを削除しますか？")){combos=combos.filter(c=>c.id!==id);save();render()}}
 $("addBtn").onclick=()=>{$("comboForm").reset();$("dialogTitle").textContent="コンボを追加";$("editId").value="";$("editor").showModal()};
 $("cancelBtn").onclick=()=>$("editor").close();
-$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:+$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
+$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
 ["search","situation","topicFilter","position","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
-$("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({game:"GGST",character:"Ramlethal",combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="ggst-ramlethal-combos.json";a.click();URL.revokeObjectURL(a.href)};
+$("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({game:"GGST",character:activeCharacter==="sol"?"Sol":"Ramlethal",combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=activeCharacter==="sol"?"ggst-sol-combos.json":"ggst-ramlethal-combos.json";a.click();URL.revokeObjectURL(a.href)};
 $("importBtn").onclick=()=>$("fileInput").click();
 $("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();render()}}catch{alert("JSONファイルを読み込めませんでした")};e.target.value=""};
-render();
+loadCharacter("ram");
 </script>
 </body></html>
