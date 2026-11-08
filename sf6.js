@@ -150,6 +150,61 @@
       route("arjun-mp","立ち中P","立ち中P > 弱 大義の巨腕","地上通常ヒット",["なし","なし"],null,"相手との距離を確認","2段目が当たる間合いで成立。")
     ]
   };
+  // SF6 combo lists conventionally use numpad directions and LP/MP/HP/LK/MK/HK.
+  // Keep character-specific special inputs explicit so move names aren't guessed from translation.
+  const specialInputs = {
+    ryu:{"上げ突き":"4HP","OD上段足刀蹴り":"OD236KK","強昇龍拳":"623HP","中昇龍拳":"623MP","弱昇龍拳":"623LP","竜巻旋風脚":"214K"},
+    luke:{"強フラッシュナックル":"236HP","弱フラッシュナックル":"236LP"},
+    jamie:{"強張弓腿":"623HK"},
+    chunli:{"中スピニングバードキック":"28MK","弱スピニングバードキック":"28LK"},
+    guile:{"強サマーソルトキック":"28HK"},
+    kimberly:{"疾駆け":"236K","急停止":"236K~6","影すくい":"236K~2K","弱流転一文字":"214LK"},
+    juri:{"中風破刃":"236MK"},
+    ken:{"強昇龍拳":"623HP","奮迅昇龍拳":"623K~623P"},
+    blanka:{"強エレクトリックサンダー":"236HP","中ローリングアタック":"4~6MK"},
+    dhalsim:{"中ヨガブラスト":"623MP","ODヨガフレイム":"OD214PP"},
+    ehonda:{"相撲ステップ":"236K","鉄砲":"236K~P"},
+    deejay:{"中ソバット":"236MK","強ソバット":"236HK"},
+    manon:{"中ランヴェルセ":"236MK","強ロン・ポワン":"214HK"},
+    marisa:{"弱ディマカイルス":"214LP","中ディマカイルス":"214MP","中グラディウス":"236MP"},
+    jp:{"弱ストリボーグ":"214LP","中ストリボーグ":"214MP"},
+    zangief:{"ダブルラリアット":"PPP"},
+    lily:{"中トマホーク":"623MP","弱コンドルウインド":"214LP","弱スパイア":"236LK"},
+    cammy:{"中スパイラルアロー":"236MK"},
+    rashid:{"中イーグル・スパイク":"236MK","弱イーグル・スパイク":"236LK"},
+    aki:{"強蛇頭鞭":"236HP","強凶襲突":"236HK"},
+    ed:{"中サイコブリッツ":"236MP","強サイコブリッツ":"236HP"},
+    akuma:{"強昇龍拳":"623HP","弱昇龍拳":"623LP","中竜巻斬空脚":"214MK"},
+    mbison:{"弱ダブルニー":"4~6LK","弱バックフィスト":"4~6LP"},
+    terry:{"中バーンナックル":"236MP"},
+    mai:{"弱忍蜂":"236LK","強龍炎舞":"214HP"},
+    elena:{"弱スピンサイズ":"214LK"},
+    sagat:{"中タイガーアッパーカット":"623MP","中タイガーショット":"236MP"},
+    cviper:{"中サンダー":"214MP","弱サンダー":"214LP","中セイスモハンマー":"22MP","空中強バーニングキック":"j.214HK","トレース":"P follow-up"},
+    alex:{"クロスチョップ":"j.236P"},
+    ingrid:{"中サンライズ":"236MP"},
+    yasmine:{"中ダロイ":"236MP","強ダロイ":"236HP","アロン":"236P"},
+    arjun:{"弱 大義の巨腕":"236LP","中 厳酷な岩肩":"214MP"}
+  };
+  const button = {"弱P":"LP","中P":"MP","強P":"HP","弱K":"LK","中K":"MK","強K":"HK"};
+  const toNumpad = (text, characterId) => {
+    let result=String(text??"");
+    for(const [label,input] of Object.entries(specialInputs[characterId]||{})) result=result.split(label).join(input);
+    result=result.replace(/ハイジャンプ中P/g,"j.MP").replace(/空中強P/g,"j.HP").replace(/空中中P/g,"j.MP");
+    result=result.replace(/前ジャンプ(弱|中|強)(P|K)|ジャンプ(弱|中|強)(P|K)/g,(match,front,frontButton,regular,regularButton)=>{
+      const strength=front||regular,attack=frontButton||regularButton;
+      return `9${button[strength+attack]}`;
+    });
+    result=result.replace(/立ち(弱|中|強)(P|K)/g,(_,strength,attack)=>`5${button[strength+attack]}`);
+    result=result.replace(/屈(弱|中|強)(P|K)/g,(_,strength,attack)=>`2${button[strength+attack]}`);
+    result=result.replace(/([1-9])(弱|中|強)(P|K)/g,(_,direction,strength,attack)=>`${direction}${button[strength+attack]}`);
+    result=result.replace(/旋風脚/g,"6HK").replace(/6P派生/g,"6P");
+    result=result.replace(/小技/g,"5LP").replace(/・/g," > ").replace(/ターゲットコンボ/g,"");
+    result=result.replace(/(?<![A-Z])(?:弱|中|強)(?:P|K)/g,match=>`5${button[match]}`);
+    result=result.replace(/前ステ/g,"66").replace(/ダッシュ/g,"66").replace(/×(\d+)/g,"×$1");
+    result=result.replace(/CDR/g,"DRC");
+    return result;
+  };
   window.SF6_CHARACTERS = names.map(([id,name,latin], index) => {
     const page = pages[id] || id;
     const entries = data[id] || [];
@@ -159,7 +214,7 @@
       sourceUrl:`https://sf6-lab.net/fighters/${page}/combo`,
       sourceTitle:"スト6ラボ Year4 コンボ・起き攻め",
       description:`${name}・クラシック操作。Year4資料を基準に、始動技とゲージ状況で整理。`,
-      routes:entries
+      routes:entries.map(entry=>({...entry,sourceRecipe:entry.recipe,recipe:toNumpad(entry.recipe,id),sourceStarter:entry.starter,starter:toNumpad(entry.starter,id),starterLabel:toNumpad(entry.starterLabel||entry.starter,id)}))
     };
   });
 })();
