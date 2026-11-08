@@ -28,11 +28,11 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 </style>
 </head>
 <body>
-<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1>RAMLETHAL COMBO BOOK</h1><p>まず主力候補6ルートから。現行Ver.2.03での成立・ダメージ・起き攻めは順次検証。</p></header>
+<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1>RAMLETHAL COMBO BOOK</h1><p>状況別・始動技別に整理。主力候補を優先表示。</p></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
-<button id="viewToggle" aria-pressed="true">全件を表示</button>
+<button id="viewToggle" aria-pressed="false">主力6件だけ表示</button>
 <button class="primary" id="addBtn">＋ コンボを追加</button>
 <button id="exportBtn">バックアップ</button>
 <button id="importBtn">復元</button>
@@ -102,13 +102,13 @@ const seed=[
 {id:"v200-6",name:"CH 5K > ダウロ > 追撃",starter:"5K",kind:"カウンターヒット",pos:"どこでも",score:3,damage:114,recipe:"CH 5K > 623P > 2K > 6H > 214H",notes:"Ver.2.00掲載。カウンターヒット時のヒットストップを利用。ダメージと画面端への運びを伸ばせる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00",version:"2.00"}
 ]
 const curation={
- "v200-5":{main:true,topic:"牽制ヒット",difficulty:"易（Dustloop評価）",meter:0,shared:"2S始動と5H > 214K/214Hを共通化",reason:"現行DustloopのBasic Far Slash Comboでも紹介される簡単な遠S始動。2Sと共通ルートで習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。トレモ未確認。",sourceMatched:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
- "v203-8":{main:true,topic:"牽制ヒット",difficulty:"易（Dustloop評価）",meter:0,shared:"遠S始動と5H > 214K/214Hを共通化",reason:"Ver.2.03資料で99/117ダメージ。2Sと遠Sで後半が共通し、追加の習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。トレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
+ "v200-5":{main:true,topic:"牽制ヒット",starterLabel:"6S（遠S/f.S）",difficulty:"易（Dustloop評価）",meter:0,shared:"2S始動と5H > 214K/214Hを共通化",reason:"現行DustloopのBasic Far Slash Comboでも紹介される簡単な遠S始動。2Sと共通ルートで習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。トレモ未確認。",sourceMatched:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
+ "v203-8":{main:true,topic:"牽制ヒット",starterLabel:"2S",difficulty:"易（Dustloop評価）",meter:0,shared:"遠S始動と5H > 214K/214Hを共通化",reason:"Ver.2.03資料で99/117ダメージ。2Sと遠Sで後半が共通し、追加の習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。トレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
  "v200-1":{main:true,topic:"小技ヒット",difficulty:"易（暫定）",meter:0,shared:"2D > 214Pを使う基本締め",reason:"小技からの短いルート。ゲージを使わず、安定してダウンを取る候補。",oki:"要検証（ダッシュキャンセル後を確認）"},
  "v200-4":{main:true,topic:"無敵技ガード後の確反",difficulty:"易（Dustloop評価）",meter:0,shared:"2H始動のエラルルーモ締めと共通",reason:"現行Dustloopがスーパーや無敵技をガードした後の基本確反として紹介。4P入力を遅らせて強化版エラルルーモにする。",oki:"Dustloopは良い運びと起き攻めを記載。4Pが速すぎるとダメージ・起き攻めが落ち、遅すぎるとコンボが落ちる。トレモ未確認。",sourceMatched:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Close_Slash_Combo.mp4",videoTitle:"Basic Close Slash Punish Combo"},
  "v203-4":{main:true,topic:"近距離ヒット",difficulty:"易（Dustloop評価）",meter:0,shared:"6H始動の短いダウロ追撃",reason:"Ver.2.03資料掲載。短く、追加習得負担が小さい6Hヒット時の候補。",oki:"ダウロ後に重ね近Sを狙えるとDustloopに記載。位置・タイミングはトレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
  "v200-3":{main:true,topic:"対空",difficulty:"易（暫定）",meter:0,shared:"他の主力ルートと共通パーツなし",reason:"対空成功時に覚える専用ルートを1本に絞る候補。",oki:"要検証（相手の高さ別に確認）"},
- "v203-1":{topic:"その他",difficulty:"易（Dustloop評価）",meter:0,oki:"214Kは距離が近ければ前進後の重ねを狙える。214Hは遠距離で当たりやすいが起き攻めしにくい。トレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-1":{topic:"牽制ヒット",starterLabel:"5HS（5H）",difficulty:"易（Dustloop評価）",meter:0,oki:"214Kは距離が近ければ前進後の重ねを狙える。214Hは遠距離で当たりやすいが起き攻めしにくい。トレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
  "v203-2":{topic:"近距離ヒット",difficulty:"易（Dustloop評価）",meter:0,oki:"強化版エラルルーモ3でハードノックダウン。起き攻め条件はトレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
  "v203-3":{topic:"近距離ヒット",difficulty:"易（Dustloop評価）",meter:0,oki:"強化版エラルルーモ3でハードノックダウン。起き攻め条件はトレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
  "v203-5":{topic:"近距離ヒット",difficulty:"易（Dustloop評価）",meter:0,oki:"強化版エラルルーモ3でハードノックダウンし、画面端へ運ぶ。起き攻め条件はトレモ未確認。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
@@ -126,7 +126,7 @@ let combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=
 const $=id=>document.getElementById(id);
 const save=()=>{try{localStorage.setItem("ramComboBook",JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
 const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
-let mainOnly=true;
+let mainOnly=false;
 const difficultyRank=c=>String(c.difficulty||"").startsWith("易")?0:String(c.difficulty||"").startsWith("中")?1:2;
 $("viewToggle").onclick=()=>{mainOnly=!mainOnly;$("viewToggle").textContent=mainOnly?"全件を表示":"主力6件だけ表示";$("viewToggle").setAttribute("aria-pressed",String(mainOnly));render()};
 function render(){
@@ -135,9 +135,10 @@ let arr=combos.filter(c=>(!mainOnly||c.main)&&(!q||[c.name,c.starter,c.recipe,c.
 arr.sort((a,b)=>sort==="damage"?(b.damage||0)-(a.damage||0):sort==="easy"?difficultyRank(a)-difficultyRank(b):Number(!!b.main)-Number(!!a.main)||b.score-a.score||((b.damage||0)-(a.damage||0)));
 $("count").textContent=combos.length;$("mainCount").textContent=combos.filter(c=>c.main).length;$("favorites").textContent=combos.filter(c=>c.favorite).length;$("resultCount").textContent=`${arr.length} 件表示`;
 const renderCard=c=>`<article class="card"><div class="cardtop"><span class="pill">${c.main?"主力候補":c.favorite?"★ お気に入り":"追加候補"}</span></div><div class="meta"><span class="tag">${esc(c.topic||c.kind)}</span><span class="tag">${esc(c.pos)}</span><span class="tag">${esc(c.starter||"始動未設定")}始動</span><span class="tag">${esc(c.difficulty||"難度未評価")}</span></div><div class="metrics"><div class="metric"><span>掲載ダメージ</span><b>${c.damage==null?"未計測":esc(c.damage)}</b></div><div class="metric"><span>ゲージ</span><b>${c.meter===0?"なし":c.meter?esc(c.meter)+"%":"未確認"}</b></div></div><div class="recipe">${esc(c.recipe)}</div><div class="status">${c.verified==="tested"?"✓ トレモ確認済み":c.currentSource?"✓ Dustloop Ver.2.03掲載・ゲーム内未検証":c.sourceMatched?"✓ Dustloopガイド掲載・ゲーム内未検証":"⚠ Ver."+esc(c.version||"未確認")+"掲載・現行未検証"}</div><details><summary>採用理由・条件・起き攻め</summary><div class="note">${esc(c.reason||c.notes||"条件を要確認")}</div>${c.shared?`<p class="note"><strong>共通ルート：</strong>${esc(c.shared)}</p>`:""}<p class="note"><strong>起き攻め：</strong>${esc(c.oki||"要検証")}</p>${c.videoUrl?`<p class="note"><a href="${esc(c.videoUrl)}" target="_blank" rel="noreferrer">▶ ${esc(c.videoTitle||"コンボ動画を見る")}</a></p>`:""}<p class="note"><strong>位置：</strong>${esc(c.pos)} ／ <strong>元データ：</strong>${c.sourceUrl?`<a href="${esc(c.sourceUrl)}" target="_blank" rel="noreferrer">${esc(c.source||"Dustloop")}</a>`:esc(c.source||"ユーザー登録")}</p>${c.notes?`<p class="note"><strong>元メモ：</strong>${esc(c.notes)}</p>`:""}</details><div class="cardactions"><button data-action="favorite" data-id="${esc(c.id)}">${c.favorite?"★ お気に入り解除":"☆ お気に入り"}</button><button data-action="edit" data-id="${esc(c.id)}">編集</button><button data-action="delete" data-id="${esc(c.id)}">削除</button></div></article>`;
-const topicOrder=["無敵技ガード後の確反","牽制ヒット","小技ヒット","近距離ヒット","起き攻め通常技ヒット","対空","画面端","カウンターヒット","その他"];
-const topics=[...new Set(arr.map(c=>c.topic||c.kind))].sort((a,b)=>{const ai=topicOrder.indexOf(a),bi=topicOrder.indexOf(b);return (ai<0?999:ai)-(bi<0?999:bi)});
-$("cards").innerHTML=topics.length?topics.map(topic=>{const items=arr.filter(c=>(c.topic||c.kind)===topic);return '<section class="situation-group"><div class="situation-head"><h3>'+esc(topic)+'</h3><span>'+items.length+'件</span></div><div class="situation-cards">'+items.map(renderCard).join("")+'</div></section>'}).join(""):'<div class="empty">該当するコンボがありません。条件を変えるか、「全14件を表示」に切り替えてください。</div>';
+const sectionFor=c=>c.topic==="牽制ヒット"?`${c.starterLabel||c.starter}ヒット時`:c.topic||c.kind;
+const topicOrder=["無敵技ガード後の確反","6S（遠S/f.S）ヒット時","2Sヒット時","5HS（5H）ヒット時","小技ヒット","近距離ヒット","起き攻め通常技ヒット","対空","画面端","カウンターヒット","その他"];
+const topics=[...new Set(arr.map(sectionFor))].sort((a,b)=>{const ai=topicOrder.indexOf(a),bi=topicOrder.indexOf(b);return (ai<0?999:ai)-(bi<0?999:bi)});
+$("cards").innerHTML=topics.length?topics.map(topic=>{const items=arr.filter(c=>sectionFor(c)===topic);return '<section class="situation-group"><div class="situation-head"><h3>'+esc(topic)+'</h3><span>'+items.length+'件</span></div><div class="situation-cards">'+items.map(renderCard).join("")+'</div></section>'}).join(""):'<div class="empty">該当するコンボがありません。条件を変えるか、「全14件を表示」に切り替えてください。</div>';
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 $("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-action]");if(!button)return;const {action,id}=button.dataset;if(action==="favorite")toggleFav(id);if(action==="edit")editCombo(id);if(action==="delete")deleteCombo(id)});
