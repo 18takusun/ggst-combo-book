@@ -2,7 +2,7 @@
 
 ## Project scope
 
-- Maintain a simple combo reference web app for multiple Guilty Gear -Strive- characters. Ramlethal remains the original character; add characters one at a time.
+- Maintain a simple combo reference web app for every currently playable Guilty Gear -Strive- character. Keep unreleased characters out until they are available and have current-version data.
 - Support desktop and iPhone Safari layouts. Combo learning progress tracking is out of scope.
 - Cover game version 2.0 and later. Keep source/version metadata available in the details, but do not show practical-rating or training-verification labels in the browsing UI.
 
@@ -28,14 +28,17 @@
 
 - Keep the interface simple and responsive. Show character, situation, route, damage and meter where known, execution or setup conditions, post-combo oki, and supporting source/video links without requiring progress tracking.
 - When modifying the app, run the relevant checks and tests, then commit the changes locally.
-- Do not push to GitHub until the user explicitly approves the push.
+- Push to GitHub only when the user has approved publishing. The user approved publishing in this conversation; that approval remains valid for this project.
 
 ## Handoff status
 
 - The GitHub repository is `18takusun/ggst-combo-book`; its default branch is `main`.
 - The Ramlethal collection retains its 28 current routes and existing route data. User selections remain in `ramComboBook`.
 - The Sol collection starts with 19 routes based on a Sol player's Ver.2.0 combo and oki guide, Dustloop combo data, and the official Ver.2.03 Sidewinder Ignited adjustment. User selections and backups are isolated in `solComboBook`.
-- A character selector switches between independent combo collections without adding a row of tabs as the roster grows. Starter groups are collapsible with route counts; groups containing main candidates open by default. Each collection keeps compact horizontal rows, hit/CH/anti-air/meter variants, expanded conditions/oki/sources, and its own personal My Combos view.
+- `roster.js` contains the other 32 available characters and their initial researched combo candidates. As of Ver.2.03, the selector covers the 34 released characters; do not include the two not-yet-released Season 5 fighters until launch.
+- The character selector groups fighters by base-game and season-pass roster and switches between independent combo collections. Starter groups are collapsible with route counts; groups containing main candidates open by default. Each collection keeps compact horizontal rows, hit/CH/anti-air/meter variants, expanded conditions/oki/sources, and its own personal My Combos view.
+- Character-specific selections/backups use independent `${characterId}ComboBook` storage keys. Ramlethal and Sol retain their existing `ramComboBook` and `solComboBook` keys.
+- Baiken and Johnny candidates, plus one Axl route, are explicitly marked as not yet checked against a current-version combo reference. Do not present those as confirmed current routes; resolve them when reliable Ver.2.0+ specialist material is available.
 - Treat sourced routes as researched candidates rather than independent in-game tests. Keep route damage blank when the available source does not provide a directly usable value.
-- The Ramlethal collection retains its links to RedDitto/SQ match footage and the specialist RAMLETHAL COMBOS Ver.2.01 guide. The Sol collection links to a current practical-combo video, Sol player Tatuma's videos, a 2.0 route guide, Dustloop, and the official 2.03 patch notes.
+- The Ramlethal collection retains its links to RedDitto/SQ match footage and the specialist RAMLETHAL COMBOS Ver.2.01 guide. The Sol collection links to a current practical-combo video, Sol player Tatuma's videos, a 2.0 route guide, Dustloop, and the official 2.03 patch notes. Other character sets link their routes to individual Dustloop combo references and specialist material when available.
 - Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.

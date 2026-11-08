@@ -31,7 +31,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 </style>
 </head>
 <body>
-<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"><option value="ram">ラムレザル</option><option value="sol">ソル</option></select></label></div></header>
+<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
@@ -69,6 +69,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 <a href="https://www.dustloop.com/w/GGST/Sol_Badguy/Combos" target="_blank" rel="noreferrer">Dustloop – Sol Combos</a><br>
 現行版の確認：<a href="https://www.guiltygear.com/ggst/jp/news/post-8366/" target="_blank" rel="noreferrer">公式 Ver.2.03更新内容</a>。Sidewinder Ignitedのクリーンヒット判定が拡大されています。対戦動画は実戦の参考で、個別ルートの成立証明には使っていません。
 </section>
+<section id="otherSources" hidden></section>
 </footer>
 </main>
 <dialog id="editor">
@@ -87,6 +88,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 </div><div class="dialogactions"><button type="button" id="cancelBtn">キャンセル</button><button class="primary" type="submit">保存</button></div>
 </form>
 </dialog>
+<script src="roster.js"></script>
 <script>
 const ramSeed=[
 {id:"v203-1",name:"5H > 214K / 214H",starter:"5H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:78,recipe:"5H > 214K（78） / 5H > 214H（100）",notes:"Ver.2.03掲載。剣を消費しない基本ルート。214Kは最遠距離では空振りする場合あり。ダメージはルート順に78 / 100。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
@@ -195,13 +197,23 @@ const solCuration={
 let combos=[];
 let activeCharacter="ram";
 const $=id=>document.getElementById(id);
-const storageKey=()=>activeCharacter==="sol"?"solComboBook":"ramComboBook";
+const extraCharacters=window.GGST_EXTRA_CHARACTERS||[];
+const builtInCharacters=[{id:"ram",name:"ラムレザル",group:"ゲーム本編",title:"RAMLETHAL"},{id:"sol",name:"ソル",group:"ゲーム本編",title:"SOL BADGUY"}];
+const allCharacters=[...builtInCharacters,...extraCharacters];
+const characterById=new Map(allCharacters.map(c=>[c.id,c]));
+const storageKey=()=>`${activeCharacter}ComboBook`;
+function populateCharacterPicker(){
+ const groups=[...new Set(allCharacters.map(c=>c.group))];
+ $("characterSelect").innerHTML=groups.map(group=>`<optgroup label="${esc(group)}">${allCharacters.filter(c=>c.group===group).map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</optgroup>`).join("");
+}
 const save=()=>{try{localStorage.setItem(storageKey(),JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
 function loadCharacter(character){
  activeCharacter=character;
- const base=character==="sol"?solSeed:ramSeed;
- const curation=character==="sol"?solCuration:ramCuration;
- const seed=base.map(c=>({...c,...curation[c.id]}));
+ const meta=characterById.get(character)||builtInCharacters[0];
+ const isRam=character==="ram",isSol=character==="sol";
+ const base=isRam?ramSeed:isSol?solSeed:meta.routes;
+ const curation=isRam?ramCuration:isSol?solCuration:{};
+ const seed=base.map(c=>({...c,...curation[c.id],sourceUrl:c.sourceUrl||meta.sourceUrl}));
  let stored=[];
  try{const data=JSON.parse(localStorage.getItem(storageKey())||"null");if(Array.isArray(data))stored=data}catch(e){console.warn("保存データの読み込みに失敗",e)}
  const storedById=new Map(stored.map(c=>[c.id,c]));
@@ -210,13 +222,14 @@ function loadCharacter(character){
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
- const isSol=character==="sol";
- $("pageTitle").textContent=isSol?"SOL BADGUY COMBO BOOK":"RAMLETHAL COMBO BOOK";
- $("pageDescription").textContent=isSol?"Ver.2.03対応資料を基準に、始動技と状況ごとに整理。":"状況別・始動技別に整理。主力候補を優先表示。";
+ $("pageTitle").textContent=`${meta.title||meta.name.toUpperCase()} COMBO BOOK`;
+ $("pageDescription").textContent=meta.description|| (isSol?"Ver.2.03対応資料を基準に、始動技と状況ごとに整理。":"状況別・始動技別に整理。主力候補を優先表示。");
 $("characterSelect").value=character;
- $("ramSources").hidden=isSol;
+ $("ramSources").hidden=!isRam;
  $("solSources").hidden=!isSol;
- document.title=`GGST ${isSol?"Sol":"Ramlethal"} Combo Book`;
+ $("otherSources").hidden=isRam||isSol;
+ if(!isRam&&!isSol){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"Dustloop – Combo Data")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。`}
+ document.title=`GGST ${meta.name} Combo Book`;
  render();
 }
 $("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value));let selectedOnly=false;
@@ -245,9 +258,10 @@ $("addBtn").onclick=()=>{$("comboForm").reset();$("dialogTitle").textContent="�
 $("cancelBtn").onclick=()=>$("editor").close();
 $("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
 ["search","situation","topicFilter","position","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
-$("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({game:"GGST",character:activeCharacter==="sol"?"Sol":"Ramlethal",combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=activeCharacter==="sol"?"ggst-sol-combos.json":"ggst-ramlethal-combos.json";a.click();URL.revokeObjectURL(a.href)};
+$("exportBtn").onclick=()=>{let meta=characterById.get(activeCharacter);let blob=new Blob([JSON.stringify({game:"GGST",character:meta?.name||activeCharacter,combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ggst-${activeCharacter}-combos.json`;a.click();URL.revokeObjectURL(a.href)};
 $("importBtn").onclick=()=>$("fileInput").click();
 $("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();render()}}catch{alert("JSONファイルを読み込めませんでした")};e.target.value=""};
+populateCharacterPicker();
 loadCharacter("ram");
 </script>
 </body></html>
