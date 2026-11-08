@@ -437,10 +437,9 @@
   addRoutes("bridget", [
     r("bridget-2s-basic", "2S", "牽制ヒット", "2S > S > 236K[6] > K", 90, "Ver.2.02資料掲載・ゲーム内未検証。遠S版と後半を共有する牽制確認。", {main:true,oki:"締め後に+10〜15Fから攻めを継続。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
     r("bridget-6p-hkd", "6P", "対空", "6P > 214S", 27, "Ver.2.02資料掲載・ゲーム内未検証。遠い対空や地上ヒット時の簡単な追撃。", {kind:"対空",oki:"214S後に有利を取る。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
-    r("bridget-6p-ch-shoot", "6P", "対空", "CH 6P > 236K[6] > K", 75, "Ver.2.02資料掲載・ゲーム内未検証。高めのカウンター対空からShootにつなぐ。", {kind:"対空",oki:"高さにより有利時間が変わる。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
+    r("bridget-6p-ch-shoot", "6P", "対空", "CH 6P > 236K[6] > K", 75, "Ver.2.02資料掲載・ゲーム内未検証。高めのカウンター対空からShootにつなぐ。", {kind:"カウンターヒット",oki:"高さにより有利時間が変わる。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
     r("bridget-2k-corner", "2K", "画面端", "2K > 6H > j.236H ▷ 6H > j.214K ▷ c.S > 6H > WS! > j.63214P", 168, "Ver.2.03資料掲載・ゲーム内未検証。端でダメージを伸ばすルート。壁割りに覚醒必殺技を使うと、その後ハードノックダウンを取れる。", {pos:"画面端",oki:"壁割り後にハードノックダウン。",version:"2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
     r("bridget-5h-ch", "5H", "カウンターヒット", "CH 5H~H > 236K[6] > K", 105, "Ver.2.02資料掲載・ゲーム内未検証。連係中のカウンターヒットを短く確認する。6入力をK直前に離す。", {kind:"カウンターヒット",oki:"Shoot後に攻めを継続。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
-    r("bridget-fs-poke", "遠S", "牽制ヒット", "遠S~S > 236K[6] > K", 94, "牽制から短く締めて有利を取る。", {oki:"+10〜15Fから攻めを継続。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
     r("bridget-fs-ch-corner", "遠S", "カウンターヒット", "CH 遠S > 5H~H > 236K[6] > 遅らせP > 2K > 6H（壁張り付き） > j.63214P（壁割り）", 163, "画面端の遠Sカウンター。遠距離や端から離れていると不安定。", {kind:"カウンターヒット",pos:"画面端",oki:"壁割り後に起き攻め。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
     r("bridget-dust", "5D", "ダスト", "5[D] > 9 > j.H > 9 > j.H > j.S > j.K > j.H~H", 186, "ゲージを使わず壁割り後のポジティブボーナスを取る。", {kind:"ダスト",oki:"壁割り後にポジティブボーナス。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"})
   ]);
@@ -489,7 +488,7 @@
     r("elphelt-p-ch-hkd", "5P / 2P", "カウンターヒット", "CH 5P / 2P > 2K > 2D", 41, "Dustloop現行資料掲載・ゲーム内未検証。ダメージよりハードノックダウンと起き攻めを優先。", {kind:"カウンターヒット",oki:"2D後に起き攻め。",version:"現行資料",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
     r("elphelt-cs-2s-ch", "近S / 2S", "カウンターヒット", "CH 近S / 2S > 2H > 214H > j.H ▷ c.S > 2S > 2H > 214S~H WS!", null, "Dustloop現行資料掲載・ゲーム内未検証。カウンターのヒットストップで2Hを当てて浮かせる。", {kind:"カウンターヒット",oki:"壁張り付き後に壁割り。",version:"現行資料",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
     r("elphelt-bomb-bnb", "ボム（214H）", "近距離ヒット", "214H ▷ 2S > 2H > 214S~S~K~H", null, "Dustloop現行資料掲載・ゲーム内未検証。ボムが当たれば距離を問わず追撃できる基本形。遠距離ではc.Sを省いて2Sまたは2Hで拾う。", {main:true,oki:"Chain Lollipop締め後に起き攻め。",version:"現行資料",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
-    r("elphelt-6p-aa-ch", "6P", "対空", "対空CH 6P > 214H > j.D ▷ ダッシュc.S > 2H > 214S~K~H WS!", null, "Dustloop現行資料掲載・ゲーム内未検証。近距離で6Pがカウンターしたときの発展ルート。j.Dを使うため距離が離れると成立しない。", {kind:"対空",oki:"壁張り付き後に壁割り。",version:"現行資料",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
+    r("elphelt-6p-aa-ch", "6P", "対空", "対空CH 6P > 214H > j.D ▷ ダッシュc.S > 2H > 214S~K~H WS!", null, "Dustloop現行資料掲載・ゲーム内未検証。近距離で6Pがカウンターしたときの発展ルート。j.Dを使うため距離が離れると成立しない。", {kind:"カウンターヒット",oki:"壁張り付き後に壁割り。",version:"現行資料",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
     r("elphelt-2h-ch-side", "2H", "カウンターヒット", "CH 2H > 214H > j.S（空振り） ▷ ダッシュc.S > 2S > 2H > 214S~K~H WS!", null, "Dustloop現行資料掲載・ゲーム内未検証。大きなカウンターから相手の下をくぐる応用ルート。空中攻撃を空振りして走る時間を作る。", {kind:"カウンターヒット",oki:"壁張り付き後に壁割り。",version:"現行資料",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
   ]);
   addRoutes("testament", [
