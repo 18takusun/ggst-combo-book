@@ -23,58 +23,19 @@ details summary{cursor:pointer;color:var(--muted);font-size:11px;list-style-posi
 .status{font-size:11px;color:var(--yellow)}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px}
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#6d28d9}
-.header-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.site-brand{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.12em}.header-topline .game-switch{margin:0;flex:0 0 auto}
+.header-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.site-brand{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.12em}
 .library-tabs{display:flex;gap:4px;margin:0 auto;padding:8px 24px 0;max-width:1440px}.library-tabs button{padding:7px 14px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--muted);font-size:13px}.library-tabs button[aria-pressed="true"]{border-color:var(--accent);color:var(--text)}
 .library-tabs[hidden],.combo-only[hidden],#referenceAddBtn[hidden]{display:none}
 .reference-card{grid-template-columns:minmax(0,1fr);padding:13px 15px}.reference-sequence{margin-top:4px;padding:8px 10px;border-radius:7px;background:var(--panel2);font:600 13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.reference-origin{color:var(--muted);font-size:11px}
 .character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
-.game-switch{display:inline-flex;gap:2px;margin-top:12px;padding:3px;background:var(--panel2);border:1px solid var(--line);border-radius:9px}.game-switch a{display:block;padding:5px 12px;color:var(--muted);font-size:12px;font-weight:700;text-decoration:none;border-radius:6px}.game-switch a[aria-current="page"]{background:var(--accent);color:#fff}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
 .collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
 .starter-group{margin:0 0 8px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}.starter-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;color:var(--text);font-size:15px;font-weight:750;cursor:pointer;list-style:none}.starter-details>summary::-webkit-details-marker{display:none}.starter-details>summary::before{content:"＋";color:var(--accent);font-size:13px;width:15px}.starter-details[open]>summary::before{content:"−"}.starter-name{margin-right:auto}.starter-count{color:var(--muted);font-size:11px;font-weight:500}.starter-details[open]>summary{border-bottom:1px solid var(--line)}.starter-details .variant-group{padding:0 12px}.starter-details .variant-group:last-child{padding-bottom:4px}.section-tools{display:flex;align-items:center;gap:10px}.section-tools button{padding:5px 9px;font-size:11px;color:var(--muted)}
-/* SF6 draws on Japanese combo-database patterns: fighter-first navigation, compact search, and readable route rows. */
-body[data-game="sf6"]{color-scheme:light;--bg:#f2f3f5;--panel:#fff;--panel2:#f5f6f8;--line:#d9dde3;--text:#20242b;--muted:#68707c;--accent:#ee9b26;--green:#238a55;--yellow:#9b6412;background:#f2f3f5;color:var(--text)}
-body[data-game="sf6"] header{background:#fff;border-bottom:1px solid #d9dde3;padding-top:16px;padding-bottom:16px}
-body[data-game="sf6"] .eyebrow{font-size:10px;letter-spacing:.12em;color:#8a9099}
-body[data-game="sf6"] h1{font-size:clamp(24px,4vw,32px);margin:3px 0 2px}
-body[data-game="sf6"] header p{font-size:13px}
-body[data-game="sf6"] .game-switch{background:#eef0f3;border-color:#d9dde3}
-body[data-game="sf6"] .game-switch a{color:#68707c}
-body[data-game="sf6"] .game-switch a[aria-current="page"]{background:#232831;color:#fff}
-body[data-game="sf6"] .collection-bar{display:flex;margin-top:12px}
-body[data-game="sf6"] .character-picker{gap:7px;font-size:11px;color:#7a818b}
-body[data-game="sf6"] .character-picker select{min-width:150px;padding:6px 30px 6px 9px;background:#fff;border-color:#cfd4db;color:#20242b;font-weight:700}
-body[data-game="sf6"] main{max-width:1180px;padding-top:18px}
-body[data-game="sf6"] .toolbar{grid-template-columns:minmax(220px,1fr) repeat(4,auto);gap:8px;margin-bottom:9px}
-body[data-game="sf6"] input,body[data-game="sf6"] select,body[data-game="sf6"] textarea,body[data-game="sf6"] button{background:#fff;color:#252a32;border-color:#d5d9df;border-radius:8px}
-body[data-game="sf6"] input:focus,body[data-game="sf6"] select:focus,body[data-game="sf6"] textarea:focus{outline-color:#ee9b26}
-body[data-game="sf6"] button.primary{background:#ee9b26;border-color:#ee9b26;color:#20242b}
-body[data-game="sf6"] .filters{grid-template-columns:repeat(3,minmax(0,1fr));padding:8px;background:#fff;border-color:#d9dde3;border-radius:9px}
-body[data-game="sf6"] #situation{display:none}
-body[data-game="sf6"] .sectionhead{margin-top:19px;padding-bottom:8px;border-bottom:1px solid #d9dde3}
-body[data-game="sf6"] .sectionhead h2{font-size:15px;letter-spacing:.02em}
-body[data-game="sf6"] .starter-group{margin-bottom:7px;background:#fff;border-color:#d9dde3;border-radius:9px}
-body[data-game="sf6"] .starter-details>summary{padding:9px 12px;font-size:14px}
-body[data-game="sf6"] .starter-details .variant-group{padding:0 10px}
-body[data-game="sf6"] .variant-head{border-left-color:#ee9b26;color:#5f6670}
-body[data-game="sf6"] .card{background:#fafbfc;border-color:#e2e5e9;border-radius:7px;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;padding:8px 10px}
-body[data-game="sf6"] .recipe{font-size:13px;line-height:1.55;color:#222832}
-body[data-game="sf6"] .metrics{gap:8px}
-body[data-game="sf6"] .metric{gap:4px;padding:3px 7px;border-radius:5px;background:#f0f2f4}
-body[data-game="sf6"] .metric span{font-size:9px}
-body[data-game="sf6"] .metric b{font-size:12px}
-body[data-game="sf6"] .cardactions button{font-size:10px;padding:4px 7px;border-radius:6px}
-body[data-game="sf6"] .cardactions button[aria-pressed="true"]{border-color:#ee9b26}
-body[data-game="sf6"] .starter-details>summary::before{color:#ee9b26}
-body[data-game="sf6"] details summary{color:#747b85}
-body[data-game="sf6"] footer{border-color:#d9dde3}
-body[data-game="sf6"] a{color:#a66300}
-@media(max-width:640px){body[data-game="sf6"] header{padding:12px 14px}body[data-game="sf6"] .collection-bar{display:flex;margin:8px 0 0}body[data-game="sf6"] .game-switch{margin-top:0}body[data-game="sf6"] main{padding:12px 12px 32px}body[data-game="sf6"] .toolbar{grid-template-columns:1fr 1fr}body[data-game="sf6"] .toolbar input{grid-column:1/-1}body[data-game="sf6"] .filters{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-game="sf6"] .card{grid-template-columns:minmax(0,1fr) auto;gap:6px 8px}body[data-game="sf6"] .route-main{grid-column:1/-1}body[data-game="sf6"] .metrics{grid-column:1;grid-row:2;flex-wrap:wrap}body[data-game="sf6"] .cardactions{grid-column:2;grid-row:2}body[data-game="sf6"] .recipe{font-size:12px}}
 @media(max-width:900px){main{padding:16px 16px 44px}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){main{padding:12px 12px 36px}.collection-bar{margin-top:10px}.character-picker{width:100%;justify-content:space-between}.character-picker select{flex:1;max-width:230px}.toolbar{grid-template-columns:1fr 1fr;gap:7px}.toolbar input{grid-column:1/-1}.toolbar button{padding:8px 7px;font-size:13px}.filters{grid-template-columns:1fr 1fr;gap:7px;padding:8px}.filters select{padding:8px 7px;font-size:12px}.situation-head{align-items:flex-start;flex-direction:column;gap:5px}.starter-details>summary{padding:10px;font-size:14px}.starter-details .variant-group{padding:0 8px}.card{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:8px 9px}.route-main{grid-column:1/-1}.metrics{grid-column:1;grid-row:2;gap:12px}.cardactions{grid-column:2;grid-row:2}.recipe{font-size:12px}.cardactions button{padding:4px 7px;font-size:10px}.sectionhead{align-items:center}.sectionhead h2{font-size:17px}.section-tools{gap:6px}.section-tools button{padding:5px 7px;font-size:10px}form .formgrid{grid-template-columns:1fr}form label.full{grid-column:auto}}
 </style>
 </head>
 <body>
-<header><div class="header-topline"><span class="site-brand">FIGHTING GAME COMBO BOOK</span><nav class="game-switch" aria-label="ゲームを切り替え"><a href="#ggst" data-game="ggst" aria-current="page">GGST</a><a href="#sf6" data-game="sf6">スト6</a></nav></div><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
+<header><div class="header-topline"><span class="site-brand">GUILTY GEAR -STRIVE- / COMBO BOOK</span></div><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
 <main>
 <nav class="library-tabs" id="referenceNav" aria-label="GGSTの参照内容"><button type="button" data-view="combos" aria-pressed="true">コンボ</button><button type="button" data-view="oki" aria-pressed="false">起き攻め</button><button type="button" data-view="pressure" aria-pressed="false">連携</button></nav>
 <div class="toolbar">
@@ -115,7 +76,6 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 現行版の確認：<a href="https://www.guiltygear.com/ggst/jp/news/post-8366/" target="_blank" rel="noreferrer">公式 Ver.2.03更新内容</a>。Sidewinder Ignitedのクリーンヒット判定が拡大されています。対戦動画は実戦の参考で、個別ルートの成立証明には使っていません。
 </section>
 <section id="otherSources" hidden></section>
-<section id="sf6Sources" hidden><strong>スト6 コンボ参考資料</strong><br><a href="https://sf6-lab.net/" target="_blank" rel="noreferrer">スト6ラボ：Year4 コンボ・起き攻め・セットプレイ</a><br>クラシック操作を基準に、始動別・ドライブ／SA使用別の実戦ルートを掲載しています。更新日と対象バージョンはキャラクター別資料で確認してください。</section>
 </footer>
 </main>
 <dialog id="editor">
@@ -128,8 +88,6 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 <label>実戦状況<select id="comboTopic"><option>その他</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option></select></label>
 <label>位置<select id="pos"><option>どこでも</option><option>画面中央</option><option>画面端</option><option>要確認</option></select></label>
 <label>ダメージ（不明なら空欄）<input id="damage" type="text" inputmode="numeric" placeholder="例：120 / 90〜110"></label>
-<label id="driveCostField" hidden>Drive使用<select id="driveCost"><option>なし</option><option>1本</option><option>2本</option><option>3本</option><option>4本</option><option>6本</option></select></label>
-<label id="saCostField" hidden>SA使用<select id="saCost"><option>なし</option><option>1本</option><option>2本</option><option>3本</option></select></label>
 <label class="full">コマンド<textarea id="recipe" required placeholder="例：近S > 遠S > HS"></textarea></label>
 <label class="full">メモ<textarea id="notes" placeholder="成立条件・注意点・練習メモなど"></textarea></label>
 <label>対応バージョン<select id="version"><option>2.00</option><option>2.03</option><option>2.04以降</option><option>Year4 / 2026-08-03</option><option>未確認</option></select></label>
@@ -138,7 +96,6 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 </dialog>
 <dialog id="referenceEditor"><form id="referenceForm"><h2 id="referenceDialogTitle">起き攻めを追加</h2><input id="referenceId" type="hidden"><label>見出し<input id="referenceName" required placeholder="例：ダウロ締め後の近S重ね"></label><label>始動・使う場面<input id="referenceSequence" placeholder="例：2H > 623P"></label><label>手順・ポイント<textarea id="referenceNotes" required placeholder="タイミング、距離、ガード後の状況など"></textarea></label><label>参考URL<input id="referenceSource" type="url" placeholder="https://..."></label><div class="dialogactions"><button type="button" id="referenceCancel">キャンセル</button><button class="primary" type="submit">保存</button></div></form></dialog>
 <script src="roster.js"></script>
-<script src="sf6.js?v=numpad-20261108"></script>
 <script>
 const ramSeed=[
 {id:"v203-1",name:"5H > 214K / 214H",starter:"5H",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:78,recipe:"5H > 214K（78） / 5H > 214H（100）",notes:"Ver.2.03掲載。剣を消費しない基本ルート。214Kは最遠距離では空振りする場合あり。ダメージはルート順に78 / 100。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.03",version:"2.03"},
@@ -247,32 +204,29 @@ const solCuration={
 let combos=[];
 let references=[];
 let currentView="combos";
-let activeGame="ggst";
 let activeCharacter="ram";
 const $=id=>document.getElementById(id);
-const extraCharacters=window.GGST_EXTRA_CHARACTERS||[];
-const builtInCharacters=[{id:"ram",name:"ラムレザル",group:"ゲーム本編",title:"RAMLETHAL"},{id:"sol",name:"ソル",group:"ゲーム本編",title:"SOL BADGUY"}];
-const gameRosters={ggst:[...builtInCharacters,...extraCharacters],sf6:window.SF6_CHARACTERS||[]};
-let allCharacters=gameRosters.ggst;
+const selectedRosterIds=new Set(["bridget","elphelt"]);
+const extraCharacters=(window.GGST_EXTRA_CHARACTERS||[]).filter(character=>selectedRosterIds.has(character.id));
+const builtInCharacters=[{id:"ram",name:"ラムレザル",group:"ゲーム本編",title:"RAMLETHAL"}];
+const allCharacters=[...builtInCharacters,...extraCharacters];
 let characterById=new Map(allCharacters.map(c=>[c.id,c]));
-const lastCharacter={ggst:"ram",sf6:"ryu"};
-const storageKey=()=>activeGame==="ggst"?`${activeCharacter}ComboBook`:`sf6-${activeCharacter}ComboBook`;
+const storageKey=()=>`${activeCharacter}ComboBook`;
 const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
 function populateCharacterPicker(){
  const preferredOrder=["ゲーム本編","Season Pass 1","Season Pass 2","Season Pass 3","Season Pass 4","Season Pass 5"];
- const baseRosterOrder=["sol","ky","may","axl","chipp","potemkin","faust","millia","zato","ram","leo","nago","gio","anji","ino"];
+ const baseRosterOrder=["ram","bridget","elphelt"];
  const groups=[...new Set(allCharacters.map(c=>c.group))].sort((a,b)=>preferredOrder.indexOf(a)-preferredOrder.indexOf(b));
  $("characterSelect").innerHTML=groups.map(group=>{const characters=allCharacters.filter(c=>c.group===group);if(group==="ゲーム本編")characters.sort((a,b)=>baseRosterOrder.indexOf(a.id)-baseRosterOrder.indexOf(b.id));return `<optgroup label="${esc(group)}">${characters.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</optgroup>`}).join("");
 }
 const save=()=>{try{localStorage.setItem(storageKey(),JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
 function loadCharacter(character){
  activeCharacter=character;
- lastCharacter[activeGame]=character;
- const fallback=activeGame==="ggst"?builtInCharacters[0]:gameRosters.sf6[0];
+ const fallback=builtInCharacters[0];
  const meta=characterById.get(character)||fallback;
- const isRam=character==="ram",isSol=character==="sol";
- const base=activeGame==="sf6"?meta.routes:isRam?ramSeed:isSol?solSeed:meta.routes;
- const curation=activeGame==="sf6"?(meta.curation||{}):isRam?ramCuration:isSol?solCuration:{};
+ const isRam=character==="ram";
+ const base=isRam?ramSeed:meta.routes;
+ const curation=isRam?ramCuration:{};
  const seed=base.map(c=>({...c,...curation[c.id],sourceUrl:c.sourceUrl||meta.sourceUrl}));
  let stored=[];
  try{const data=JSON.parse(localStorage.getItem(storageKey())||"null");if(Array.isArray(data))stored=data}catch(e){console.warn("保存データの読み込みに失敗",e)}
@@ -280,45 +234,36 @@ function loadCharacter(character){
  combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
  combos.forEach(c=>delete c.favorite);
  references=[];
- if(activeGame==="ggst"){try{const savedReferences=JSON.parse(localStorage.getItem(referenceStorageKey())||"[]");if(Array.isArray(savedReferences))references=savedReferences}catch(e){console.warn("参照データの読み込みに失敗",e)}}
+ try{const savedReferences=JSON.parse(localStorage.getItem(referenceStorageKey())||"[]");if(Array.isArray(savedReferences))references=savedReferences}catch(e){console.warn("参照データの読み込みに失敗",e)}
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
-  $("pageTitle").textContent=activeGame==="sf6"?meta.name:`${meta.title||meta.name.toUpperCase()} COMBO BOOK`;
-  $("pageDescription").textContent=meta.description||(activeGame==="sf6"?"コンボを始動技から探す · クラシック操作":"状況別・始動技別に整理。主力候補を優先表示。");
+  $("pageTitle").textContent=`${meta.title||meta.name.toUpperCase()} COMBO BOOK`;
+  $("pageDescription").textContent=meta.description||"状況別・始動技別に整理。主力候補を優先表示。";
 $("characterSelect").value=character;
-  $("topicFilter").innerHTML=activeGame==="sf6"?'<option value="">コンボ条件：すべて</option><option value="地上通常ヒット">通常ヒット</option><option value="カウンターヒット">カウンターヒット</option><option value="対空">対空</option><option value="__meter">ドライブ／SA使用</option><option value="パニッシュカウンター">パニッシュカウンター</option>':'<option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option><option>インパクト返し</option><option>パニッシュカウンター</option><option>その他</option>';
- if(activeGame==="sf6"){$("version").innerHTML='<option>Year4 / 2026-08-03</option><option>未確認</option>'}else{$("version").innerHTML='<option>2.00</option><option>2.03</option><option>2.04以降</option><option>未確認</option>'}
- $("driveCostField").hidden=activeGame!=="sf6";$("saCostField").hidden=activeGame!=="sf6";
- $("starter").placeholder=activeGame==="sf6"?"例：5MP / 2MK / 9HP":"例：近S / 2K / 6P";
- $("recipe").placeholder=activeGame==="sf6"?"例：5MP > 2MP > 236HP":"例：近S > 遠S > HS";
+ $("starter").placeholder="例：近S / 2K / 6P";
+ $("recipe").placeholder="例：近S > 遠S > HS";
  $("ramSources").hidden=!isRam;
- $("solSources").hidden=!isSol;
- $("sf6Sources").hidden=activeGame!=="sf6";
- $("otherSources").hidden=activeGame==="sf6"||isRam||isSol;
- if(activeGame==="sf6"){$("sf6Sources").innerHTML=`<strong>${esc(meta.name)}のコンボ参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">スト6ラボ：${esc(meta.name)} コンボ・起き攻め（Year4）</a><br>クラシック操作／Year4（2026年8月3日調整基準）。ルートとゲージ量は参考資料に基づく候補です。`}
- else if(!isRam&&!isSol){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"Dustloop – Combo Data")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。`}
- document.body.dataset.game=activeGame;
- if(activeGame==="sf6")currentView="combos";
- $("referenceNav").hidden=activeGame!=="ggst";
- $("gameEyebrow").textContent=activeGame==="sf6"?"STREET FIGHTER 6 / COMBO DATABASE":"GUILTY GEAR -STRIVE- / COMBO DATABASE";
- document.title=`${activeGame==="sf6"?"SF6":"GGST"} ${meta.name} Combo Book`;
+ $("solSources").hidden=true;
+ $("otherSources").hidden=isRam;
+ if(!isRam){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"Dustloop – Combo Data")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。`}
+ $("referenceNav").hidden=false;
+ $("gameEyebrow").textContent="GUILTY GEAR -STRIVE- / COMBO DATABASE";
+ document.title=`GGST ${meta.name} Combo Book`;
  render();
 }
-function switchGame(game){if(game===activeGame)return;activeGame=game;allCharacters=gameRosters[game];characterById=new Map(allCharacters.map(c=>[c.id,c]));populateCharacterPicker();document.querySelectorAll(".game-switch [data-game]").forEach(link=>link.setAttribute("aria-current",link.dataset.game===game?"page":"false"));loadCharacter(lastCharacter[game]||allCharacters[0]?.id)}
-document.querySelectorAll(".game-switch [data-game]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();switchGame(link.dataset.game)}));
 document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.addEventListener("click",()=>{currentView=button.dataset.view;render()}));
 $("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value));let selectedOnly=false;
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
 $("toggleGroups").onclick=()=>{const groups=[...document.querySelectorAll(".starter-details")];const shouldOpen=!groups.some(group=>group.open);groups.forEach(group=>group.open=shouldOpen);$("toggleGroups").textContent=shouldOpen?"すべてたたむ":"すべて開く"};
-function syncLibraryView(){const comboView=activeGame!=="ggst"||currentView==="combos";document.querySelectorAll(".combo-only").forEach(element=>element.hidden=!comboView);$("referenceAddBtn").hidden=comboView;$("referenceAddBtn").textContent=currentView==="oki"?"＋ 起き攻めを追加":"＋ 連携を追加";$("sectionTitle").textContent=currentView==="oki"?"起き攻め一覧":currentView==="pressure"?"連携一覧":"コンボ一覧";$("search").placeholder=currentView==="oki"?"起き攻め・始動技・コンボで検索":currentView==="pressure"?"連携名・手順・ポイントで検索":"コンボ名・始動技・コマンドで検索";document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.view===currentView)))}
+function syncLibraryView(){const comboView=currentView==="combos";document.querySelectorAll(".combo-only").forEach(element=>element.hidden=!comboView);$("referenceAddBtn").hidden=comboView;$("referenceAddBtn").textContent=currentView==="oki"?"＋ 起き攻めを追加":"＋ 連携を追加";$("sectionTitle").textContent=currentView==="oki"?"起き攻め一覧":currentView==="pressure"?"連携一覧":"コンボ一覧";$("search").placeholder=currentView==="oki"?"起き攻め・始動技・コンボで検索":currentView==="pressure"?"連携名・手順・ポイントで検索":"コンボ名・始動技・コマンドで検索";document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.view===currentView)))}
 function renderReferences(){syncLibraryView();const query=$("search").value.trim().toLowerCase();let items=[];if(currentView==="oki"){items=combos.filter(combo=>combo.oki&&!/^(要検証|要確認)/.test(combo.oki)).map(combo=>({id:`combo-${combo.id}`,name:`${combo.starterLabel||combo.starter||"始動未設定"}始動後`,sequence:combo.recipe,notes:combo.oki,source:combo.sourceUrl,origin:"コンボ一覧から"}));items.push(...references.filter(reference=>reference.kind==="oki"))}else items=references.filter(reference=>reference.kind==="pressure");items=items.filter(item=>!query||[item.name,item.sequence,item.notes,item.origin].join(" ").toLowerCase().includes(query));$("resultCount").textContent=`${items.length} 件表示`;$("toggleGroups").hidden=true;$("cards").innerHTML=items.length?items.map(item=>`<article class="card reference-card"><div class="route-main"><div class="recipe">${esc(item.name)}</div>${item.sequence?`<div class="reference-sequence">${esc(item.sequence)}</div>`:""}<p class="note">${esc(item.notes)}</p>${item.source?`<p class="note"><a href="${esc(validSource(item.source))}" target="_blank" rel="noreferrer">参考資料を開く</a></p>`:""}${item.origin?`<small class="reference-origin">${esc(item.origin)}</small>`:""}${item.kind?`<div class="cardtools"><button data-ref-action="edit" data-id="${esc(item.id)}">編集</button><button data-ref-action="delete" data-id="${esc(item.id)}">削除</button></div>`:""}</div></article>`).join(""):currentView==="oki"?'<div class="empty">起き攻め情報はまだありません。コンボの詳細を確認するか、「起き攻めを追加」から登録できます。</div>':'<div class="empty">連携はまだ登録されていません。「連携を追加」から手順とポイントを登録できます。</div>'}
 function validSource(value){try{const url=new URL(value);return ["http:","https:"].includes(url.protocol)?url.href:""}catch{return ""}}
 function render(){
-if(activeGame==="ggst"&&currentView!=="combos"){renderReferences();return}
+if(currentView!=="combos"){renderReferences();return}
 syncLibraryView();
 let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFilter").value,pos=$("position").value,sort=$("sort").value;
- let arr=combos.filter(c=>{const meterUsed=c.resources?.some(resource=>resource.value!=="なし");const topicMatch=!topic||(activeGame==="sf6"&&topic==="__meter"?meterUsed:c.topic===topic||c.kind===topic);return (!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&topicMatch&&(!pos||c.pos===pos)});
+ let arr=combos.filter(c=>{const topicMatch=!topic||c.topic===topic||c.kind===topic;return (!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&topicMatch&&(!pos||c.pos===pos)});
 const damageScore=c=>{const value=String(c.damage??"").match(/\d+/);return value?Number(value[0]):0};
 arr.sort((a,b)=>sort==="damage"?damageScore(b)-damageScore(a):Number(!!b.main)-Number(!!a.main)||damageScore(b)-damageScore(a));
 $("resultCount").textContent=`${arr.length} 件表示`; $("viewToggle").textContent=selectedOnly?"全コンボを見る":"マイコンボだけ表示（"+combos.filter(c=>c.customSelected).length+"）"; $("viewToggle").setAttribute("aria-pressed",String(selectedOnly));
@@ -334,7 +279,7 @@ function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 $("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-action]");if(!button)return;const {action,id}=button.dataset;if(action==="select")toggleSelection(id);if(action==="edit")editCombo(id);if(action==="delete")deleteCombo(id)});
 $("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-ref-action]");if(!button)return;const {refAction,id}=button.dataset;if(refAction==="edit")editReference(id);if(refAction==="delete")deleteReference(id)});
 function toggleSelection(id){let c=combos.find(x=>x.id===id);c.customSelected=!c.customSelected;save();render()}
-function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textContent="コンボを編集";$("editId").value=c.id;for(let k of ["name","starter","kind","pos","damage","recipe","notes","version"]){let el=$(k);el.value=c[k]??(k==="damage"?"":el.value)}$("comboTopic").value=c.topic||"その他";if(c.resources){$("driveCost").value=c.resources[0]?.value||"なし";$("saCost").value=c.resources[1]?.value||"なし"}$("editor").showModal()}
+function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textContent="コンボを編集";$("editId").value=c.id;for(let k of ["name","starter","kind","pos","damage","recipe","notes","version"]){let el=$(k);el.value=c[k]??(k==="damage"?"":el.value)}$("comboTopic").value=c.topic||"その他";$("editor").showModal()}
 function deleteCombo(id){if(confirm("このコンボを削除しますか？")){combos=combos.filter(c=>c.id!==id);save();render()}}
 $("addBtn").onclick=()=>{$("comboForm").reset();$("dialogTitle").textContent="コンボを追加";$("editId").value="";$("editor").showModal()};
 function editReference(id){const item=references.find(reference=>reference.id===id);if(!item)return;$("referenceId").value=item.id;$("referenceName").value=item.name;$("referenceSequence").value=item.sequence||"";$("referenceNotes").value=item.notes;$("referenceSource").value=item.source||"";$("referenceDialogTitle").textContent=item.kind==="oki"?"起き攻めを編集":"連携を編集";$("referenceEditor").showModal()}
@@ -343,11 +288,11 @@ $("referenceAddBtn").onclick=()=>{$("referenceForm").reset();$("referenceId").va
 $("referenceCancel").onclick=()=>$("referenceEditor").close();
 $("referenceForm").onsubmit=e=>{e.preventDefault();const source=$("referenceSource").value.trim();if(source&&!validSource(source)){alert("参考URLは http または https のURLを入力してください。");return}const id=$("referenceId").value||`ref-${Date.now()}`,old=references.find(reference=>reference.id===id),item={...old,id,kind:currentView==="oki"?"oki":"pressure",name:$("referenceName").value.trim(),sequence:$("referenceSequence").value.trim(),notes:$("referenceNotes").value.trim(),source};references=old?references.map(reference=>reference.id===id?item:reference):[item,...references];try{localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}catch(error){console.warn("参照データの保存に失敗",error)}$("referenceEditor").close();render()};
 $("cancelBtn").onclick=()=>$("editor").close();
-$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,resources:activeGame==="sf6"?[{label:"DRIVE",value:$("driveCost").value},{label:"SA",value:$("saCost").value}]:old?.resources,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
+$("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,resources:old?.resources,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
 ["search","situation","topicFilter","position","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
-$("exportBtn").onclick=()=>{let meta=characterById.get(activeCharacter);let game=activeGame==="sf6"?"SF6":"GGST";let payload={game,character:meta?.name||activeCharacter,combos};if(activeGame==="ggst")payload.references=references;let blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`${activeGame}-${activeCharacter}-combos.json`;a.click();URL.revokeObjectURL(a.href)};
+$("exportBtn").onclick=()=>{let meta=characterById.get(activeCharacter);let payload={game:"GGST",character:meta?.name||activeCharacter,combos,references};let blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ggst-${activeCharacter}-combos.json`;a.click();URL.revokeObjectURL(a.href)};
 $("importBtn").onclick=()=>$("fileInput").click();
-$("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(d.game&&d.game!==(activeGame==="sf6"?"SF6":"GGST"))throw Error("game");if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();if(activeGame==="ggst"&&Array.isArray(d.references)){references=d.references;localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}render()}}catch(error){alert(error.message==="game"?"別のゲームのバックアップです。先にゲームを切り替えてください。":"JSONファイルを読み込めませんでした")};e.target.value=""};
+$("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(d.game&&d.game!=="GGST")throw Error("game");if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();if(Array.isArray(d.references)){references=d.references;localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}render()}}catch(error){alert(error.message==="game"?"GGSTのバックアップファイルを選んでください。":"JSONファイルを読み込めませんでした")};e.target.value=""};
 populateCharacterPicker();
 loadCharacter("ram");
 </script>
