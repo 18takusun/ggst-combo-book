@@ -39,7 +39,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <input id="fileInput" type="file" accept="application/json" hidden>
 </div>
 <div class="filters">
-<select id="topicFilter"><option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>その他</option></select>
+<select id="topicFilter"><option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option><option>その他</option></select>
 <select id="situation"><option value="">始動分類：すべて</option><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select>
 <select id="position"><option value="">位置：すべて</option><option>画面中央</option><option>画面端</option><option>どこでも</option><option>要確認</option></select>
 <select id="sort"><option value="recommended">おすすめ順</option><option value="damage">ダメージ順</option></select>
@@ -55,8 +55,9 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <strong>ラムレザル専門・上位プレイヤーの実戦参考</strong><br>
 RedDitto（ラムレザル）対 Verix：<a href="https://www.youtube.com/watch?v=D0URjpLOG2k" target="_blank" rel="noreferrer">EVO 2026 Grand Final</a> ／
 RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" target="_blank" rel="noreferrer">GGST Ver.2.00 対戦</a> ／
-ラムレザルプレイヤーSQ：<a href="https://www.youtube.com/user/ISQuirrel147/videos" target="_blank" rel="noreferrer">YouTube動画一覧</a><br>
-これらは実戦での始動・判断を見る参考資料で、個別コンボの成立証明ではありません。<br><br>
+ラムレザルプレイヤーSQ：<a href="https://www.youtube.com/user/ISQuirrel147/videos" target="_blank" rel="noreferrer">YouTube動画一覧</a> ／
+専門チャンネル RAMLETHAL COMBOS：<a href="https://www.youtube.com/watch?v=g4-tcoHcRVs" target="_blank" rel="noreferrer">Ver.2.01 超簡単コンボ</a><br>
+実戦・解説動画は手順の参考資料です。Ver.2.01動画には現行ルートと異なるものがあり、個別ルートの成立証明には使っていません。<br><br>
 パッチ資料：<a href="https://www.guiltygear.com/ggst/en/news/post-2851/" target="_blank" rel="noreferrer">Arc System Works – Ver.2.00</a> ／
 <a href="https://www.guiltygear.com/ggst/jp/news/post-8366/" target="_blank" rel="noreferrer">Arc System Works – Ver.2.03</a> ／
 <a href="https://www.dustloop.com/w/GGST/Ramlethal_Valentine/Combos" target="_blank" rel="noreferrer">Dustloop – Ramlethal Combos</a>
@@ -69,7 +70,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 <label>コンボ名<input id="name" required placeholder="例：近S始動・基本"></label>
 <label>始動技<input id="starter" placeholder="例：近S / 2K / 6P"></label>
 <label>状況<select id="kind"><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select></label>
-<label>実戦状況<select id="comboTopic"><option>その他</option><option>無敵技ガード後の確反</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option></select></label>
+<label>実戦状況<select id="comboTopic"><option>その他</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option></select></label>
 <label>位置<select id="pos"><option>どこでも</option><option>画面中央</option><option>画面端</option><option>要確認</option></select></label>
 <label>ダメージ（未計測なら空欄）<input id="damage" type="number" min="0" placeholder="未計測"></label>
 <label class="full">コマンド<textarea id="recipe" required placeholder="例：近S > 遠S > HS"></textarea></label>
@@ -95,7 +96,20 @@ const seed=[
 {id:"v200-4",name:"c.S > 2H > エラルルーモ",starter:"近S",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:150,recipe:"c.S > 2H > 214P~4P~4P",notes:"Ver.2.00掲載。簡単な近S始動。エンハンス版エラルルーモ3でダウンを奪い、どこでも起き攻めを狙える。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
 {id:"v200-5",name:"f.S > 5H > 214H",starter:"遠S",kind:"地上通常ヒット",pos:"どこでも",score:5,damage:120,recipe:"f.S > 5H > 214H",notes:"Ver.2.00掲載。非常に簡単で確認もしやすい遠S始動。",verified:"unverified",favorite:true,source:"Dustloop・Ver.2.00",version:"2.00"},
 {id:"v200-6",name:"CH 5K > ダウロ > 追撃",starter:"5K",kind:"カウンターヒット",pos:"どこでも",score:3,damage:114,recipe:"CH 5K > 623P > 2K > 6H > 214H",notes:"Ver.2.00掲載。カウンターヒット時のヒットストップを利用。ダメージと画面端への運びを伸ばせる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00",version:"2.00"},
-{id:"g203-1",name:"遠S > バヨネートH > カルヴァドス",starter:"遠S",kind:"ゲージ使用",pos:"画面端",score:5,damage:null,recipe:"f.S > 5H > 236H > 214K > H! > ダッシュ5K > 6H（壁張り付き） > 236236S（壁割り）",notes:"Dustloop Ver.2.03の遠S始動ルート。50%ゲージがあれば壁割りを236236Sに替え、ダメージを伸ばしてハードノックダウンを取れる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"}
+{id:"g203-1",name:"遠S > バヨネートH > カルヴァドス",starter:"遠S",kind:"ゲージ使用",pos:"画面端",score:5,damage:null,recipe:"f.S > 5H > 236H > 214K > H! > ダッシュ5K > 6H（壁張り付き） > 236236S（壁割り）",notes:"Dustloop Ver.2.03の遠S始動ルート。50%ゲージがあれば壁割りを236236Sに替え、ダメージを伸ばしてハードノックダウンを取れる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-9",name:"5P > 5P > 6P > ダウロ",starter:"5P / 2P",kind:"地上通常ヒット",pos:"どこでも",score:4,damage:45,recipe:"5P > 5P > 6P > 623P",notes:"Ver.2.03の基本パンチコンボ。相手の攻めへの割り込み向け。遠めで5Pが当たった場合は2発目を省く。各5Pは2Pに置き換え可能。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v200-7",name:"CH 5P > 近S > 6H > ダウロ",starter:"5P",kind:"カウンターヒット",pos:"どこでも",score:3,damage:73,recipe:"CH 5P > 近S > 6H > 623P",notes:"Dustloop Ver.2.00掲載。5Pカウンターヒット時だけ近Sがつながる伸ばし方。Ver.2.03で未再検証の参考候補。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00（現行未確認）",version:"2.00"},
+{id:"v200-8",name:"CH 6P > エラルルーモ",starter:"6P",kind:"カウンターヒット",pos:"どこでも",score:4,damage:106,recipe:"CH 6P > 214P~en.4P~en.4P",notes:"Dustloop Ver.2.00掲載。地上カウンターヒットからの確認用。最遠距離では214Pが届かない場合あり。Ver.2.03で未再検証の参考候補。対空6Pの基本ルートとは始動状況が異なる。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00（現行未確認）",version:"2.00"},
+{id:"v203-12",name:"CH 2S > ダウロ > 近S > 6H",starter:"2S",kind:"カウンターヒット",pos:"画面中央",score:4,damage:125,recipe:"CH 2S > 623P > 近S > 6H > 214K / 214H",notes:"Ver.2.03資料掲載。通常ヒット時より伸ばすカウンターヒット用。214Kは起き攻めを狙いやすく、214Hはダメージ重視（125 / 136）。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v200-9",name:"近S > 2H > ダウロ > 近S > 6H",starter:"近S",kind:"地上通常ヒット",pos:"画面中央",score:3,damage:170,recipe:"近S > 2H > 623P > 近S > 6H > 214H",notes:"Dustloop Ver.2.00掲載。既存の短いエラルルーモ締めより高ダメージを狙うルート。遠くへ吹き飛ばすため、画面端に届かないと起き攻めしにくい。Ver.2.03で未再検証の参考候補。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00（現行未確認）",version:"2.00"},
+{id:"v203-14",name:"5H > ダウロ > 追撃",starter:"5H",kind:"地上通常ヒット",pos:"どこでも",score:3,damage:132,recipe:"5H > 623P > 2K > 6H > 214K / 214H",notes:"Ver.2.03資料掲載。既存の短い5Hルートよりダメージと運びを伸ばす。始動距離が遠いと623Pが空振りする。ダメージは214K / 214Hの順に132 / 143。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v200-10",name:"CH 5K / 2K > 6H > バヨネートH",starter:"5K / 2K",kind:"カウンターヒット",pos:"画面端",score:3,damage:176,recipe:"CH 5K / 2K > 6H > 236H > ダッシュ近S > H! > 遅らせ5[D] > 近S > 6H WS",notes:"Dustloop Ver.2.00掲載。画面端のCHから壁割りを狙う。5K / 2K始動のダメージは176 / 137。Ver.2.03で未再検証の参考候補。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.00（現行未確認）",version:"2.00"},
+{id:"g203-2",name:"ダスト > 赤RC > 追撃",starter:"5D",kind:"ゲージ使用",pos:"どこでも",score:3,damage:128,recipe:"5D > 66RRC > 5[D] > 微ダッシュ近S > 2H > 214P~en.4P~en.4P",notes:"Ver.2.03資料掲載。通常ダストを当てた後、赤ロマンキャンセルから溜めダストで追撃し、場所を問わずハードノックダウンを取る。50%ゲージ使用。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-16",name:"2H > ダウロ > 近S > 2H > バヨネートH",starter:"2H",kind:"地上通常ヒット",pos:"画面端",score:3,damage:196,recipe:"2H > 623P > 近S > 2H > 236H > ダッシュ5K > H! > 5K > 6H WS > 214H",notes:"Ver.2.03資料掲載。P2開始位置（相手が近い側）付近から狙うゲージなしの壁割りルート。相手との距離が遠いと壁割りまで届かない。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-17",name:"CH 6H > ダウロ > 近S連係",starter:"6H",kind:"カウンターヒット",pos:"画面中央",score:3,damage:203,recipe:"CH 6H > 623P > 微ダッシュ近S > 微ダッシュ近S > 2H > 214P~en.4P(~en.4P) WS > 214H",notes:"Ver.2.03資料掲載。カウンターヒット時の高リターンを狙うルート。難度は高め。壁が近いと強化エラルルーモ2段目で壁張り付きする場合あり。ダメージは追加入力により203 / 208。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-18",name:"CH 2D > ダウロ > バヨネートH",starter:"2D",kind:"カウンターヒット",pos:"画面中央",score:3,damage:140,recipe:"CH 2D > 623P > ダッシュ近S > 2H > 214P > ダッシュキャンセル~236H > ダッシュ5K > H! > 近S > 6H WS",notes:"Ver.2.03資料掲載。通常のCH 2Dダウン取りとは異なり、剣を使って距離のある位置から壁割りを狙う。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-19",name:"6H > ダウロ > バヨネートH",starter:"6H",kind:"地上通常ヒット",pos:"画面中央",score:3,damage:218,recipe:"6H > 623P > 近S > 6H > 236H > ダッシュ遠S > H! > 214P~en.4P WS~en.4P",notes:"Ver.2.03資料掲載。通常ヒットから剣を使い壁割りまで運ぶルート。壁までの距離や遠Sのタイミングで壁張り付きが早まることがある。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"},
+{id:"v203-20",name:"CH 5H > バヨネートK > エラルルーモ",starter:"5HS（5H）",kind:"カウンターヒット",pos:"どこでも",score:3,damage:152,recipe:"CH 5H > 236K > 5K > 214P~en.4P~en.4P",notes:"Ver.2.03資料掲載。5Hカウンターヒット時に、壁割りを無理に狙わずハードノックダウンと起き攻めを取る簡単なルート。",verified:"unverified",favorite:false,source:"Dustloop・Ver.2.03",version:"2.03"}
 ]
 const curation={
  "v200-5":{main:true,topic:"牽制ヒット",starterLabel:"遠S",difficulty:"易（Dustloop評価）",meter:0,shared:"2S始動と5H > 214K/214Hを共通化",reason:"現行DustloopのBasic Far Slash Comboでも紹介される簡単な遠S始動。2Sと共通ルートで習得負担が小さい。",oki:"214Kは前進後にf.S/2Sの重ねを狙えるが、遠距離では届かないことがある。214Hは遠距離でも当たりやすい一方、起き攻めしにくい。",sourceMatched:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos",videoUrl:"https://www.dustloop.com/w/File:GGST_Ramlethal_Basic_Far_Slash_Combo.mp4",videoTitle:"Basic Far Slash Combo"},
@@ -112,7 +126,20 @@ const curation={
  "v203-7":{topic:"カウンターヒット",difficulty:"易（Dustloop評価）",meter:0,oki:"強化版エラルルーモ3でハードノックダウン。5Kは最遠距離で空振りする。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
  "v200-2":{topic:"小技ヒット",difficulty:"中（暫定）",meter:0,routeLabel:"別ルート：ダウロ締め",oki:"要検証（分岐・距離別に確認）"},
  "v200-6":{starterLabel:"5K / 2K",topic:"カウンターヒット",difficulty:"中（暫定）",meter:0,oki:"要検証（画面端運びを含めて確認）"},
- "g203-1":{main:true,starterLabel:"遠S",topic:"画面端",difficulty:"易（Dustloop評価）",meter:50,routeLabel:"スーパーで壁割り",reason:"端が近い遠Sヒットから壁割りまで運び、50%ゲージでダメージとハードノックダウンを伸ばす。",oki:"スーパーで壁を割るとハードノックダウン。",currentSource:true,source:"Dustloop・Ver.2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"}
+ "g203-1":{main:true,starterLabel:"遠S",topic:"画面端",difficulty:"易（Dustloop評価）",meter:50,routeLabel:"スーパーで壁割り",reason:"端が近い遠Sヒットから壁割りまで運び、50%ゲージでダメージとハードノックダウンを伸ばす。",oki:"スーパーで壁を割るとハードノックダウン。",currentSource:true,source:"Dustloop・Ver.2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-9":{starterLabel:"5P / 2P",topic:"割り込み",difficulty:"易",meter:0,reason:"相手の攻めに小技で割り込んだとき用。遠めで当たった場合の短縮も覚えやすい。",oki:"ダウロ後にダッシュして近Sを重ねられる。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v200-7":{starterLabel:"5P",topic:"カウンターヒット",difficulty:"易",meter:0,routeLabel:"Ver.2.00・現行未確認",reason:"5Pカウンターヒット時に近Sをつないで伸ばす。Ver.2.03で未再検証の参考候補。",oki:"ダウロ後に近Sで攻めを続けられる。",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v200-8":{starterLabel:"6P",topic:"カウンターヒット",difficulty:"易",meter:0,routeLabel:"Ver.2.00・現行未確認",reason:"対空ではなく地上カウンターヒット時の専用ルート。Ver.2.03で未再検証の参考候補。",oki:"強化版エラルルーモ3でダウンを取る。",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-12":{starterLabel:"2S",topic:"カウンターヒット",difficulty:"易",meter:0,routeLabel:"CH時：追撃を追加",reason:"牽制の2Sがカウンターヒットした場合の伸ばし方。通常ヒット時は基本ルートを使う。",oki:"214Kは近づいて起き攻め、214Hはダメージ優先。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v200-9":{starterLabel:"近S",topic:"近距離ヒット",difficulty:"易",meter:0,routeLabel:"Ver.2.00・現行未確認",reason:"短い近S基本ルートより高ダメージ。遠くへ飛ばすため起き攻めとの交換になる。Ver.2.03で未再検証の参考候補。",oki:"画面端に到達しないと起き攻めしにくい。",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-14":{starterLabel:"5HS（5H）",topic:"牽制ヒット",difficulty:"易",meter:0,routeLabel:"ダメージ・運び重視",reason:"基本ルートにダウロ追撃を加えてダメージと運びを伸ばす。距離が遠い場合は短い基本ルートを選ぶ。",oki:"214Kは接近して起き攻めを狙え、214Hは遠距離まで当たりやすい。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v200-10":{starterLabel:"5K / 2K",topic:"画面端",difficulty:"易",meter:0,routeLabel:"Ver.2.00・現行未確認",reason:"画面端かつカウンターヒット時に壁割りまで狙うルート。Ver.2.03で未再検証の参考候補。",oki:"壁割り後の状況は壁割り技により変わる。",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "g203-2":{starterLabel:"5D",topic:"ゲージ使用",difficulty:"中",meter:50,routeLabel:"赤RC・ハードノックダウン",reason:"通常ダストからの追撃。赤RCを使ってどこでもダウンまで運ぶ。",oki:"強化版エラルルーモ3でハードノックダウン。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-16":{starterLabel:"2H",topic:"画面端",difficulty:"中",meter:0,routeLabel:"ゲージなし壁割り",reason:"相手が近い画面端から、ゲージを使わず壁を割るルート。",oki:"壁割り後は214Hで締める。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-17":{starterLabel:"6H",topic:"カウンターヒット",difficulty:"難",meter:0,routeLabel:"CH時：高火力",reason:"6Hカウンターヒット限定。中央から高ダメージと端運びを狙う。",oki:"壁が近いと早く張り付くため、距離を見て締めを調整。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-18":{starterLabel:"2D",topic:"画面端",difficulty:"中",meter:0,routeLabel:"CH時：遠距離から壁割り",reason:"カウンターヒット時に剣を使って壁割りまで運ぶ。基本CHルートのダウン取りとは狙いを分ける。",oki:"壁張り付きから壁割りへ。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-19":{starterLabel:"6H",topic:"近距離ヒット",difficulty:"中",meter:0,routeLabel:"剣使用・壁割り",reason:"既存の短いダウロ締めやエラルルーモ締めから、剣を使って壁割りまで伸ばす。",oki:"壁張り付き後は強化エラルルーモで締める。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"},
+ "v203-20":{starterLabel:"5HS（5H）",topic:"カウンターヒット",difficulty:"易",meter:0,routeLabel:"CH時：ダウン重視",reason:"通常ヒットの5H伸ばしと用途を分け、CH時は剣を温存してダウンと起き攻めを優先。",oki:"強化版エラルルーモ3でハードノックダウン。",currentSource:true,sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Combos"}
 };
 seed.forEach(c=>Object.assign(c,curation[c.id]||{}));
 let stored=[];

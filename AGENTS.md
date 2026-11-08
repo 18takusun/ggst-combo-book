@@ -33,11 +33,11 @@
 ## Handoff status
 
 - The GitHub repository is `18takusun/ggst-combo-book`; its default branch is `main`.
-- The page retains the original 14 seed entries and their existing route data, plus one Ver.2.03 meter-use wall-break route. Seven entries are marked as provisional main candidates and appear first; personal selection is stored separately.
-- The source material for the 15 routes is cross-referenced against Dustloop Ver.2.00/2.03, with the new meter-use route derived from the Ver.2.03 far-slash wall-break route. Several original Ver.2.00 entries remain historical references.
+- The page retains the original 14 seed entries and their existing route data, plus 13 researched additions for 28 routes total. Seven entries are marked as provisional main candidates and appear first; personal selection is stored separately.
+- The source material for the 28 routes is cross-referenced against Dustloop Ver.2.00/2.03, with added RC, counter-hit, route-extension, and wall-break candidates. Ver.2.00-only entries are visibly marked as unconfirmed on the current patch.
 - The page groups candidates by match situation and starter, shows damage and meter, and keeps route conditions, oki notes, and source links in the expanded details. It links specialist/high-level match footage as context, not as proof of individual routes.
 - The default list shows all routes grouped by starter, with main candidates ordered first. A toggle shows only the routes the user selected as their personal list. Label overlapping routes with their practical difference (for example, easy/short, damage/corner carry, or a meter-use wall break), and keep normal hit, counter hit, anti-air, and meter-use variants separate.
-- A current Dustloop guide identifies the c.S route as a basic punish after blocking unsafe moves such as supers or reversals. This is a sourced candidate, not an independent in-game test. Normal-hit conversions during offense and corner-specific routes still need review.
-- Combo clips are linked on the cards where a route-specific Dustloop clip was available. The general RedDitto/SQ YouTube references remain match context rather than route validation.
+- A current Dustloop guide identifies the c.S route as a basic punish after blocking unsafe moves such as supers or reversals. Recent additions include abare, counter-hit, damage-focused, corner, and Roman Cancel routes. Ver.2.00-only candidates are marked as unconfirmed on the current patch. These are sourced candidates, not independent in-game tests.
+- Combo clips are linked on the cards where a route-specific Dustloop clip was available. RedDitto/SQ match videos and the specialist RAMLETHAL COMBOS Ver.2.01 guide provide context; they are not treated as proof of individual current routes.
 - The situation selector already includes those categories so verified entries can be added without changing the interface.
 - Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.
