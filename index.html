@@ -24,12 +24,14 @@ details summary{cursor:pointer;color:var(--muted);font-size:11px;list-style-posi
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#d8b4ff}
 .character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#21152a;border-color:var(--accent)}
+.collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
+.starter-group{margin:0 0 8px;border:1px solid var(--line);border-radius:12px;background:#15172088;overflow:hidden}.starter-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;color:var(--text);font-size:15px;font-weight:750;cursor:pointer;list-style:none}.starter-details>summary::-webkit-details-marker{display:none}.starter-details>summary::before{content:"＋";color:var(--accent);font-size:13px;width:15px}.starter-details[open]>summary::before{content:"−"}.starter-name{margin-right:auto}.starter-count{color:var(--muted);font-size:11px;font-weight:500}.starter-details[open]>summary{border-bottom:1px solid var(--line)}.starter-details .variant-group{padding:0 12px}.starter-details .variant-group:last-child{padding-bottom:4px}.section-tools{display:flex;align-items:center;gap:10px}.section-tools button{padding:5px 9px;font-size:11px;color:var(--muted)}
 @media(max-width:900px){main{padding:16px 16px 44px}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){main{padding:12px 12px 36px}.toolbar{grid-template-columns:1fr 1fr;gap:7px}.toolbar input{grid-column:1/-1}.toolbar button{padding:8px 7px;font-size:13px}.filters{grid-template-columns:1fr 1fr;gap:7px;padding:8px}.filters select{padding:8px 7px;font-size:12px}.situation-head{align-items:flex-start;flex-direction:column;gap:5px}.card{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:8px 9px}.route-main{grid-column:1/-1}.metrics{grid-column:1;grid-row:2;gap:12px}.cardactions{grid-column:2;grid-row:2}.recipe{font-size:12px}.cardactions button{padding:4px 7px;font-size:10px}form .formgrid{grid-template-columns:1fr}form label.full{grid-column:auto}}
+@media(max-width:640px){main{padding:12px 12px 36px}.collection-bar{margin-top:10px}.character-picker{width:100%;justify-content:space-between}.character-picker select{flex:1;max-width:230px}.toolbar{grid-template-columns:1fr 1fr;gap:7px}.toolbar input{grid-column:1/-1}.toolbar button{padding:8px 7px;font-size:13px}.filters{grid-template-columns:1fr 1fr;gap:7px;padding:8px}.filters select{padding:8px 7px;font-size:12px}.situation-head{align-items:flex-start;flex-direction:column;gap:5px}.starter-details>summary{padding:10px;font-size:14px}.starter-details .variant-group{padding:0 8px}.card{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:8px 9px}.route-main{grid-column:1/-1}.metrics{grid-column:1;grid-row:2;gap:12px}.cardactions{grid-column:2;grid-row:2}.recipe{font-size:12px}.cardactions button{padding:4px 7px;font-size:10px}.sectionhead{align-items:center}.sectionhead h2{font-size:17px}.section-tools{gap:6px}.section-tools button{padding:5px 7px;font-size:10px}form .formgrid{grid-template-columns:1fr}form label.full{grid-column:auto}}
 </style>
 </head>
 <body>
-<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><nav class="character-tabs" aria-label="キャラクター切替"><button class="character-tab" id="ramButton" aria-pressed="true">ラムレザル</button><button class="character-tab" id="solButton" aria-pressed="false">ソル</button></nav></header>
+<header><div class="eyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"><option value="ram">ラムレザル</option><option value="sol">ソル</option></select></label></div></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
@@ -45,7 +47,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <select id="position"><option value="">位置：すべて</option><option>画面中央</option><option>画面端</option><option>どこでも</option><option>要確認</option></select>
 <select id="sort"><option value="recommended">おすすめ順</option><option value="damage">ダメージ順</option></select>
 </div>
-<div class="sectionhead"><h2>コンボ一覧</h2><small id="resultCount"></small></div>
+<div class="sectionhead"><h2>コンボ一覧</h2><div class="section-tools"><small id="resultCount"></small><button id="toggleGroups" type="button">すべてたたむ</button></div></div>
 <div class="cardgrid" id="cards"></div>
 <footer>
 <section id="ramSources">
@@ -211,16 +213,15 @@ function loadCharacter(character){
  const isSol=character==="sol";
  $("pageTitle").textContent=isSol?"SOL BADGUY COMBO BOOK":"RAMLETHAL COMBO BOOK";
  $("pageDescription").textContent=isSol?"Ver.2.03対応資料を基準に、始動技と状況ごとに整理。":"状況別・始動技別に整理。主力候補を優先表示。";
- $("ramButton").setAttribute("aria-pressed",String(!isSol));
- $("solButton").setAttribute("aria-pressed",String(isSol));
+$("characterSelect").value=character;
  $("ramSources").hidden=isSol;
  $("solSources").hidden=!isSol;
  document.title=`GGST ${isSol?"Sol":"Ramlethal"} Combo Book`;
  render();
 }
-$("ramButton").onclick=()=>loadCharacter("ram");
-$("solButton").onclick=()=>loadCharacter("sol");let selectedOnly=false;
+$("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value));let selectedOnly=false;
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
+$("toggleGroups").onclick=()=>{const groups=[...document.querySelectorAll(".starter-details")];const shouldOpen=!groups.some(group=>group.open);groups.forEach(group=>group.open=shouldOpen);$("toggleGroups").textContent=shouldOpen?"すべてたたむ":"すべて開く"};
 function render(){
 let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFilter").value,pos=$("position").value,sort=$("sort").value;
 let arr=combos.filter(c=>(!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&(!topic||c.topic===topic)&&(!pos||c.pos===pos));
@@ -232,7 +233,8 @@ const starterFor=c=>c.starterLabel||c.starter||"始動未設定";
 const variantFor=c=>c.kind==="カウンターヒット"?"カウンターヒット時":c.kind==="対空"?"対空時":c.kind==="ゲージ使用"||Number(c.meter)>0?"ゲージ使用時":"通常ヒット時";
 const variantsOrder=["通常ヒット時","カウンターヒット時","対空時","ゲージ使用時"];
 const starters=[...new Set(arr.map(starterFor))];
-$("cards").innerHTML=starters.length?starters.map(starter=>{const items=arr.filter(c=>starterFor(c)===starter);const variants=[...new Set(items.map(variantFor))].sort((a,b)=>variantsOrder.indexOf(a)-variantsOrder.indexOf(b));return '<section class="situation-group"><div class="situation-head"><h3>'+esc(starter)+'始動</h3></div>'+variants.map(variant=>{const routes=items.filter(c=>variantFor(c)===variant);return '<div class="variant-group"><h4 class="variant-head"><span>'+esc(variant)+'</span></h4><div class="situation-cards">'+routes.map(renderCard).join('')+'</div></div>'}).join('')+'</section>'}).join(''):'<div class="empty">表示するコンボがありません。全コンボを見て「マイコンボに追加」を選ぶか、絞り込み条件を変えてください。</div>';
+$("cards").innerHTML=starters.length?starters.map(starter=>{const items=arr.filter(c=>starterFor(c)===starter);const variants=[...new Set(items.map(variantFor))].sort((a,b)=>variantsOrder.indexOf(a)-variantsOrder.indexOf(b));return '<section class="starter-group"><details class="starter-details"'+(items.some(c=>c.main)?' open':'')+'><summary><span class="starter-name">'+esc(starter)+'始動</span><span class="starter-count">'+items.length+'件</span></summary>'+variants.map(variant=>{const routes=items.filter(c=>variantFor(c)===variant);return '<div class="variant-group"><h4 class="variant-head"><span>'+esc(variant)+'</span></h4><div class="situation-cards">'+routes.map(renderCard).join('')+'</div></div>'}).join('')+'</details></section>'}).join(''):'<div class="empty">表示するコンボがありません。全コンボを見て「マイコンボに追加」を選ぶか、絞り込み条件を変えてください。</div>';
+const groups=[...document.querySelectorAll(".starter-details")];$("toggleGroups").textContent=groups.length&&groups.every(group=>group.open)?"すべてたたむ":"すべて開く";
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 $("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-action]");if(!button)return;const {action,id}=button.dataset;if(action==="select")toggleSelection(id);if(action==="edit")editCombo(id);if(action==="delete")deleteCombo(id)});

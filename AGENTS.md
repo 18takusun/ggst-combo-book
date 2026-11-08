@@ -35,7 +35,7 @@
 - The GitHub repository is `18takusun/ggst-combo-book`; its default branch is `main`.
 - The Ramlethal collection retains its 28 current routes and existing route data. User selections remain in `ramComboBook`.
 - The Sol collection starts with 19 routes based on a Sol player's Ver.2.0 combo and oki guide, Dustloop combo data, and the official Ver.2.03 Sidewinder Ignited adjustment. User selections and backups are isolated in `solComboBook`.
-- Character tabs switch between independent combo collections. Each keeps the shared situation/starter grouping, compact horizontal rows, expanded conditions/oki/sources, and its own personal My Combos view.
+- A character selector switches between independent combo collections without adding a row of tabs as the roster grows. Starter groups are collapsible with route counts; groups containing main candidates open by default. Each collection keeps compact horizontal rows, hit/CH/anti-air/meter variants, expanded conditions/oki/sources, and its own personal My Combos view.
 - Treat sourced routes as researched candidates rather than independent in-game tests. Keep route damage blank when the available source does not provide a directly usable value.
 - The Ramlethal collection retains its links to RedDitto/SQ match footage and the specialist RAMLETHAL COMBOS Ver.2.01 guide. The Sol collection links to a current practical-combo video, Sol player Tatuma's videos, a 2.0 route guide, Dustloop, and the official 2.03 patch notes.
 - Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.
