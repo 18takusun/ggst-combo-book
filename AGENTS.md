@@ -2,7 +2,7 @@
 
 ## Scope
 
-- This is a two-game reference site. Expose only Ramlethal, Bridget, and Elphelt for GGST, and Mai, Vega, and Blanka for SF6. Do not add other characters unless requested.
+- This is a two-game reference site. Expose only Ramlethal, Bridget, and Elphelt for GGST, and Mai and Vega for SF6. Do not add new SF6 content or characters until the user asks again.
 - Keep existing GGST local storage keys (`${characterId}ComboBook`) unchanged so personal selections remain available.
 - Keep the simple responsive layout usable on desktop and iPhone Safari. Combo learning progress tracking is out of scope.
 - Keep the three views: Combos, Oki, and Pressure. GGST Oki can derive from non-placeholder combo `oki` data; additional Oki and pressure notes are stored per character in `${characterId}ReferenceBook`. SF6 uses its own character-specific Oki and pressure references, with numpad notation.
@@ -19,4 +19,3 @@
 - Before changing the site, compare the current implementation with this scope and report material differences.
 - Make the requested changes, run relevant checks, then commit locally.
 - GitHub publishing is allowed only after the user approves it. The user has approved publishing for this project.
-
