@@ -24,7 +24,7 @@ details summary{cursor:pointer;color:var(--muted);font-size:11px;list-style-posi
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#d8b4ff}
 .character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#21152a;border-color:var(--accent)}
-.game-switch{display:flex;justify-content:center;gap:0;margin-top:20px;padding-top:14px;border-top:1px solid var(--line)}.game-switch a{padding:3px 10px;color:var(--muted);font-size:11px;font-weight:700;text-decoration:none;border-right:1px solid var(--line)}.game-switch a:last-child{border-right:0}.game-switch a[aria-current="page"]{color:var(--text)}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
+.game-switch{display:inline-flex;gap:2px;margin-top:12px;padding:3px;background:var(--panel2);border:1px solid var(--line);border-radius:9px}.game-switch a{display:block;padding:5px 12px;color:var(--muted);font-size:12px;font-weight:700;text-decoration:none;border-radius:6px}.game-switch a[aria-current="page"]{background:var(--accent);color:#21152a}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
 .collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
 .starter-group{margin:0 0 8px;border:1px solid var(--line);border-radius:12px;background:#15172088;overflow:hidden}.starter-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;color:var(--text);font-size:15px;font-weight:750;cursor:pointer;list-style:none}.starter-details>summary::-webkit-details-marker{display:none}.starter-details>summary::before{content:"＋";color:var(--accent);font-size:13px;width:15px}.starter-details[open]>summary::before{content:"−"}.starter-name{margin-right:auto}.starter-count{color:var(--muted);font-size:11px;font-weight:500}.starter-details[open]>summary{border-bottom:1px solid var(--line)}.starter-details .variant-group{padding:0 12px}.starter-details .variant-group:last-child{padding-bottom:4px}.section-tools{display:flex;align-items:center;gap:10px}.section-tools button{padding:5px 9px;font-size:11px;color:var(--muted)}
 /* SF6 draws on Japanese combo-database patterns: fighter-first navigation, compact search, and readable route rows. */
@@ -33,9 +33,9 @@ body[data-game="sf6"] header{background:#fff;border-bottom:1px solid #d9dde3;pad
 body[data-game="sf6"] .eyebrow{font-size:10px;letter-spacing:.12em;color:#8a9099}
 body[data-game="sf6"] h1{font-size:clamp(24px,4vw,32px);margin:3px 0 2px}
 body[data-game="sf6"] header p{font-size:13px}
-body[data-game="sf6"] .game-switch{border-color:#d9dde3}
-body[data-game="sf6"] .game-switch a{border-color:#d9dde3;color:#707782}
-body[data-game="sf6"] .game-switch a[aria-current="page"]{color:#20242b}
+body[data-game="sf6"] .game-switch{background:#eef0f3;border-color:#d9dde3}
+body[data-game="sf6"] .game-switch a{color:#68707c}
+body[data-game="sf6"] .game-switch a[aria-current="page"]{background:#232831;color:#fff}
 body[data-game="sf6"] .collection-bar{display:flex;margin-top:12px}
 body[data-game="sf6"] .character-picker{gap:7px;font-size:11px;color:#7a818b}
 body[data-game="sf6"] .character-picker select{min-width:150px;padding:6px 30px 6px 9px;background:#fff;border-color:#cfd4db;color:#20242b;font-weight:700}
@@ -70,7 +70,7 @@ body[data-game="sf6"] a{color:#a66300}
 </style>
 </head>
 <body>
-<header><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
+<header><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><nav class="game-switch" aria-label="ゲームを切り替え"><a href="#ggst" data-game="ggst" aria-current="page">GGST</a><a href="#sf6" data-game="sf6">スト6</a></nav><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
@@ -110,7 +110,6 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 </section>
 <section id="otherSources" hidden></section>
 <section id="sf6Sources" hidden><strong>スト6 コンボ参考資料</strong><br><a href="https://sf6-lab.net/" target="_blank" rel="noreferrer">スト6ラボ：Year4 コンボ・起き攻め・セットプレイ</a><br>クラシック操作を基準に、始動別・ドライブ／SA使用別の実戦ルートを掲載しています。更新日と対象バージョンはキャラクター別資料で確認してください。</section>
-<nav class="game-switch" aria-label="ゲームを切り替え"><a href="#ggst" data-game="ggst" aria-current="page">GGST</a><a href="#sf6" data-game="sf6">スト6</a></nav>
 </footer>
 </main>
 <dialog id="editor">
