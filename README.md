@@ -1,6 +1,6 @@
 # Fighting Game Combo Book
 
-Guilty Gear -Strive- と Street Fighter 6 のコンボを参照する静的Webアプリです。ゲームを切り替え、GGSTはラムレザル・ブリジット・エルフェルト、SF6は舞・ベガを選べます。
+Guilty Gear -Strive- と Street Fighter 6 のコンボを参照する静的Webアプリです。ゲームを切り替え、GGSTはラムレザル・ブリジット・エルフェルト、SF6は舞・ベガ・ブランカを選べます。
 
 ## 使い方
 
