@@ -28,6 +28,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 .library-tabs[hidden],.combo-only[hidden],#referenceAddBtn[hidden]{display:none}
 .reference-card{grid-template-columns:minmax(0,1fr);padding:13px 15px}.reference-sequence{margin-top:4px;padding:8px 10px;border-radius:7px;background:var(--panel2);font:600 13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.reference-origin{color:var(--muted);font-size:11px}
 .character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.game-switch{display:flex;gap:4px;margin:0 0 14px;padding:4px;width:max-content;background:var(--panel2);border:1px solid var(--line);border-radius:11px}.game-switch button{padding:7px 12px;border:0;background:transparent;color:var(--muted);font-size:12px}.game-switch button[aria-pressed="true"]{background:var(--accent);color:#fff;border-radius:8px}.notation-note{margin:12px 0 0;padding:8px 11px;border-radius:9px;background:var(--panel2);color:var(--muted);font-size:12px}.notation-note[hidden]{display:none}
 .collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
 .starter-group{margin:0 0 8px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}.starter-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;color:var(--text);font-size:15px;font-weight:750;cursor:pointer;list-style:none}.starter-details>summary::-webkit-details-marker{display:none}.starter-details>summary::before{content:"＋";color:var(--accent);font-size:13px;width:15px}.starter-details[open]>summary::before{content:"−"}.starter-name{margin-right:auto}.starter-count{color:var(--muted);font-size:11px;font-weight:500}.starter-details[open]>summary{border-bottom:1px solid var(--line)}.starter-details .variant-group{padding:0 12px}.starter-details .variant-group:last-child{padding-bottom:4px}.section-tools{display:flex;align-items:center;gap:10px}.section-tools button{padding:5px 9px;font-size:11px;color:var(--muted)}
 @media(max-width:900px){main{padding:16px 16px 44px}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -35,7 +36,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 </style>
 </head>
 <body>
-<header><div class="header-topline"><span class="site-brand">GUILTY GEAR -STRIVE- / COMBO BOOK</span></div><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
+<header><div class="game-switch" role="group" aria-label="ゲームを選択"><button type="button" data-game="ggst" aria-pressed="true">GUILTY GEAR -STRIVE-</button><button type="button" data-game="sf6" aria-pressed="false">STREET FIGHTER 6</button></div><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div><p class="notation-note" id="sf6Notation" hidden>クラシック操作・テンキー表記：5=ニュートラル、2=下、236=波動、623=昇龍。P=パンチ、K=キック、L/M/H=弱/中/強、OD=ドライブ2本、DR/CDR=ドライブラッシュ／キャンセルドライブラッシュ。</p></header>
 <main>
 <nav class="library-tabs" id="referenceNav" aria-label="GGSTの参照内容"><button type="button" data-view="combos" aria-pressed="true">コンボ</button><button type="button" data-view="oki" aria-pressed="false">起き攻め</button><button type="button" data-view="pressure" aria-pressed="false">連携</button></nav>
 <div class="toolbar">
@@ -213,7 +214,31 @@ const selectedRosterIds=new Set(["bridget","elphelt"]);
 const extraCharacters=(window.GGST_EXTRA_CHARACTERS||[]).filter(character=>selectedRosterIds.has(character.id));
 const builtInCharacters=[{id:"ram",name:"ラムレザル",group:"ゲーム本編",title:"RAMLETHAL"}];
 const allCharacters=[...builtInCharacters,...extraCharacters];
-let characterById=new Map(allCharacters.map(c=>[c.id,c]));
+const maiSourceUrl="https://sf6-lab.net/fighters/mai/combo";
+const vegaSourceUrl="https://sf6-genten.com/character/vega";
+const sf6Characters=[
+ {id:"sf6-mai",name:"舞",group:"ストリートファイター6",title:"MAI",game:"sf6",sourceUrl:maiSourceUrl,sourceTitle:"舞 コンボ・起き攻め・セットプレイ｜Year4最新版（2026年8月調整対応）",routes:[
+  {id:"mai-2lk",name:"下段小技",starter:"2LK",starterLabel:"2LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"2LK > 2LP > 2LP > 236LK",notes:"下段からヒット確認して弱忍蜂で締める基本。ガード時に弱忍蜂まで出すと反撃を受けるため、ヒット確認する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"弱忍蜂後に前ステップで接近して起き攻め。",main:true},
+  {id:"mai-5lk",name:"飛燕連脚",starter:"5LK",starterLabel:"5LK",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"5LK > LK > LK > j.214P",notes:"弱K連係からムササビの舞へ。起き攻めを重視する基本ルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"ムササビの舞後に起き攻め。",main:true},
+  {id:"mai-5lk-od",name:"飛燕連脚・OD追撃",starter:"5LK",starterLabel:"5LK",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:null,recipe:"5LK > LK > LK > j.214PP（OD） > 623HK",notes:"ドライブを2本使い、ODムササビから強飛翔龍炎陣で追撃。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"}],oki:"強飛翔龍炎陣後に攻めを継続。"},
+  {id:"mai-2mp",name:"2中Pからの小技確認",starter:"2MP",starterLabel:"2MP",kind:"地上通常ヒット",topic:"起き攻め通常技ヒット",pos:"どこでも",damage:null,recipe:"2MP > 2LP > 236LK",notes:"2中Pから弱Pを挟んで弱忍蜂。短く確認しやすいノーゲージルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"弱忍蜂後に前ステップで接近。"},
+  {id:"mai-5mp-od",name:"5中PからOD忍蜂",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"5MP > 236KK（OD忍蜂） > j.MP > j.214P",notes:"ドライブを2本使う空中追撃。現行版ではJ中Pからムササビの舞へつなぐ。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"}],oki:"ムササビの舞後に起き攻め。",main:true},
+  {id:"mai-2mk-drive",name:"中足キャンセルラッシュ",starter:"2MK",starterLabel:"2MK",kind:"ゲージ使用",topic:"牽制ヒット",pos:"どこでも",damage:null,recipe:"2MK > CDR > 4HK > 2MP > 214HP > 236LK",notes:"キャンセルラッシュを使う運びルート。4強Kで相手を立たせてから強龍炎舞につなぐ。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"弱忍蜂後に起き攻め。",main:true},
+  {id:"mai-5hp",name:"5強Pの確反・差し返し",starter:"5HP",starterLabel:"5HP",kind:"地上通常ヒット",topic:"無敵技ガード後の確反",pos:"どこでも",damage:null,recipe:"5HP > 236HK",notes:"5強Pから強忍蜂で締める簡単なルート。確反や差し返しで使いやすい。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"強忍蜂後に攻めを継続。",main:true},
+  {id:"mai-jhk",name:"飛び込み",starter:"j.HK",starterLabel:"j.HK",kind:"空中始動",topic:"その他",pos:"どこでも",damage:null,recipe:"j.HK > 5HP > 236HK",notes:"飛び込みから5強Pを経由して強忍蜂につなぐ基本。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"強忍蜂後に攻めを継続。"}
+ ]},
+ {id:"sf6-vega",name:"ベガ",group:"ストリートファイター6",title:"M. BISON",game:"sf6",sourceUrl:vegaSourceUrl,sourceTitle:"ベガの使い方・コンボ（2026年11月1日更新）",routes:[
+  {id:"vega-2lp",name:"弱攻撃確認",starter:"2LP",starterLabel:"2LP",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:1230,recipe:"2LP > 2LP > 5LP > 236LK",notes:"弱攻撃が当たったのを確認して弱ダブルニープレス。ガード時は反撃を受けるため、ヒット確認する。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",oki:"ヒット後+2F。投げ・2LK・シミーを選べる。",main:true},
+  {id:"vega-5mp-meterless",name:"中攻撃・ノーゲージ",starter:"5MP",starterLabel:"5MP",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:1840,recipe:"5MP > 2MP > 214MP",notes:"ドライブを使わず中バックフィストコンボでサイコマインを付ける。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",oki:"サイコマイン付きダウン。約+20Fから起き攻め。",main:true},
+  {id:"vega-5mp-od",name:"中攻撃・ODダブルニー",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"近距離ヒット",pos:"どこでも",damage:2380,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 214HP",notes:"ヒット確認してODダブルニーへ。ガード時に出すと反撃を受ける。ドライブ2本を使ってサイコマインを付ける。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"}],oki:"サイコマイン付き、約+31F。前ステップから起き攻め。",main:true},
+  {id:"vega-5mp-sa1",name:"中攻撃・SA1締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:3440,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA1",notes:"ドライブ2本とSAゲージ1本を使う倒し切り候補。SAゲージがない場合はODルートで締める。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"1本"}],oki:"SA1後に起き攻め。"},
+  {id:"vega-5mp-sa2",name:"中攻撃・SA2締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:3940,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA2",notes:"ドライブ2本とSAゲージ2本を使う。倒し切れる場面で選ぶ。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"2本"}],oki:"SA2後に起き攻め。"},
+  {id:"vega-5mp-sa3",name:"中攻撃・SA3締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:4440,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA3",notes:"ドライブ2本とSAゲージ3本を使う最大SA締め候補。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"3本"}],oki:"SA3後に攻めを継続。"},
+  {id:"vega-2mk-drive",name:"下段からドライブラッシュ",starter:"2MK",starterLabel:"2MK",kind:"ゲージ使用",topic:"牽制ヒット",pos:"どこでも",damage:1898,recipe:"2MK > DR > 5MP > 2HP > 214HP",notes:"下段からドライブラッシュでつなぎ、強バックフィストコンボでサイコマインを付ける。ドライブ3本を使う。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"サイコマイン付き、約+31F。前ステップから起き攻め。"}
+ ]}
+];
+let characterById=new Map([...allCharacters,...sf6Characters].map(c=>[c.id,c]));
+let activeGame="ggst";
 const storageKey=()=>`${activeCharacter}ComboBook`;
 const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
 const referenceSeedVersion="pressure-20261108-v3";
@@ -246,17 +271,20 @@ const pressureSeeds={
  ]
 };
 function populateCharacterPicker(){
+ const roster=activeGame==="sf6"?sf6Characters:allCharacters;
  const preferredOrder=["ゲーム本編","Season Pass 1","Season Pass 2","Season Pass 3","Season Pass 4","Season Pass 5"];
  const baseRosterOrder=["ram","bridget","elphelt"];
- const groups=[...new Set(allCharacters.map(c=>c.group))].sort((a,b)=>preferredOrder.indexOf(a)-preferredOrder.indexOf(b));
- $("characterSelect").innerHTML=groups.map(group=>{const characters=allCharacters.filter(c=>c.group===group);if(group==="ゲーム本編")characters.sort((a,b)=>baseRosterOrder.indexOf(a.id)-baseRosterOrder.indexOf(b.id));return `<optgroup label="${esc(group)}">${characters.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</optgroup>`}).join("");
+ const groups=[...new Set(roster.map(c=>c.group))].sort((a,b)=>preferredOrder.indexOf(a)-preferredOrder.indexOf(b));
+ $("characterSelect").innerHTML=groups.map(group=>{const characters=roster.filter(c=>c.group===group);if(group==="ゲーム本編")characters.sort((a,b)=>baseRosterOrder.indexOf(a.id)-baseRosterOrder.indexOf(b.id));return `<optgroup label="${esc(group)}">${characters.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</optgroup>`}).join("");
 }
 const save=()=>{try{localStorage.setItem(storageKey(),JSON.stringify(combos))}catch(e){console.warn("このブラウザでは保存できません",e)}};
 function loadCharacter(character){
  activeCharacter=character;
- const fallback=builtInCharacters[0];
+ const isSF6=character.startsWith("sf6-");
+ const fallback=isSF6?sf6Characters[0]:builtInCharacters[0];
  const meta=characterById.get(character)||fallback;
  const isRam=character==="ram";
+ activeGame=isSF6?"sf6":"ggst";
  const base=isRam?ramSeed:meta.routes;
  const curation=isRam?ramCuration:{};
  const seed=base.map(c=>({...c,...curation[c.id],sourceUrl:c.sourceUrl||meta.sourceUrl}));
@@ -294,24 +322,29 @@ function loadCharacter(character){
  }
  combos.forEach(c=>delete c.favorite);
  references=pressureSeeds[character]||[];
- try{const key=referenceStorageKey(),savedReferences=JSON.parse(localStorage.getItem(key)||"[]"),versionKey=`${key}SeedVersion`;if(Array.isArray(savedReferences)){if(localStorage.getItem(versionKey)!==referenceSeedVersion){const seededIds=new Set(references.map(reference=>reference.id));references=[...references,...savedReferences.filter(reference=>!seededIds.has(reference.id))];localStorage.setItem(key,JSON.stringify(references));localStorage.setItem(versionKey,referenceSeedVersion)}else references=savedReferences}}catch(e){console.warn("参照データの読み込みに失敗",e)}
+ if(!isSF6)try{const key=referenceStorageKey(),savedReferences=JSON.parse(localStorage.getItem(key)||"[]"),versionKey=`${key}SeedVersion`;if(Array.isArray(savedReferences)){if(localStorage.getItem(versionKey)!==referenceSeedVersion){const seededIds=new Set(references.map(reference=>reference.id));references=[...references,...savedReferences.filter(reference=>!seededIds.has(reference.id))];localStorage.setItem(key,JSON.stringify(references));localStorage.setItem(versionKey,referenceSeedVersion)}else references=savedReferences}}catch(e){console.warn("参照データの読み込みに失敗",e)}
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
-  $("pageTitle").textContent=`${meta.title||meta.name.toUpperCase()} COMBO BOOK`;
-  $("pageDescription").textContent=meta.description||"状況別・始動技別に整理。主力候補を優先表示。";
+  $("pageTitle").textContent=isSF6?`${meta.name} COMBO BOOK`:`${meta.title||meta.name.toUpperCase()} COMBO BOOK`;
+  $("pageDescription").textContent=isSF6?"始動技ごとに整理。テンキー表記でコンボを確認できます。":meta.description||"状況別・始動技別に整理。主力候補を優先表示。";
 $("characterSelect").value=character;
- $("starter").placeholder="例：近S / 2K / 6P";
- $("recipe").placeholder="例：近S > 遠S > HS";
+ $("starter").placeholder=isSF6?"例：2LK / 5MP / 2MK":"例：近S / 2K / 6P";
+ $("recipe").placeholder=isSF6?"例：2LK > 2LP > 236LK":"例：近S > 遠S > HS";
+ $("filters").hidden=isSF6;
+ $("sf6Notation").hidden=!isSF6;
+ document.querySelectorAll(".game-switch [data-game]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.game===activeGame)));
  $("ramSources").hidden=!isRam;
  $("solSources").hidden=true;
  $("otherSources").hidden=isRam;
- if(!isRam){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"Dustloop – Combo Data")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。`}
- $("referenceNav").hidden=false;
- $("gameEyebrow").textContent="GUILTY GEAR -STRIVE- / COMBO DATABASE";
- document.title=`GGST ${meta.name} Combo Book`;
+ if(!isRam){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"キャラ別コンボ資料")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>${isSF6?"現行Year4資料をもとにした候補です。入力はクラシック操作のテンキー表記です。":"記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。"}`}
+ $("referenceNav").hidden=isSF6;
+ $("gameEyebrow").textContent=isSF6?"STREET FIGHTER 6 / COMBO DATABASE":"GUILTY GEAR -STRIVE- / COMBO DATABASE";
+ document.title=`${isSF6?"SF6":"GGST"} ${meta.name} Combo Book`;
  render();
 }
+function switchGame(game){if(game===activeGame)return;activeGame=game;currentView="combos";populateCharacterPicker();loadCharacter((game==="sf6"?sf6Characters:allCharacters)[0].id)}
+document.querySelectorAll(".game-switch [data-game]").forEach(button=>button.addEventListener("click",()=>switchGame(button.dataset.game)));
 document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.addEventListener("click",()=>{currentView=button.dataset.view;render()}));
 $("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value));let selectedOnly=false;
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
@@ -327,7 +360,7 @@ let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFil
 const damageScore=c=>{const value=String(c.damage??"").match(/\d+/);return value?Number(value[0]):0};
 arr.sort((a,b)=>sort==="damage"?damageScore(b)-damageScore(a):Number(!!b.main)-Number(!!a.main)||damageScore(b)-damageScore(a));
 $("resultCount").textContent=`${arr.length} 件表示`; $("viewToggle").textContent=selectedOnly?"全コンボを見る":"マイコンボだけ表示（"+combos.filter(c=>c.customSelected).length+"）"; $("viewToggle").setAttribute("aria-pressed",String(selectedOnly));
-const renderCard=c=>`<article class="card"><div class="route-main"><div class="recipe">${esc(c.recipe)}</div><details><summary>条件・起き攻め・出典など</summary>${(c.reason||c.notes)?`<div class="note">${esc(c.reason||c.notes)}</div>`:""}${c.shared?`<p class="note"><strong>共通ルート：</strong>${esc(c.shared)}</p>`:""}${c.oki && !/^(要検証|要確認)/.test(c.oki)?`<p class="note"><strong>起き攻め：</strong>${esc(c.oki)}</p>`:""}${c.videoUrl?`<p class="note"><a href="${esc(c.videoUrl)}" target="_blank" rel="noreferrer">▶ ${esc(c.videoTitle||"コンボ動画を見る")}</a></p>`:""}<p class="note"><strong>位置：</strong>${esc(c.pos)} ／ <strong>元データ：</strong>${c.sourceUrl?`<a href="${esc(c.sourceUrl)}" target="_blank" rel="noreferrer">${esc(c.source||"Dustloop")}</a>`:esc(c.source||"ユーザー登録")}</p><div class="cardtools"><button data-action="edit" data-id="${esc(c.id)}">編集</button><button data-action="delete" data-id="${esc(c.id)}">削除</button></div></details></div><div class="metrics">${c.damage!=null?`<div class="metric"><span>ダメージ</span><b>${esc(c.damage)}</b></div>`:""}${c.resources?c.resources.map(resource=>`<div class="metric"><span>${esc(resource.label)}</span><b>${esc(resource.value)}</b></div>`).join(""):`<div class="metric"><span>ゲージ</span><b>${c.meter===0?"なし":c.meter?esc(c.meter)+"%":"—"}</b></div>`}</div><div class="cardactions"><button data-action="select" data-id="${esc(c.id)}" aria-label="${c.customSelected?"マイコンボから外す":"マイコンボに追加"}" title="${c.customSelected?"マイコンボから外す":"マイコンボに追加"}">${c.customSelected?"✓ 追加済み":"＋ マイコンボ"}</button></div></article>`;
+const renderCard=c=>`<article class="card"><div class="route-main"><div class="recipe">${esc(c.recipe)}</div><details><summary>条件・起き攻め・出典など</summary>${(c.reason||c.notes)?`<div class="note">${esc(c.reason||c.notes)}</div>`:""}${c.shared?`<p class="note"><strong>共通ルート：</strong>${esc(c.shared)}</p>`:""}${c.oki && !/^(要検証|要確認)/.test(c.oki)?`<p class="note"><strong>起き攻め：</strong>${esc(c.oki)}</p>`:""}${c.videoUrl?`<p class="note"><a href="${esc(c.videoUrl)}" target="_blank" rel="noreferrer">▶ ${esc(c.videoTitle||"コンボ動画を見る")}</a></p>`:""}<p class="note"><strong>位置：</strong>${esc(c.pos)} ／ <strong>元データ：</strong>${c.sourceUrl?`<a href="${esc(c.sourceUrl)}" target="_blank" rel="noreferrer">${esc(c.source||"Dustloop")}</a>`:esc(c.source||"ユーザー登録")}</p><div class="cardtools"><button data-action="edit" data-id="${esc(c.id)}">編集</button><button data-action="delete" data-id="${esc(c.id)}">削除</button></div></details></div><div class="metrics">${c.damage!=null?`<div class="metric"><span>ダメージ</span><b>${esc(c.damage)}</b></div>`:""}${c.resources?c.resources.map(resource=>`<div class="metric"><span>${esc(resource.label)}</span><b>${esc(resource.value)}</b></div>`).join(""):`<div class="metric"><span>${activeGame==="sf6"?"ドライブ":"ゲージ"}</span><b>${activeGame==="sf6"||c.meter===0?"なし":c.meter?esc(c.meter)+"%":"—"}</b></div>`}</div><div class="cardactions"><button data-action="select" data-id="${esc(c.id)}" aria-label="${c.customSelected?"マイコンボから外す":"マイコンボに追加"}" title="${c.customSelected?"マイコンボから外す":"マイコンボに追加"}">${c.customSelected?"✓ 追加済み":"＋ マイコンボ"}</button></div></article>`;
 const starterFor=c=>c.starterLabel||c.starter||"始動未設定";
 const variantFor=c=>c.kind==="カウンターヒット"||c.topic==="パニッシュカウンター"?"カウンターヒット時":c.kind==="対空"?"対空時":c.kind==="ゲージ使用"||Number(c.meter)>0||c.resources?.some(resource=>resource.value!=="なし")?"ゲージ使用時":"通常ヒット時";
 const variantsOrder=["通常ヒット時","カウンターヒット時","対空時","ゲージ使用時"];
