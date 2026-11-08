@@ -24,7 +24,7 @@ details summary{cursor:pointer;color:var(--muted);font-size:11px;list-style-posi
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#d8b4ff}
 .character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#21152a;border-color:var(--accent)}
-.game-switch{display:flex;gap:8px;margin-top:16px}.game-switch button{min-width:110px;padding:8px 16px;font-size:14px}.game-switch button[aria-pressed="true"]{background:var(--accent);color:#17131b;border-color:var(--accent)}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
+.game-switch{display:flex;justify-content:center;gap:0;margin-top:20px;padding-top:14px;border-top:1px solid var(--line)}.game-switch a{padding:3px 10px;color:var(--muted);font-size:11px;font-weight:700;text-decoration:none;border-right:1px solid var(--line)}.game-switch a:last-child{border-right:0}.game-switch a[aria-current="page"]{color:var(--text)}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
 .collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
 .starter-group{margin:0 0 8px;border:1px solid var(--line);border-radius:12px;background:#15172088;overflow:hidden}.starter-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;color:var(--text);font-size:15px;font-weight:750;cursor:pointer;list-style:none}.starter-details>summary::-webkit-details-marker{display:none}.starter-details>summary::before{content:"＋";color:var(--accent);font-size:13px;width:15px}.starter-details[open]>summary::before{content:"−"}.starter-name{margin-right:auto}.starter-count{color:var(--muted);font-size:11px;font-weight:500}.starter-details[open]>summary{border-bottom:1px solid var(--line)}.starter-details .variant-group{padding:0 12px}.starter-details .variant-group:last-child{padding-bottom:4px}.section-tools{display:flex;align-items:center;gap:10px}.section-tools button{padding:5px 9px;font-size:11px;color:var(--muted)}
 /* SF6 draws on Japanese combo-database patterns: fighter-first navigation, compact search, and readable route rows. */
@@ -33,10 +33,10 @@ body[data-game="sf6"] header{background:#fff;border-bottom:1px solid #d9dde3;pad
 body[data-game="sf6"] .eyebrow{font-size:10px;letter-spacing:.12em;color:#8a9099}
 body[data-game="sf6"] h1{font-size:clamp(24px,4vw,32px);margin:3px 0 2px}
 body[data-game="sf6"] header p{font-size:13px}
-body[data-game="sf6"] .game-switch{display:inline-flex;gap:2px;padding:3px;background:#eef0f3;border:1px solid #d9dde3;border-radius:9px;margin-top:12px}
-body[data-game="sf6"] .game-switch button{min-width:78px;padding:6px 12px;background:transparent;border:0;color:#68707c;font-size:12px;border-radius:6px}
-body[data-game="sf6"] .game-switch button[aria-pressed="true"]{background:#232831;color:#fff}
-body[data-game="sf6"] .collection-bar{display:inline-flex;margin:0 0 0 12px;vertical-align:middle}
+body[data-game="sf6"] .game-switch{border-color:#d9dde3}
+body[data-game="sf6"] .game-switch a{border-color:#d9dde3;color:#707782}
+body[data-game="sf6"] .game-switch a[aria-current="page"]{color:#20242b}
+body[data-game="sf6"] .collection-bar{display:flex;margin-top:12px}
 body[data-game="sf6"] .character-picker{gap:7px;font-size:11px;color:#7a818b}
 body[data-game="sf6"] .character-picker select{min-width:150px;padding:6px 30px 6px 9px;background:#fff;border-color:#cfd4db;color:#20242b;font-weight:700}
 body[data-game="sf6"] main{max-width:1180px;padding-top:18px}
@@ -70,7 +70,7 @@ body[data-game="sf6"] a{color:#a66300}
 </style>
 </head>
 <body>
-<header><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><nav class="game-switch" aria-label="ゲームを選択"><button type="button" data-game="ggst" aria-pressed="true">GGST</button><button type="button" data-game="sf6" aria-pressed="false">スト6</button></nav><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
+<header><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
@@ -110,6 +110,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 </section>
 <section id="otherSources" hidden></section>
 <section id="sf6Sources" hidden><strong>スト6 コンボ参考資料</strong><br><a href="https://sf6-lab.net/" target="_blank" rel="noreferrer">スト6ラボ：Year4 コンボ・起き攻め・セットプレイ</a><br>クラシック操作を基準に、始動別・ドライブ／SA使用別の実戦ルートを掲載しています。更新日と対象バージョンはキャラクター別資料で確認してください。</section>
+<nav class="game-switch" aria-label="ゲームを切り替え"><a href="#ggst" data-game="ggst" aria-current="page">GGST</a><a href="#sf6" data-game="sf6">スト6</a></nav>
 </footer>
 </main>
 <dialog id="editor">
@@ -278,6 +279,8 @@ $("characterSelect").value=character;
   $("topicFilter").innerHTML=activeGame==="sf6"?'<option value="">コンボ条件：すべて</option><option value="地上通常ヒット">通常ヒット</option><option value="カウンターヒット">カウンターヒット</option><option value="対空">対空</option><option value="__meter">ドライブ／SA使用</option><option value="パニッシュカウンター">パニッシュカウンター</option>':'<option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option><option>インパクト返し</option><option>パニッシュカウンター</option><option>その他</option>';
  if(activeGame==="sf6"){$("version").innerHTML='<option>Year4 / 2026-08-03</option><option>未確認</option>'}else{$("version").innerHTML='<option>2.00</option><option>2.03</option><option>2.04以降</option><option>未確認</option>'}
  $("driveCostField").hidden=activeGame!=="sf6";$("saCostField").hidden=activeGame!=="sf6";
+ $("starter").placeholder=activeGame==="sf6"?"例：5MP / 2MK / 9HP":"例：近S / 2K / 6P";
+ $("recipe").placeholder=activeGame==="sf6"?"例：5MP > 2MP > 236HP":"例：近S > 遠S > HS";
  $("ramSources").hidden=!isRam;
  $("solSources").hidden=!isSol;
  $("sf6Sources").hidden=activeGame!=="sf6";
@@ -289,8 +292,8 @@ $("characterSelect").value=character;
  document.title=`${activeGame==="sf6"?"SF6":"GGST"} ${meta.name} Combo Book`;
  render();
 }
-function switchGame(game){if(game===activeGame)return;activeGame=game;allCharacters=gameRosters[game];characterById=new Map(allCharacters.map(c=>[c.id,c]));populateCharacterPicker();document.querySelectorAll(".game-switch [data-game]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.game===game)));loadCharacter(lastCharacter[game]||allCharacters[0]?.id)}
-document.querySelectorAll(".game-switch [data-game]").forEach(button=>button.addEventListener("click",()=>switchGame(button.dataset.game)));
+function switchGame(game){if(game===activeGame)return;activeGame=game;allCharacters=gameRosters[game];characterById=new Map(allCharacters.map(c=>[c.id,c]));populateCharacterPicker();document.querySelectorAll(".game-switch [data-game]").forEach(link=>link.setAttribute("aria-current",link.dataset.game===game?"page":"false"));loadCharacter(lastCharacter[game]||allCharacters[0]?.id)}
+document.querySelectorAll(".game-switch [data-game]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();switchGame(link.dataset.game)}));
 $("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value));let selectedOnly=false;
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
 $("toggleGroups").onclick=()=>{const groups=[...document.querySelectorAll(".starter-details")];const shouldOpen=!groups.some(group=>group.open);groups.forEach(group=>group.open=shouldOpen);$("toggleGroups").textContent=shouldOpen?"すべてたたむ":"すべて開く"};
