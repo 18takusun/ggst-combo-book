@@ -24,6 +24,9 @@ details summary{cursor:pointer;color:var(--muted);font-size:11px;list-style-posi
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;width:min(620px,calc(100% - 24px));padding:20px;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b}form .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}form label{display:grid;gap:5px;color:var(--muted);font-size:12px;margin-bottom:10px}form label.full{grid-column:1/-1}textarea{min-height:76px;resize:vertical}.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}a{color:#6d28d9}
 .header-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.site-brand{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.12em}.header-topline .game-switch{margin:0;flex:0 0 auto}
+.library-tabs{display:flex;gap:4px;margin:0 auto;padding:8px 24px 0;max-width:1440px}.library-tabs button{padding:7px 14px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--muted);font-size:13px}.library-tabs button[aria-pressed="true"]{border-color:var(--accent);color:var(--text)}
+.library-tabs[hidden],.combo-only[hidden],#referenceAddBtn[hidden]{display:none}
+.reference-card{grid-template-columns:minmax(0,1fr);padding:13px 15px}.reference-sequence{margin-top:4px;padding:8px 10px;border-radius:7px;background:var(--panel2);font:600 13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.reference-origin{color:var(--muted);font-size:11px}
 .character-tabs{display:flex;gap:8px;margin-top:16px}.character-tabs button{padding:7px 14px;font-size:13px}.character-tabs button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
 .game-switch{display:inline-flex;gap:2px;margin-top:12px;padding:3px;background:var(--panel2);border:1px solid var(--line);border-radius:9px}.game-switch a{display:block;padding:5px 12px;color:var(--muted);font-size:12px;font-weight:700;text-decoration:none;border-radius:6px}.game-switch a[aria-current="page"]{background:var(--accent);color:#fff}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
 .collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
@@ -73,21 +76,23 @@ body[data-game="sf6"] a{color:#a66300}
 <body>
 <header><div class="header-topline"><span class="site-brand">FIGHTING GAME COMBO BOOK</span><nav class="game-switch" aria-label="ゲームを切り替え"><a href="#ggst" data-game="ggst" aria-current="page">GGST</a><a href="#sf6" data-game="sf6">スト6</a></nav></div><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div></header>
 <main>
+<nav class="library-tabs" id="referenceNav" aria-label="GGSTの参照内容"><button type="button" data-view="combos" aria-pressed="true">コンボ</button><button type="button" data-view="oki" aria-pressed="false">起き攻め</button><button type="button" data-view="pressure" aria-pressed="false">連携</button></nav>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
-<button id="viewToggle" aria-pressed="false">マイコンボだけ表示（0）</button>
-<button class="primary" id="addBtn">＋ コンボを追加</button>
+<button id="viewToggle" class="combo-only" aria-pressed="false">マイコンボだけ表示（0）</button>
+<button class="primary combo-only" id="addBtn">＋ コンボを追加</button>
+<button class="primary" id="referenceAddBtn" hidden>＋ 追加</button>
 <button id="exportBtn">バックアップ</button>
 <button id="importBtn">復元</button>
 <input id="fileInput" type="file" accept="application/json" hidden>
 </div>
-<div class="filters">
+<div class="filters combo-only" id="filters">
 <select id="topicFilter"><option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option><option>インパクト返し</option><option>パニッシュカウンター</option><option>その他</option></select>
 <select id="situation"><option value="">始動分類：すべて</option><option>地上通常ヒット</option><option>カウンターヒット</option><option>対空</option><option>空中始動</option><option>画面中央</option><option>画面端</option><option>ダスト</option><option>ゲージ使用</option></select>
 <select id="position"><option value="">位置：すべて</option><option>画面中央</option><option>画面端</option><option>どこでも</option><option>要確認</option></select>
 <select id="sort"><option value="recommended">おすすめ順</option><option value="damage">ダメージ順</option></select>
 </div>
-<div class="sectionhead"><h2>コンボ一覧</h2><div class="section-tools"><small id="resultCount"></small><button id="toggleGroups" type="button">すべてたたむ</button></div></div>
+<div class="sectionhead"><h2 id="sectionTitle">コンボ一覧</h2><div class="section-tools"><small id="resultCount"></small><button id="toggleGroups" class="combo-only" type="button">すべてたたむ</button></div></div>
 <div class="cardgrid" id="cards"></div>
 <footer>
 <section id="ramSources">
@@ -131,6 +136,7 @@ RedDitto対 Totsubunger：<a href="https://www.youtube.com/watch?v=kDrM8aDAPAc" 
 </div><div class="dialogactions"><button type="button" id="cancelBtn">キャンセル</button><button class="primary" type="submit">保存</button></div>
 </form>
 </dialog>
+<dialog id="referenceEditor"><form id="referenceForm"><h2 id="referenceDialogTitle">起き攻めを追加</h2><input id="referenceId" type="hidden"><label>見出し<input id="referenceName" required placeholder="例：ダウロ締め後の近S重ね"></label><label>始動・使う場面<input id="referenceSequence" placeholder="例：2H > 623P"></label><label>手順・ポイント<textarea id="referenceNotes" required placeholder="タイミング、距離、ガード後の状況など"></textarea></label><label>参考URL<input id="referenceSource" type="url" placeholder="https://..."></label><div class="dialogactions"><button type="button" id="referenceCancel">キャンセル</button><button class="primary" type="submit">保存</button></div></form></dialog>
 <script src="roster.js"></script>
 <script src="sf6.js?v=numpad-20261108"></script>
 <script>
@@ -239,6 +245,8 @@ const solCuration={
 "sol-charge-corner":{starterLabel:"5D",topic:"ゲージ使用",meter:50,reason:"溜めダストから50%ゲージを使って追撃。壁の位置が近ければ壁割りまで狙う。",oki:"Sidewinder締め。",currentSource:true,sourceUrl:solGuideUrl}
 };
 let combos=[];
+let references=[];
+let currentView="combos";
 let activeGame="ggst";
 let activeCharacter="ram";
 const $=id=>document.getElementById(id);
@@ -249,6 +257,7 @@ let allCharacters=gameRosters.ggst;
 let characterById=new Map(allCharacters.map(c=>[c.id,c]));
 const lastCharacter={ggst:"ram",sf6:"ryu"};
 const storageKey=()=>activeGame==="ggst"?`${activeCharacter}ComboBook`:`sf6-${activeCharacter}ComboBook`;
+const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
 function populateCharacterPicker(){
  const preferredOrder=["ゲーム本編","Season Pass 1","Season Pass 2","Season Pass 3","Season Pass 4","Season Pass 5"];
  const baseRosterOrder=["sol","ky","may","axl","chipp","potemkin","faust","millia","zato","ram","leo","nago","gio","anji","ino"];
@@ -270,6 +279,8 @@ function loadCharacter(character){
  const storedById=new Map(stored.map(c=>[c.id,c]));
  combos=[...seed.map(c=>({...c,...storedById.get(c.id)})),...stored.filter(c=>!seed.some(s=>s.id===c.id))];
  combos.forEach(c=>delete c.favorite);
+ references=[];
+ if(activeGame==="ggst"){try{const savedReferences=JSON.parse(localStorage.getItem(referenceStorageKey())||"[]");if(Array.isArray(savedReferences))references=savedReferences}catch(e){console.warn("参照データの読み込みに失敗",e)}}
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
@@ -288,16 +299,24 @@ $("characterSelect").value=character;
  if(activeGame==="sf6"){$("sf6Sources").innerHTML=`<strong>${esc(meta.name)}のコンボ参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">スト6ラボ：${esc(meta.name)} コンボ・起き攻め（Year4）</a><br>クラシック操作／Year4（2026年8月3日調整基準）。ルートとゲージ量は参考資料に基づく候補です。`}
  else if(!isRam&&!isSol){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"Dustloop – Combo Data")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。`}
  document.body.dataset.game=activeGame;
+ if(activeGame==="sf6")currentView="combos";
+ $("referenceNav").hidden=activeGame!=="ggst";
  $("gameEyebrow").textContent=activeGame==="sf6"?"STREET FIGHTER 6 / COMBO DATABASE":"GUILTY GEAR -STRIVE- / COMBO DATABASE";
  document.title=`${activeGame==="sf6"?"SF6":"GGST"} ${meta.name} Combo Book`;
  render();
 }
 function switchGame(game){if(game===activeGame)return;activeGame=game;allCharacters=gameRosters[game];characterById=new Map(allCharacters.map(c=>[c.id,c]));populateCharacterPicker();document.querySelectorAll(".game-switch [data-game]").forEach(link=>link.setAttribute("aria-current",link.dataset.game===game?"page":"false"));loadCharacter(lastCharacter[game]||allCharacters[0]?.id)}
 document.querySelectorAll(".game-switch [data-game]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();switchGame(link.dataset.game)}));
+document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.addEventListener("click",()=>{currentView=button.dataset.view;render()}));
 $("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value));let selectedOnly=false;
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
 $("toggleGroups").onclick=()=>{const groups=[...document.querySelectorAll(".starter-details")];const shouldOpen=!groups.some(group=>group.open);groups.forEach(group=>group.open=shouldOpen);$("toggleGroups").textContent=shouldOpen?"すべてたたむ":"すべて開く"};
+function syncLibraryView(){const comboView=activeGame!=="ggst"||currentView==="combos";document.querySelectorAll(".combo-only").forEach(element=>element.hidden=!comboView);$("referenceAddBtn").hidden=comboView;$("referenceAddBtn").textContent=currentView==="oki"?"＋ 起き攻めを追加":"＋ 連携を追加";$("sectionTitle").textContent=currentView==="oki"?"起き攻め一覧":currentView==="pressure"?"連携一覧":"コンボ一覧";$("search").placeholder=currentView==="oki"?"起き攻め・始動技・コンボで検索":currentView==="pressure"?"連携名・手順・ポイントで検索":"コンボ名・始動技・コマンドで検索";document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.view===currentView)))}
+function renderReferences(){syncLibraryView();const query=$("search").value.trim().toLowerCase();let items=[];if(currentView==="oki"){items=combos.filter(combo=>combo.oki&&!/^(要検証|要確認)/.test(combo.oki)).map(combo=>({id:`combo-${combo.id}`,name:`${combo.starterLabel||combo.starter||"始動未設定"}始動後`,sequence:combo.recipe,notes:combo.oki,source:combo.sourceUrl,origin:"コンボ一覧から"}));items.push(...references.filter(reference=>reference.kind==="oki"))}else items=references.filter(reference=>reference.kind==="pressure");items=items.filter(item=>!query||[item.name,item.sequence,item.notes,item.origin].join(" ").toLowerCase().includes(query));$("resultCount").textContent=`${items.length} 件表示`;$("toggleGroups").hidden=true;$("cards").innerHTML=items.length?items.map(item=>`<article class="card reference-card"><div class="route-main"><div class="recipe">${esc(item.name)}</div>${item.sequence?`<div class="reference-sequence">${esc(item.sequence)}</div>`:""}<p class="note">${esc(item.notes)}</p>${item.source?`<p class="note"><a href="${esc(validSource(item.source))}" target="_blank" rel="noreferrer">参考資料を開く</a></p>`:""}${item.origin?`<small class="reference-origin">${esc(item.origin)}</small>`:""}${item.kind?`<div class="cardtools"><button data-ref-action="edit" data-id="${esc(item.id)}">編集</button><button data-ref-action="delete" data-id="${esc(item.id)}">削除</button></div>`:""}</div></article>`).join(""):currentView==="oki"?'<div class="empty">起き攻め情報はまだありません。コンボの詳細を確認するか、「起き攻めを追加」から登録できます。</div>':'<div class="empty">連携はまだ登録されていません。「連携を追加」から手順とポイントを登録できます。</div>'}
+function validSource(value){try{const url=new URL(value);return ["http:","https:"].includes(url.protocol)?url.href:""}catch{return ""}}
 function render(){
+if(activeGame==="ggst"&&currentView!=="combos"){renderReferences();return}
+syncLibraryView();
 let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFilter").value,pos=$("position").value,sort=$("sort").value;
  let arr=combos.filter(c=>{const meterUsed=c.resources?.some(resource=>resource.value!=="なし");const topicMatch=!topic||(activeGame==="sf6"&&topic==="__meter"?meterUsed:c.topic===topic||c.kind===topic);return (!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&topicMatch&&(!pos||c.pos===pos)});
 const damageScore=c=>{const value=String(c.damage??"").match(/\d+/);return value?Number(value[0]):0};
@@ -313,16 +332,22 @@ const groups=[...document.querySelectorAll(".starter-details")];$("toggleGroups"
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 $("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-action]");if(!button)return;const {action,id}=button.dataset;if(action==="select")toggleSelection(id);if(action==="edit")editCombo(id);if(action==="delete")deleteCombo(id)});
+$("cards").addEventListener("click",e=>{const button=e.target.closest("button[data-ref-action]");if(!button)return;const {refAction,id}=button.dataset;if(refAction==="edit")editReference(id);if(refAction==="delete")deleteReference(id)});
 function toggleSelection(id){let c=combos.find(x=>x.id===id);c.customSelected=!c.customSelected;save();render()}
 function editCombo(id){let c=combos.find(x=>x.id===id);$("dialogTitle").textContent="コンボを編集";$("editId").value=c.id;for(let k of ["name","starter","kind","pos","damage","recipe","notes","version"]){let el=$(k);el.value=c[k]??(k==="damage"?"":el.value)}$("comboTopic").value=c.topic||"その他";if(c.resources){$("driveCost").value=c.resources[0]?.value||"なし";$("saCost").value=c.resources[1]?.value||"なし"}$("editor").showModal()}
 function deleteCombo(id){if(confirm("このコンボを削除しますか？")){combos=combos.filter(c=>c.id!==id);save();render()}}
 $("addBtn").onclick=()=>{$("comboForm").reset();$("dialogTitle").textContent="コンボを追加";$("editId").value="";$("editor").showModal()};
+function editReference(id){const item=references.find(reference=>reference.id===id);if(!item)return;$("referenceId").value=item.id;$("referenceName").value=item.name;$("referenceSequence").value=item.sequence||"";$("referenceNotes").value=item.notes;$("referenceSource").value=item.source||"";$("referenceDialogTitle").textContent=item.kind==="oki"?"起き攻めを編集":"連携を編集";$("referenceEditor").showModal()}
+function deleteReference(id){if(confirm("この参照項目を削除しますか？")){references=references.filter(reference=>reference.id!==id);try{localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}catch(e){console.warn("参照データの保存に失敗",e)}render()}}
+$("referenceAddBtn").onclick=()=>{$("referenceForm").reset();$("referenceId").value="";$("referenceDialogTitle").textContent=currentView==="oki"?"起き攻めを追加":"連携を追加";$("referenceEditor").showModal()};
+$("referenceCancel").onclick=()=>$("referenceEditor").close();
+$("referenceForm").onsubmit=e=>{e.preventDefault();const source=$("referenceSource").value.trim();if(source&&!validSource(source)){alert("参考URLは http または https のURLを入力してください。");return}const id=$("referenceId").value||`ref-${Date.now()}`,old=references.find(reference=>reference.id===id),item={...old,id,kind:currentView==="oki"?"oki":"pressure",name:$("referenceName").value.trim(),sequence:$("referenceSequence").value.trim(),notes:$("referenceNotes").value.trim(),source};references=old?references.map(reference=>reference.id===id?item:reference):[item,...references];try{localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}catch(error){console.warn("参照データの保存に失敗",error)}$("referenceEditor").close();render()};
 $("cancelBtn").onclick=()=>$("editor").close();
 $("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,resources:activeGame==="sf6"?[{label:"DRIVE",value:$("driveCost").value},{label:"SA",value:$("saCost").value}]:old?.resources,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
 ["search","situation","topicFilter","position","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
-$("exportBtn").onclick=()=>{let meta=characterById.get(activeCharacter);let game=activeGame==="sf6"?"SF6":"GGST";let blob=new Blob([JSON.stringify({game,character:meta?.name||activeCharacter,combos},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`${activeGame}-${activeCharacter}-combos.json`;a.click();URL.revokeObjectURL(a.href)};
+$("exportBtn").onclick=()=>{let meta=characterById.get(activeCharacter);let game=activeGame==="sf6"?"SF6":"GGST";let payload={game,character:meta?.name||activeCharacter,combos};if(activeGame==="ggst")payload.references=references;let blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`${activeGame}-${activeCharacter}-combos.json`;a.click();URL.revokeObjectURL(a.href)};
 $("importBtn").onclick=()=>$("fileInput").click();
-$("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(d.game&&d.game!==(activeGame==="sf6"?"SF6":"GGST"))throw Error("game");if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();render()}}catch(error){alert(error.message==="game"?"別のゲームのバックアップです。先にゲームを切り替えてください。":"JSONファイルを読み込めませんでした")};e.target.value=""};
+$("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(d.game&&d.game!==(activeGame==="sf6"?"SF6":"GGST"))throw Error("game");if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();if(activeGame==="ggst"&&Array.isArray(d.references)){references=d.references;localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}render()}}catch(error){alert(error.message==="game"?"別のゲームのバックアップです。先にゲームを切り替えてください。":"JSONファイルを読み込めませんでした")};e.target.value=""};
 populateCharacterPicker();
 loadCharacter("ram");
 </script>
