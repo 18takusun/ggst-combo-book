@@ -27,6 +27,44 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 .game-switch{display:flex;gap:8px;margin-top:16px}.game-switch button{min-width:110px;padding:8px 16px;font-size:14px}.game-switch button[aria-pressed="true"]{background:var(--accent);color:#17131b;border-color:var(--accent)}body[data-game="sf6"]{--accent:#f5a623;--green:#a7e2bd}body[data-game="sf6"] a{color:#ffd27a}body[data-game="sf6"] .eyebrow{color:var(--accent)}
 .collection-bar{display:flex;align-items:center;gap:10px;margin-top:14px}.character-picker{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.character-picker select{min-width:170px;padding:8px 34px 8px 11px;color:var(--text)}
 .starter-group{margin:0 0 8px;border:1px solid var(--line);border-radius:12px;background:#15172088;overflow:hidden}.starter-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;color:var(--text);font-size:15px;font-weight:750;cursor:pointer;list-style:none}.starter-details>summary::-webkit-details-marker{display:none}.starter-details>summary::before{content:"＋";color:var(--accent);font-size:13px;width:15px}.starter-details[open]>summary::before{content:"−"}.starter-name{margin-right:auto}.starter-count{color:var(--muted);font-size:11px;font-weight:500}.starter-details[open]>summary{border-bottom:1px solid var(--line)}.starter-details .variant-group{padding:0 12px}.starter-details .variant-group:last-child{padding-bottom:4px}.section-tools{display:flex;align-items:center;gap:10px}.section-tools button{padding:5px 9px;font-size:11px;color:var(--muted)}
+/* SF6 draws on Japanese combo-database patterns: fighter-first navigation, compact search, and readable route rows. */
+body[data-game="sf6"]{color-scheme:light;--bg:#f2f3f5;--panel:#fff;--panel2:#f5f6f8;--line:#d9dde3;--text:#20242b;--muted:#68707c;--accent:#ee9b26;--green:#238a55;--yellow:#9b6412;background:#f2f3f5;color:var(--text)}
+body[data-game="sf6"] header{background:#fff;border-bottom:1px solid #d9dde3;padding-top:16px;padding-bottom:16px}
+body[data-game="sf6"] .eyebrow{font-size:10px;letter-spacing:.12em;color:#8a9099}
+body[data-game="sf6"] h1{font-size:clamp(24px,4vw,32px);margin:3px 0 2px}
+body[data-game="sf6"] header p{font-size:13px}
+body[data-game="sf6"] .game-switch{display:inline-flex;gap:2px;padding:3px;background:#eef0f3;border:1px solid #d9dde3;border-radius:9px;margin-top:12px}
+body[data-game="sf6"] .game-switch button{min-width:78px;padding:6px 12px;background:transparent;border:0;color:#68707c;font-size:12px;border-radius:6px}
+body[data-game="sf6"] .game-switch button[aria-pressed="true"]{background:#232831;color:#fff}
+body[data-game="sf6"] .collection-bar{display:inline-flex;margin:0 0 0 12px;vertical-align:middle}
+body[data-game="sf6"] .character-picker{gap:7px;font-size:11px;color:#7a818b}
+body[data-game="sf6"] .character-picker select{min-width:150px;padding:6px 30px 6px 9px;background:#fff;border-color:#cfd4db;color:#20242b;font-weight:700}
+body[data-game="sf6"] main{max-width:1180px;padding-top:18px}
+body[data-game="sf6"] .toolbar{grid-template-columns:minmax(220px,1fr) repeat(4,auto);gap:8px;margin-bottom:9px}
+body[data-game="sf6"] input,body[data-game="sf6"] select,body[data-game="sf6"] textarea,body[data-game="sf6"] button{background:#fff;color:#252a32;border-color:#d5d9df;border-radius:8px}
+body[data-game="sf6"] input:focus,body[data-game="sf6"] select:focus,body[data-game="sf6"] textarea:focus{outline-color:#ee9b26}
+body[data-game="sf6"] button.primary{background:#ee9b26;border-color:#ee9b26;color:#20242b}
+body[data-game="sf6"] .filters{grid-template-columns:repeat(3,minmax(0,1fr));padding:8px;background:#fff;border-color:#d9dde3;border-radius:9px}
+body[data-game="sf6"] #situation{display:none}
+body[data-game="sf6"] .sectionhead{margin-top:19px;padding-bottom:8px;border-bottom:1px solid #d9dde3}
+body[data-game="sf6"] .sectionhead h2{font-size:15px;letter-spacing:.02em}
+body[data-game="sf6"] .starter-group{margin-bottom:7px;background:#fff;border-color:#d9dde3;border-radius:9px}
+body[data-game="sf6"] .starter-details>summary{padding:9px 12px;font-size:14px}
+body[data-game="sf6"] .starter-details .variant-group{padding:0 10px}
+body[data-game="sf6"] .variant-head{border-left-color:#ee9b26;color:#5f6670}
+body[data-game="sf6"] .card{background:#fafbfc;border-color:#e2e5e9;border-radius:7px;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;padding:8px 10px}
+body[data-game="sf6"] .recipe{font-size:13px;line-height:1.55;color:#222832}
+body[data-game="sf6"] .metrics{gap:8px}
+body[data-game="sf6"] .metric{gap:4px;padding:3px 7px;border-radius:5px;background:#f0f2f4}
+body[data-game="sf6"] .metric span{font-size:9px}
+body[data-game="sf6"] .metric b{font-size:12px}
+body[data-game="sf6"] .cardactions button{font-size:10px;padding:4px 7px;border-radius:6px}
+body[data-game="sf6"] .cardactions button[aria-pressed="true"]{border-color:#ee9b26}
+body[data-game="sf6"] .starter-details>summary::before{color:#ee9b26}
+body[data-game="sf6"] details summary{color:#747b85}
+body[data-game="sf6"] footer{border-color:#d9dde3}
+body[data-game="sf6"] a{color:#a66300}
+@media(max-width:640px){body[data-game="sf6"] header{padding:12px 14px}body[data-game="sf6"] .collection-bar{display:flex;margin:8px 0 0}body[data-game="sf6"] .game-switch{margin-top:8px}body[data-game="sf6"] main{padding:12px 12px 32px}body[data-game="sf6"] .toolbar{grid-template-columns:1fr 1fr}body[data-game="sf6"] .toolbar input{grid-column:1/-1}body[data-game="sf6"] .filters{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-game="sf6"] .card{grid-template-columns:minmax(0,1fr) auto;gap:6px 8px}body[data-game="sf6"] .route-main{grid-column:1/-1}body[data-game="sf6"] .metrics{grid-column:1;grid-row:2;flex-wrap:wrap}body[data-game="sf6"] .cardactions{grid-column:2;grid-row:2}body[data-game="sf6"] .recipe{font-size:12px}}
 @media(max-width:900px){main{padding:16px 16px 44px}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){main{padding:12px 12px 36px}.collection-bar{margin-top:10px}.character-picker{width:100%;justify-content:space-between}.character-picker select{flex:1;max-width:230px}.toolbar{grid-template-columns:1fr 1fr;gap:7px}.toolbar input{grid-column:1/-1}.toolbar button{padding:8px 7px;font-size:13px}.filters{grid-template-columns:1fr 1fr;gap:7px;padding:8px}.filters select{padding:8px 7px;font-size:12px}.situation-head{align-items:flex-start;flex-direction:column;gap:5px}.starter-details>summary{padding:10px;font-size:14px}.starter-details .variant-group{padding:0 8px}.card{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:8px 9px}.route-main{grid-column:1/-1}.metrics{grid-column:1;grid-row:2;gap:12px}.cardactions{grid-column:2;grid-row:2}.recipe{font-size:12px}.cardactions button{padding:4px 7px;font-size:10px}.sectionhead{align-items:center}.sectionhead h2{font-size:17px}.section-tools{gap:6px}.section-tools button{padding:5px 7px;font-size:10px}form .formgrid{grid-template-columns:1fr}form label.full{grid-column:auto}}
 </style>
@@ -234,9 +272,10 @@ function loadCharacter(character){
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
- $("pageTitle").textContent=`${activeGame==="sf6"?meta.name.toUpperCase():meta.title||meta.name.toUpperCase()} COMBO BOOK`;
- $("pageDescription").textContent=meta.description||(activeGame==="sf6"?"スト6・クラシック操作。始動技とゲージ別にコンボを整理。":"状況別・始動技別に整理。主力候補を優先表示。");
+  $("pageTitle").textContent=activeGame==="sf6"?meta.name:`${meta.title||meta.name.toUpperCase()} COMBO BOOK`;
+  $("pageDescription").textContent=meta.description||(activeGame==="sf6"?"コンボを始動技から探す · クラシック操作":"状況別・始動技別に整理。主力候補を優先表示。");
 $("characterSelect").value=character;
+  $("topicFilter").innerHTML=activeGame==="sf6"?'<option value="">コンボ条件：すべて</option><option value="地上通常ヒット">通常ヒット</option><option value="カウンターヒット">カウンターヒット</option><option value="対空">対空</option><option value="__meter">ドライブ／SA使用</option><option value="パニッシュカウンター">パニッシュカウンター</option>':'<option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option><option>インパクト返し</option><option>パニッシュカウンター</option><option>その他</option>';
  if(activeGame==="sf6"){$("version").innerHTML='<option>Year4 / 2026-08-03</option><option>未確認</option>'}else{$("version").innerHTML='<option>2.00</option><option>2.03</option><option>2.04以降</option><option>未確認</option>'}
  $("driveCostField").hidden=activeGame!=="sf6";$("saCostField").hidden=activeGame!=="sf6";
  $("ramSources").hidden=!isRam;
@@ -257,7 +296,7 @@ $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
 $("toggleGroups").onclick=()=>{const groups=[...document.querySelectorAll(".starter-details")];const shouldOpen=!groups.some(group=>group.open);groups.forEach(group=>group.open=shouldOpen);$("toggleGroups").textContent=shouldOpen?"すべてたたむ":"すべて開く"};
 function render(){
 let q=$("search").value.toLowerCase(),sit=$("situation").value,topic=$("topicFilter").value,pos=$("position").value,sort=$("sort").value;
-let arr=combos.filter(c=>(!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&(!topic||c.topic===topic)&&(!pos||c.pos===pos));
+ let arr=combos.filter(c=>{const meterUsed=c.resources?.some(resource=>resource.value!=="なし");const topicMatch=!topic||(activeGame==="sf6"&&topic==="__meter"?meterUsed:c.topic===topic||c.kind===topic);return (!selectedOnly||c.customSelected)&&(!q||[c.name,c.starter,c.recipe,c.notes,c.reason,c.topic].join(" ").toLowerCase().includes(q))&&(!sit||c.kind===sit)&&topicMatch&&(!pos||c.pos===pos)});
 const damageScore=c=>{const value=String(c.damage??"").match(/\d+/);return value?Number(value[0]):0};
 arr.sort((a,b)=>sort==="damage"?damageScore(b)-damageScore(a):Number(!!b.main)-Number(!!a.main)||damageScore(b)-damageScore(a));
 $("resultCount").textContent=`${arr.length} 件表示`; $("viewToggle").textContent=selectedOnly?"全コンボを見る":"マイコンボだけ表示（"+combos.filter(c=>c.customSelected).length+"）"; $("viewToggle").setAttribute("aria-pressed",String(selectedOnly));
