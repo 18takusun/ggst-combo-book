@@ -217,6 +217,7 @@ const allCharacters=[...builtInCharacters,...extraCharacters];
 const maiSourceUrl="https://sf6-lab.net/fighters/mai/combo";
 const vegaSourceUrl="https://sf6-genten.com/character/vega";
 const blankaSourceUrl="https://sf6-lab.net/fighters/blanka/combo";
+const jpSourceUrl="https://sf6-lab.net/fighters/jp/combo";
 const blankaSetplayUrl="https://takukakugamer.com/sf6-blanka-setup/";
 const sf6Characters=[
  {id:"sf6-mai",name:"舞",group:"ストリートファイター6",title:"MAI",game:"sf6",sourceUrl:maiSourceUrl,sourceTitle:"舞 コンボ・起き攻め・セットプレイ｜Year4最新版（2026年8月調整対応）",referenceLinks:[{url:"https://youtu.be/QkJD4arUso0",title:"山崎だだだ｜舞の最強起き攻め4選"},{url:"https://youtu.be/eIG5ODSSHfM",title:"Mai Practical Combo and Okizeme Guide（6秒・内容未確認）"},{url:"https://youtu.be/omXqqUag_0A?t=123s",title:"山崎だだだ｜Year4画面端・焔コンボ（2:03おすすめルート）"}],routes:[
@@ -251,6 +252,22 @@ const sf6Characters=[
   {id:"vega-5mp-sa2",name:"中攻撃・SA2締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:3940,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA2",notes:"ドライブ2本とSAゲージ2本を使う。倒し切れる場面で選ぶ。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"2本"}],oki:"SA2後に起き攻め。"},
   {id:"vega-5mp-sa3",name:"中攻撃・SA3締め",starter:"5MP",starterLabel:"5MP",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:4440,recipe:"5MP > 2MP > 236KK（ODダブルニー） > 5HP > SA3",notes:"ドライブ2本とSAゲージ3本を使う最大SA締め候補。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"2本"},{label:"SA",value:"3本"}],oki:"SA3後に攻めを継続。"},
   {id:"vega-2mk-drive",name:"下段からドライブラッシュ",starter:"2MK",starterLabel:"2MK",kind:"ゲージ使用",topic:"牽制ヒット",pos:"どこでも",damage:1898,recipe:"2MK > DR > 5MP > 2HP > 214HP",notes:"下段からドライブラッシュでつなぎ、強バックフィストコンボでサイコマインを付ける。ドライブ3本を使う。",source:"スト6原典・2026-11-01",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"サイコマイン付き、約+31F。前ステップから起き攻め。"}
+  ]},
+ {id:"sf6-jp",name:"JP",group:"ストリートファイター6",title:"JP",game:"sf6",sourceUrl:jpSourceUrl,sourceTitle:"JP コンボ・起き攻め・セットプレイ｜Year4最新版（2026年8月調整対応）",referenceLinks:[{url:jpSourceUrl,title:"スト6ラボ｜JP コンボ・起き攻め・セットプレイ（Year4）"},{url:"https://www.sf6-ingrid.com/character/jp/category/combo",title:"スト6原典｜JPのコンボ（2026年8月3日調整対応）"}],routes:[
+  {id:"jp-2lp",name:"小技から弱ストリボーグ",starter:"2LP",starterLabel:"2LP",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"2LP ×1～2 > 5LP > 236LP",notes:"近距離の暴れや確反から使う基本。弱ストリボーグ後は+38Fで起き攻めへ。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"弱ストリボーグ後に+38F。",main:true},
+  {id:"jp-2mp",name:"近距離2中Pから",starter:"2MP",starterLabel:"2MP",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"2MP > 5LK > 236LP",notes:"近距離限定のノーゲージ基本ルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"弱ストリボーグ後に+38F。",main:true},
+  {id:"jp-5mk",name:"5中Kから中ストリボーグ",starter:"5MK",starterLabel:"5MK",kind:"地上通常ヒット",topic:"牽制ヒット",pos:"どこでも",damage:null,recipe:"5MK > 236MP",notes:"中距離の牽制ヒットから狙うシンプルなノーゲージルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"中ストリボーグ後に+42F。",main:true},
+  {id:"jp-5hp",name:"5強Pから弱トルバラン",starter:"5HP",starterLabel:"5HP",kind:"地上通常ヒット",topic:"牽制ヒット",pos:"どこでも",damage:null,recipe:"5HP > 236LK",notes:"ヒット時はコンボ、ガード時は連係になる。現行版は先端で後ろ歩きに空振りする場合がある。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"地上ヒットで+42F以上。",main:true},
+  {id:"jp-5hk",name:"5強Kターゲットコンボ",starter:"5HK",starterLabel:"5HK",kind:"地上通常ヒット",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"5HK > 5HP > 236MP",notes:"5強Kから強Pのターゲットコンボを経由する基本ルート。5強K単発ガード時は有利なので、状況を見てターゲットコンボを出さず止める選択もある。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03"},
+  {id:"jp-5hp-pc",name:"5強Pパニッシュカウンター",starter:"5HP",starterLabel:"5HP PC",kind:"カウンターヒット",topic:"パニッシュカウンター",pos:"どこでも",damage:null,recipe:"5HP PC > 236HP > 236MK > 22HP",notes:"中央で大きく反撃するノーゲージルート。距離が遠い場合は5強Pが届くか確認する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"強トリグラフ後に+44F。",main:true},
+  {id:"jp-2mp-drive",name:"中央主力キャンセルラッシュ",starter:"2MP",starterLabel:"2MP",kind:"ゲージ使用",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"2MP > CDR > 2HP > 236HP > 236MK > 22HP",notes:"中央の主力高火力ルート。キャンセルラッシュを使い、強ストリボーグから中トルバラン、強トリグラフへつなぐ。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"強トリグラフ後に+44F。",main:true},
+  {id:"jp-5mk-drive",name:"牽制からラッシュ中段",starter:"5MK",starterLabel:"5MK",kind:"ゲージ使用",topic:"牽制ヒット",pos:"どこでも",damage:null,recipe:"5MK > CDR > 2HP > 236HP > 236MK > 22HP",notes:"牽制ヒットからキャンセルラッシュで中央主力ルートへ。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"強トリグラフ後に+44F。"},
+  {id:"jp-5hp-drive",name:"5強Pパニカン・遠距離対応",starter:"5HP",starterLabel:"5HP PC",kind:"ゲージ使用",topic:"パニッシュカウンター",pos:"どこでも",damage:null,recipe:"5HP PC > DR > 5HP > 236HP > 236MK > 22HP",notes:"パニッシュカウンターの距離が離れた時にラッシュで追いかける候補。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"1本"}],oki:"強トリグラフ後に+44F。"},
+  {id:"jp-dr-overhead",name:"ラッシュ中段から",starter:"DR 6MK",starterLabel:"DR 6MK",kind:"ゲージ使用",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"DR 6MK > 2MP > 236MP",notes:"ドライブラッシュ中段から中P、中ストリボーグにつなぐ。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"1本"}],oki:"中ストリボーグ後に+42F。",main:true},
+  {id:"jp-dr-overhead-drive",name:"ラッシュ中段・高火力",starter:"DR 6MK",starterLabel:"DR 6MK",kind:"ゲージ使用",topic:"近距離ヒット",pos:"どこでも",damage:null,recipe:"DR 6MK > 2MP > CDR > 2HP > 236MK > 22HP",notes:"キャンセルラッシュを追加して強トリグラフで締める。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"4本"}],oki:"強トリグラフ後に+44F。"},
+  {id:"jp-di-pc",name:"DIパニカン・中央",starter:"DI",starterLabel:"DI PC",kind:"ゲージ使用",topic:"インパクト返し",pos:"どこでも",damage:null,recipe:"DI PC > 少し前歩き > 5HP（空中ヒット） > 236HP > 236MK > 22HP",notes:"ドライブインパクトがパニッシュカウンターになった時の中央ルート。5強Pを空中ヒットさせる。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"強トリグラフ後に+44F。"},
+  {id:"jp-corner-od",name:"画面端・ODストリボーグ",starter:"5HK",starterLabel:"5HK",kind:"ゲージ使用",topic:"画面端",pos:"画面端",damage:null,recipe:"5HK > 2MP > 236PP（ODストリボーグ） > DR > 6HK > 236MP > 5HP > 22HP",notes:"画面端でODストリボーグとラッシュを使う高火力ルート。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"ドライブ",value:"3本"}],oki:"強トリグラフ後に+44F。",main:true},
+  {id:"jp-sa2",name:"SA2ラヴーシュカ連係",starter:"5HK",starterLabel:"5HK",kind:"ゲージ使用",topic:"ゲージ使用",pos:"どこでも",damage:null,recipe:"5HK > 5HP > SA2 > 2MK > 5HK > 2HP > 214HP > 5HK > 5HP > 22LP > 236HP > 236MP > 22HP",notes:"SA2発動から設置技をつないで再度コンボにするルート。入力とタイミングの練習が必要。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",resources:[{label:"SA",value:"2本"}],oki:"強トリグラフ後に+44F。"}
  ]},
  {id:"sf6-blanka",name:"ブランカ",group:"ストリートファイター6",title:"BLANKA",game:"sf6",sourceUrl:blankaSourceUrl,sourceTitle:"ブランカ コンボ・起き攻め・セットプレイ｜Year4（2026年8月調整対応）",referenceLinks:[{url:"https://youtu.be/l_aZgMkq8Gs",title:"MR2100ブランカのコンボ・起き攻め解説（Year4）"},{url:"https://youtu.be/8WkpwdzbOSg",title:"ブランカ基本コンボ（Year3・旧版、現行版と照合用）"},{url:"https://takukakugamer.com/sf6-blanka-combo/",title:"ブランカのコンボまとめ（2026年9月更新）"},{url:"https://takukakugamer.com/sf6-blanka-setup/",title:"ブランカの起き攻め・連携まとめ"},{url:"https://nikotaro.com/articles/blanka-complete-guide",title:"ブランカ完全攻略（2026年11月7日更新）"}],routes:[
   {id:"blanka-5lk",name:"小技・起き攻め重視",starter:"5LK",starterLabel:"5LK",kind:"地上通常ヒット",topic:"小技ヒット",pos:"どこでも",damage:null,recipe:"5LK > 2LP > 214HP",notes:"5LKから強電撃で締める基本。電撃後の起き攻めを重視する。",source:"スト6ラボ・Year4",version:"Year4 / 2026-08-03",oki:"電撃後は約+39F。前ステップなどから起き攻め。",main:true},
@@ -312,7 +329,7 @@ let characterById=new Map([...allCharacters,...sf6Characters].map(c=>[c.id,c]));
 let activeGame="ggst";
 const storageKey=()=>`${activeCharacter}ComboBook`;
 const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
-const referenceSeedVersion="reference-20261108-v7";
+const referenceSeedVersion="reference-20261108-v8";
 const pressureSeeds={
  ram:[
   {id:"ram-pressure-low",kind:"pressure",name:"中距離の下段択",sequence:"5K > 2K > 2D",notes:"5Kから下段へ。2Dはガードされると反撃を受けるため、相手が固まる場面で使い、普段は5K・2Kの遅らせや投げも混ぜる。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"},
@@ -361,6 +378,18 @@ const sf6ReferenceSeeds={
   {id:"vega-pressure-mine",kind:"pressure",name:"サイコマインをガード起爆",sequence:"サイコマイン付与 > 4~6LP / MP（サイコクラッシャー）",notes:"ガードさせて誘爆すると弱・中版は+6F、強版は+5F。普段は反撃される技でも、マイン起爆で有利を取れる。",sourceUrl:vegaSourceUrl},
   {id:"vega-pressure-plus6",kind:"pressure",name:"誘爆後の+6Fから打撃・投げ",sequence:"誘爆で+6F > 4HK / 2MP / 遅らせ投げ",notes:"4HKは4F暴れと相打ちになっても2MPへつながる。最速投げは空振りする状況があるため、少し遅らせる。",sourceUrl:vegaSourceUrl},
   {id:"vega-pressure-center-bf",kind:"pressure",name:"中央・弱中バックフィスト後の再接近",sequence:"214LP / 214MP > DR 2MK > 214MP",notes:"後ろ受け身には通常技が重ならないため、ドライブラッシュから下段を重ねてマインを誘爆させる。ガードされても誘爆後に有利を取りやすい。",sourceUrl:vegaSourceUrl}
+ ],
+ "sf6-jp":[
+  {id:"jp-oki-safejump",kind:"oki",name:"+42Fから詐欺飛び",sequence:"236MP / 236LK（地上ヒット・+42F） > 前ジャンプHK",notes:"中ストリボーグか地上ヒットした弱トルバラン後の基本起き攻め。相手の受け身と距離を見てジャンプ攻撃を調整する。",sourceUrl:jpSourceUrl},
+  {id:"jp-oki-corner-throw",kind:"oki",name:"画面端・前投げ後",sequence:"LP+LK（+23F） > 前ステップ（約+1F） > 投げ / 2LP",notes:"投げと小技を使い分ける。2026年3月以降は以前の強いノーゲージ投げループが弱くなっている。",sourceUrl:jpSourceUrl},
+  {id:"jp-oki-corner-throw-drive",kind:"oki",name:"端・前投げからラッシュ重ね",sequence:"LP+LK > DR 5HK",notes:"5強Kの持続を重ねる。ヒット時は+12F、ガード時は+7Fが目安。ドライブを使うため、倒し切りや端の攻め継続に。",sourceUrl:jpSourceUrl},
+  {id:"jp-oki-portal",kind:"oki",name:"強P空中ヒットからヴィーハト",sequence:"5HP（空中ヒット） > 22P",notes:"設置後は約+15F前後。手動起爆、少し遅らせた5HK、投げ、シミー、ワープへ分岐する端攻めの基本。",sourceUrl:jpSourceUrl},
+  {id:"jp-oki-od-portal",kind:"oki",name:"端・トリグラフからODヴィーハト",sequence:"5HP（空中ヒット） > 22HP > 214PP",notes:"約+4～+6Fから投げ、2MP、ワープなどを選ぶ。起き上がりの無敵技や距離に注意する。",sourceUrl:jpSourceUrl},
+  {id:"jp-pressure-portal-cancel",kind:"pressure",name:"ヴィーハト設置中の手動起爆・ワープ",sequence:"22P設置中 > 5MP / 2MK > 手動起爆 / ワープ",notes:"手動起爆を見せて、相手がジャストパリィなどで対応したらワープを混ぜる。2026年3月調整後に可能になった連係。",sourceUrl:jpSourceUrl},
+  {id:"jp-pressure-5hp",kind:"pressure",name:"5強Pガード後の連係",sequence:"5HP > 236LK / 236LKフェイント / 214PP / CDR 2MK",notes:"弱トルバランはヒット確認用。2026年8月調整後は5強Pのガード待機判定が変わり、先端で後ろ歩きに空振りする場合がある。",sourceUrl:jpSourceUrl},
+  {id:"jp-pressure-5hk",kind:"pressure",name:"5強Kガード後の攻め",sequence:"5HK（ガード+2F） > 2LP / 投げ",notes:"5強Kは単発ガードで有利。相手の暴れを小技で抑えるか、投げに分ける。",sourceUrl:jpSourceUrl},
+  {id:"jp-oki-amnesia",kind:"oki",name:"アムネジア成立後・中央",sequence:"22K成立 > バックステップ > 214P設置 > 爆発に合わせてDR投げ / 5HK / 6MK",notes:"中央で安全寄りに設置してから攻める。通常投げを取ったODアムネジア後の旧コンボは現行版で再検証が必要なため掲載しない。",sourceUrl:jpSourceUrl},
+  {id:"jp-pressure-vihart",kind:"pressure",name:"ヴィーハト自動起爆前の中下段",sequence:"設置中 > 2MK / 6MK / 236MK / 236HK",notes:"自動起爆に合わせて下段、中段、トルバランを重ねる。ヒット時はヴィーハトで浮かせて追撃できる。",sourceUrl:jpSourceUrl}
  ],
  "sf6-blanka":[
   {id:"blanka-oki-electric-dash",kind:"oki",name:"電撃後の前ステップ重ね",sequence:"214P（約+39F） > 前ステップ×2 > 5LK",notes:"2回目の前ステップ後は約+1F。5LKで4F暴れを抑える。1回だけ前ステップして約+20Fからサプライズフォワードへ行き、5HP重ねや歩き投げに分ける形もある。",sourceUrl:blankaSourceUrl},
