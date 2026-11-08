@@ -9,7 +9,7 @@
 *{box-sizing:border-box}body{margin:0;background:#f2f3f5;color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
 header{padding:26px max(18px,calc((100vw - 1120px)/2));border-bottom:1px solid var(--line);background:#fff}
 .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.16em;font-weight:800}h1{margin:5px 0 4px;font-size:clamp(25px,5vw,38px)}header p{margin:0;color:var(--muted)}
-main{max-width:1440px;margin:auto;padding:20px 24px 56px}.toolbar,.filters,.cardgrid{display:grid;gap:10px}.toolbar{grid-template-columns:minmax(220px,1fr) repeat(4,auto);margin-bottom:10px}.filters{grid-template-columns:repeat(4,minmax(0,1fr));padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px}
+main{max-width:1440px;margin:auto;padding:20px 24px 56px}.toolbar,.filters,.cardgrid{display:grid;gap:10px}.toolbar{grid-template-columns:minmax(220px,1fr) repeat(2,auto);margin-bottom:10px}.filters{grid-template-columns:repeat(4,minmax(0,1fr));padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px}
 input,select,textarea,button{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}input:focus,select:focus,textarea:focus{outline:2px solid #9b7bea}
 button{cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}button:hover{filter:brightness(1.1)}
 .sectionhead{display:flex;justify-content:space-between;align-items:end;margin:16px 0 8px}.sectionhead h2{font-size:19px;margin:0}.sectionhead small{color:var(--muted)}
@@ -43,9 +43,6 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <button id="viewToggle" class="combo-only" aria-pressed="false">マイコンボだけ表示（0）</button>
 <button class="primary combo-only" id="addBtn">＋ コンボを追加</button>
 <button class="primary" id="referenceAddBtn" hidden>＋ 追加</button>
-<button id="exportBtn">バックアップ</button>
-<button id="importBtn">復元</button>
-<input id="fileInput" type="file" accept="application/json" hidden>
 </div>
 <div class="filters combo-only" id="filters">
 <select id="topicFilter"><option value="">実戦状況：すべて</option><option>無敵技ガード後の確反</option><option>割り込み</option><option>牽制ヒット</option><option>起き攻め通常技ヒット</option><option>小技ヒット</option><option>近距離ヒット</option><option>対空</option><option>画面端</option><option>カウンターヒット</option><option>ゲージ使用</option><option>インパクト返し</option><option>パニッシュカウンター</option><option>その他</option></select>
@@ -310,9 +307,6 @@ $("referenceForm").onsubmit=e=>{e.preventDefault();const source=$("referenceSour
 $("cancelBtn").onclick=()=>$("editor").close();
 $("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,resources:old?.resources,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
 ["search","situation","topicFilter","position","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
-$("exportBtn").onclick=()=>{let meta=characterById.get(activeCharacter);let payload={game:"GGST",character:meta?.name||activeCharacter,combos,references};let blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ggst-${activeCharacter}-combos.json`;a.click();URL.revokeObjectURL(a.href)};
-$("importBtn").onclick=()=>$("fileInput").click();
-$("fileInput").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());let list=Array.isArray(d)?d:d.combos;if(!Array.isArray(list))throw Error();if(d.game&&d.game!=="GGST")throw Error("game");if(confirm("現在の一覧を読み込んだデータで置き換えますか？")){combos=list;save();if(Array.isArray(d.references)){references=d.references;localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}render()}}catch(error){alert(error.message==="game"?"GGSTのバックアップファイルを選んでください。":"JSONファイルを読み込めませんでした")};e.target.value=""};
 populateCharacterPicker();
 loadCharacter("ram");
 </script>
