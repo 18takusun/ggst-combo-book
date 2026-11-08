@@ -35,7 +35,7 @@
 - The page retains all 14 seed entries and their existing route data. Six entries are marked as provisional main candidates and are shown first; the main set is not gameplay-verified.
 - All 14 routes remain unverified in the current training environment. Eight entries are now cross-referenced against the Ver.2.03 combo list; several Ver.2.00 entries are still historical references.
 - The page groups candidates by match situation, shows difficulty ratings attributed to Dustloop, meter use, shared route notes, and post-combo oki notes with in-game verification clearly outstanding. It links specialist/high-level match footage as context, not as proof of individual routes.
-- The default list shows all entries grouped by situation; poke hits are subdivided into 6S/f.S, 2S, and 5HS/5H starters. A toggle narrows the list to the six main candidates.
+- The default list shows all entries grouped by starter; each starter group separates normal hit, counter hit, anti-air, and meter-use variants and summarizes their counts. A toggle narrows the list to the six main candidates.
 - A current Dustloop guide identifies the c.S route as a basic punish after blocking unsafe moves such as supers or reversals. This is a sourced candidate, not an independent in-game test. Normal-hit conversions during offense and corner-specific routes still need review.
 - Combo clips are linked on the cards where a route-specific Dustloop clip was available. The general RedDitto/SQ YouTube references remain match context rather than route validation.
 - The situation selector already includes those categories so verified entries can be added without changing the interface.
