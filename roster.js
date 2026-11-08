@@ -302,4 +302,115 @@
     r("ky-jh-rc", "空中j.H", "ゲージ使用", "j.H > 近S > 5H > 236K(2) > RRC > ダッシュ近S > 6H > 214S（壁張り付き） > 214S（壁割り）", 205, "中央から壁割りまで運ぶ50%テンション使用ルート。", {kind:"ゲージ使用",meter:50,oki:"壁割り後に攻めを継続。",version:"2.0+"}),
     r("ky-6p-ch", "6P", "カウンターヒット", "CH 6P > 214S", null, "対空や牽制6Pのカウンター確認。通常ヒットより高いリターンを狙う。", {kind:"カウンターヒット",oki:"214S後に起き攻め。",version:"2.0+"})
   ]);
+  addRoutes("jam", [
+    r("jam-dust-meter", "5D", "ゲージ使用", "5D > 66RRC~6HH > 214S~X > 近S > dc.en236S > 近S > 6H > 22K > 壁張り付き > en236K（壁割り）", 172, "角付近でSカードを所持しているときの50%テンション使用ルート。", {kind:"ゲージ使用",pos:"画面端",meter:50,oki:"壁割り後に攻めを継続。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Jam_Kuradoberi/Combos"}),
+    r("jam-ch-aa6p", "6P", "対空カウンターヒット", "対空CH 6P > 236S > 2K > 6H > 214S~H", 116, "高めの対空カウンターから運びと起き攻めを両立。高さが足りない場合は短い締めを選ぶ。", {kind:"対空",oki:"214S~H後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Jam_Kuradoberi/Combos"})
+  ]);
+  addRoutes("lucy", [
+    r("lucy-sc-throw", "SC中の投げ", "投げ始動", "SC投げ > 66遅らせ近S > 2S~S", 94, "Short Circuit中の投げからの簡単な追撃。2S~Sから214[H]を重ねる選択もある。", {oki:"214[H]の自動重ねを狙える。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Lucy/Combos"}),
+    r("lucy-sc-throw-corner", "SC中の投げ", "画面端", "SC投げ > 近S > 遠S~S > 5H > 214K WS > 214[H]", 142, "画面端でShort Circuit中の投げからダメージと起き攻めを伸ばす。", {pos:"画面端",oki:"214[H]で起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Lucy/Combos"}),
+    r("lucy-dust", "5D", "ダスト", "5[D]~8 > j.H > jc > j.H > j.S > 遅らせj.K > jc > j.SS", 162, "全キャラ共通の溜めダスト追撃。少し簡単にするなら最後をj.KKにする。", {kind:"ダスト",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Lucy/Combos"})
+  ]);
+  addRoutes("unika", [
+    r("unika-cs-wallbreak", "近S", "近距離ヒット", "近S > 2H~2H~6S > ダッシュ5H~2H~4S > 壁張り付き > 214S", 256, "中央から壁割りまで運ぶ近Sの基本ルート。最初の2Hは近距離で当てる。", {main:true,oki:"壁割り後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Unika/Combos"}),
+    r("unika-5h", "5H", "近距離ヒット", "5H > 214S", 105, "ノーマルヒット時の簡単なダウン取り。", {oki:"214S後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Unika/Combos"}),
+    r("unika-2d-ch", "2D", "カウンターヒット", "CH 2D > 5H~5H dc > 5H~2H~6K", 148, "2Dカウンターからの簡単な追撃。より遠くからならダッシュを加えた延長を選ぶ。", {kind:"カウンターヒット",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Unika/Combos"})
+  ]);
+  addRoutes("venom", [
+    r("venom-jd", "j.D", "中段ヒット", "j.D > [2]8H > 5K / 近S > 6H > 623[X]", "105〜122", "中段からボール設置を伴うダウン取り。近Sは近距離で選ぶ。", {oki:"ボール設置から起き攻め。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Venom/Combos"}),
+    r("venom-light-ch", "5P / 2P / 5K / 2K", "カウンターヒット", "CH 5P / 2P / 5K / 2K > 6K > [2]8H > 近S > 6H > 623{X}", 104, "小技カウンターを6Kで拾う。始動によって6Kのタイミングを練習する。", {kind:"カウンターヒット",oki:"623{X}後にボール起き攻め。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Venom/Combos"}),
+    r("venom-k-ch", "2K / 5K", "カウンターヒット", "CH 2K / 5K > 6H > [2]8S > ダッシュ2K > 6H > 623{X}", "114 / 124", "近距離のカウンター始動。2Kと5Kの順にダメージを記載。", {kind:"カウンターヒット",oki:"623{X}後にボール起き攻め。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Venom/Combos"})
+  ]);
+  addRoutes("dizzy", [
+    r("dizzy-fs-ch-oki", "遠S", "カウンターヒット", "CH 遠S(1〜2) > 236S~S > 66 2D", "107〜112", "ダメージよりダウンとノート起き攻めを優先するカウンター確認。", {kind:"カウンターヒット",oki:"2D後にノート起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Queen_Dizzy/Combos"}),
+    r("dizzy-cs-ch-midscreen", "近S", "カウンターヒット", "CH 近S > 2H > 214H > 236H > ダッシュ近S > 6H > 214S（壁張り付き） > 214H", 254, "中央から壁割りまで運ぶ近Sカウンター。214Hから236Hを素早く入力する。", {kind:"カウンターヒット",oki:"壁割り後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Queen_Dizzy/Combos"}),
+    r("dizzy-2s", "2S", "牽制ヒット", "2S > 5H(3) > ダッシュ6H > 214S", 153, "中距離2Sから安定した運びを狙う。", {oki:"214S後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Queen_Dizzy/Combos"})
+  ]);
+  addRoutes("aba", [
+    r("aba-2d-ch-nm", "2D", "カウンターヒット", "NM CH 2D > 214K > 近S > dc > 近S > 6H > 遅らせ214H", 136, "ノーマルモードでJealousyを温存するカウンター確認。", {kind:"カウンターヒット",oki:"214H後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/A.B.A/Combos"}),
+    r("aba-jr-2d", "2D", "Jealous Rage", "JR 2D > 623H > ダッシュ近S > 6H > 623H", 198, "Jealous Rage中の簡単な高火力ルート。Jealousyを多く消費する。", {oki:"623H後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/A.B.A/Combos"}),
+    r("aba-air-k", "空中j.K", "空対空", "空対空j.K > 66 > j.S > 5K > 236S~6S", 82, "空中の相手を追いかけて起き攻めへつなぐ。最大距離では空中追撃が届かないことがある。", {kind:"対空",oki:"236S~6S後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/A.B.A/Combos"})
+  ]);
+  addRoutes("elphelt", [
+    r("elphelt-p-ch", "5P / 2P", "カウンターヒット", "CH 5P / 2P > 近S > 5H > 214S~S > ダッシュ6D", 92, "小技カウンターから近Sで拾う。遠めの近Sが難しければ2Hに替える。", {kind:"カウンターヒット",oki:"6D後に攻めを継続。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"}),
+    r("elphelt-aa5p", "対空5P", "対空", "対空5P > 6H > 214H > ダッシュ近S > 2S > 2H > 214S~K~H", 103, "対空5Pから大きく運ぶ追撃。入力を先行して準備する。", {kind:"対空",oki:"壁張り付きから壁割り。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Combos"})
+  ]);
+  addRoutes("bedman", [
+    r("bedman-cs-install", "近S", "ゲージ使用", "近S > 2H > 632146S > 5K > 236H", 133, "ミッドスクリーンでinstallを発動してエラーと起き攻めを得る。5Kが遅れるとつながらない。", {kind:"ゲージ使用",meter:50,oki:"エラー攻めへ移行。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Bedman/Combos"}),
+    r("bedman-fs-install", "遠S", "ゲージ使用", "遠S > 2H > 632146S > 5K > 236H", 121, "遠Sからinstallへつなぐ。遠S先端では2Hが届かないため、短い遠Sなら使用。", {kind:"ゲージ使用",meter:50,version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Bedman/Combos"})
+  ]);
+  addRoutes("sin", [
+    r("sin-cs-overdrive", "近S", "ゲージ使用", "近S > 5H / 2H > 623S~S > 近S > 6H > 632146H > 6H > 6H", 212, "テンション50%で壁まで運び、壁割り後に起き攻めするルート。", {kind:"ゲージ使用",meter:50,oki:"壁割り後に攻めを継続。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Sin_Kiske/Combos"}),
+    r("sin-corner-hoof", "近S / 遠S / 2S", "画面端", "近S / 遠S / 2S > 2H > 214S, 5K / 2K > 6H > 623S（壁張り付き）", "208〜239", "画面端限定、スタミナを使わず壁割りを狙うルート。", {pos:"画面端",oki:"壁割り後に起き攻め。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Sin_Kiske/Combos"})
+  ]);
+  addRoutes("bridget", [
+    r("bridget-2p-ch-oki", "2P", "カウンターヒット", "CH 2P > 2K > 2D > 214S", 46, "2Pカウンターからヨーヨー設置を伴うハードノックダウン。5Pカウンターではつながらない。", {kind:"カウンターヒット",oki:"214S後にヨーヨー起き攻め。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"}),
+    r("bridget-corner-2k", "2K", "画面端", "2K > 6H > j.236H > 6H > j.214K > 近S > 6H（壁張り付き） > j.63214P（壁割り）", 168, "画面端で2Kから高火力の壁割り。", {pos:"画面端",oki:"壁割り後に起き攻め。",version:"2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Bridget/Combos"})
+  ]);
+  addRoutes("testament", [
+    r("testament-stain-k", "ステイン中の2K / 5K", "ゲージなし", "ステイン中2K / 5K > ダッシュ近S > 214[P] > 5K dc > 近S > 6H > 214[P]", 128, "ステイン状態の小技からダッシュキャンセルで拾う。再度のステイン付与とダッシュ重ねを狙う。", {oki:"ステインを付与し近Sで重ねる。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Testament/Combos"}),
+    r("testament-cs-ch-far", "近S", "カウンターヒット", "遠距離CH 近S > 6H > 236[H] > ダッシュ近S > 214[P] > 5K dc > 近S > 遅らせ2S > 236S（壁張り付き） > 214P（壁割り）", 241, "中央より遠い位置から25%程度のゲージで壁割りまで運ぶ。難しいため距離があるカウンター用。", {kind:"カウンターヒット",meter:25,oki:"壁割りでステイン付与。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Testament/Combos"})
+  ]);
+  addRoutes("baiken", [
+    r("baiken-hkab-switch", "空中ダッシュ236S", "画面端入れ替え", "空中ダッシュ236S > 近S > 6H > 41236H[X] > 5K > j.236K > 5K > 6H > 41236H~H", null, "梅喧専門プレイヤーのVer.2.0動画で紹介された入れ替えルート。距離と高さの確認が必要。", {pos:"画面端",version:"2.0",oki:"画面端入れ替え後に攻めを継続。",source:"AxolotlBaiken – Ver.2.0 combos/pressure",sourceUrl:"https://www.youtube.com/watch?v=lhsNb4G-UG4"})
+  ]);
+  addRoutes("happy-chaos", [
+    r("hc-p-ch-double", "5P / 2P", "カウンターヒット", "CH 5P / 2P > 6S > 214S~585~2P / 4P > 214S~585~2P / 4P", 83, "立ち状態の相手限定。585を2回使い、テンション増加も得る。", {kind:"カウンターヒット",version:"2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Happy_Chaos/Combos"}),
+    r("hc-aa-p-corner", "対空5P", "対空", "対空5P > 66 2K > 6K > 214S~585~2P / 4P > 66近S > 6S > 214S~585~2P / 4P（壁張り付き）", "74〜76", "画面端で対空5Pから左右を入れ替えて壁張り付きを狙う。位置に応じて最後の585を調整する。", {kind:"対空",pos:"画面端",version:"2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Happy_Chaos/Combos"})
+  ]);
+  addRoutes("jack-o", [
+    r("jacko-p-meter", "2P / 5P", "ゲージ使用", "2P / 5P > 6H(1) > 632146P", "79 / 81", "小技から50%テンションで覚醒必殺技へ。近距離で安全な確反を取る。", {kind:"ゲージ使用",meter:50,version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Jack-O/Combos"}),
+    r("jacko-cs-ch", "近S", "カウンターヒット", "CH 近S > 2H > 236P > 5K（サーヴァント当たり）dc > 近S > 6H(1) > 236[P]", "132〜150", "サーヴァントを使わずに始める高運びルート。締め方で起き攻めと距離を選べる。", {kind:"カウンターヒット",oki:"236[P]でサーヴァントを設置。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Jack-O/Combos"})
+  ]);
+  addRoutes("goldlewis", [
+    r("gl-6p-ch-extended", "6P", "カウンターヒット", "CH 6P > 486H > ダッシュ5K > 684H", 145, "6Pカウンターから486Hで浮かせて追撃する。", {kind:"カウンターヒット",oki:"684H後に起き攻め。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Goldlewis_Dickinson/Combos"}),
+    r("gl-aa2p", "対空2P / 5P", "対空", "対空2P / 5P > ダッシュ近S > 2H > 486H >（ダッシュ5K >）684H", "99〜102", "対空小技を近Sで拾う。カウンターヒットなら近Sへのリンクが安定する。", {kind:"対空",oki:"684H後に起き攻め。",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Goldlewis_Dickinson/Combos"})
+  ]);
+  addRoutes("ino", [
+    r("ino-jumpin-corner", "空中j.S / j.H", "画面端", "j.S / j.H > 6H(2) > 遅らせ214K~6 > 微歩き6H(2) > 214K~6 > 6H(2) > 214K~6 > 壁張り付き > 214S", "190〜224", "画面端で高火力を狙うループ。最後の6Hを5Hに替えると少し安定する。", {kind:"空中始動",pos:"画面端",oki:"214S後に起き攻め。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/I-No/Combos"}),
+    r("ino-6h-ch", "6H", "カウンターヒット", "CH 6H(2) > 214S > j.236H~H > j.H > jc j.H > j.236S（壁張り付き） > 214S", 207, "ミッドスクリーンから壁割りまで運ぶ対空・確反向けのカウンター確認。", {kind:"カウンターヒット",oki:"壁割り後に起き攻め。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/I-No/Combos"})
+  ]);
+  addRoutes("gio", [
+    r("gio-2s-ch", "2S", "カウンターヒット", "CH 2S(1) > 5H > 236K > 5K > 214K", 105, "2Hが届かない間合いで2Sがカウンターしたときの短い追撃。2S初段でキャンセルする。", {kind:"カウンターヒット",oki:"214K後に起き攻め。",version:"2.0",currentSource:false,source:"Dustloop（2.0資料・現行照合待ち）",sourceUrl:"https://mail.dustloop.com/w/GGST/Giovanna/Combos"})
+  ]);
+  addRoutes("nago", [
+    r("nago-5k-ch", "5K", "カウンターヒット", "CH 5K > 214H > 遅らせ623H > 236K > 2K > 近S > f.SSS（壁張り付き） > 6H", "195〜211", "血液量に応じてダメージが変動。遅らせ623Hで拾い、血液をf.SSSと6Hで戻す。", {kind:"カウンターヒット",version:"2.03",oki:"壁割り後に攻めを継続。",sourceUrl:"https://mail.dustloop.com/w/GGST/Nagoriyuki/Combos"}),
+    r("nago-5k-bsu", "5K", "近距離ヒット", "5K > 6K > 623P", "114〜127", "近距離でBloodsucking Universeへつなぐ。近すぎる間合いで使う。", {oki:"投げ後に血液を回復して攻める。",version:"2.03",sourceUrl:"https://mail.dustloop.com/w/GGST/Nagoriyuki/Combos"})
+  ]);
+  addRoutes("millia", [
+    r("millia-6k-damage", "6K", "近距離ヒット", "6K > 2K > 6H > 214P", 96, "6Kからダウンを取り、236H締めよりダメージを優先する。", {oki:"214Pでハードノックダウン。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Millia_Rage/Combos"}),
+    r("millia-6k-meter", "6K", "ゲージ使用", "6K > 2K > 6H > mc 236236S > ダッシュ近S > 6H > mc 214P", 155, "テンションを使い、ダメージと端運びを伸ばす。", {kind:"ゲージ使用",meter:50,oki:"214Pでハードノックダウン。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Millia_Rage/Combos"})
+  ]);
+  addRoutes("faust", [
+    r("faust-fs-ch", "遠S", "カウンターヒット", "CH 遠S > 236S > 近S > j.S > j.H > 空中ダッシュj.H > 5K > 6H", 186, "ミッドスクリーンで壁が近いとき、遠Sカウンターを確認して壁張り付きまで運ぶ。", {kind:"カウンターヒット",pos:"画面中央",oki:"6Hで壁割り。",version:"2.01",sourceUrl:"https://mail.dustloop.com/w/GGST/Faust/Combos"}),
+    r("faust-meter-corner", "遠S", "ゲージ使用", "遠S > 2H > 66RRC~236S[6661] > 近S > 2S > 236S（壁張り付き） > 6H（壁割り）", 179, "50%ゲージで壁割りを狙う。近距離始動と画面端の位置が必要。", {kind:"ゲージ使用",meter:50,pos:"画面端付近",oki:"壁割り後に攻めを継続。",version:"2.01",sourceUrl:"https://mail.dustloop.com/w/GGST/Faust/Combos"})
+  ]);
+  addRoutes("potemkin", [
+    r("pot-2d-ch-easy", "2D", "カウンターヒット", "CH 2D > 623K > 遅らせ214H", "80〜91", "簡単なカウンター確認。214Hを遅らせて起き上がりに重ねる。", {kind:"カウンターヒット",oki:"ガルダ重ねまたは安全飛び。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Potemkin/Combos"}),
+    r("pot-2d-ch-cs", "2D", "カウンターヒット", "CH 2D > 214H > 近S > 2H > 214H > 2K > 623K", 157, "近距離で2Dがカウンターしたときの伸ばし。遠いと近Sか2Hが届かない。", {kind:"カウンターヒット",oki:"623K後に攻めを継続。",version:"2.0+",sourceUrl:"https://mail.dustloop.com/w/GGST/Potemkin/Combos"})
+  ]);
+  addRoutes("chipp", [
+    r("chipp-2s-carry", "近S", "近距離ヒット", "近S > 2S > 5H > 236P~K", "99〜129", "画面中央で使う簡単な代替ルート。236K締めより起き攻めを取りやすい。", {main:true,oki:"相手の近くに着地して起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Chipp_Zanuff/Combos"}),
+    r("chipp-dust", "5D", "ダスト", "5[D]~8 > 遅らせj.D > j.K(1) > jc9 > j.D > j.K(1) > j.D > j.K(1) > j.D > j.D", 140, "調整不要の簡単な溜めダスト。Positive Bonusを得る壁割り用。", {kind:"ダスト",version:"2.01",sourceUrl:"https://mail.dustloop.com/w/GGST/Chipp_Zanuff/Combos"})
+  ]);
+  addRoutes("may", [
+    r("may-fs-aa-ch", "遠S", "空中カウンターヒット", "空中CH 遠S > [4]6S~6K > j.K > 近S > 6H > [2]8H > 2S > [4]6S > 壁張り付き > 6[H]", 197, "空中の相手に遠Sがカウンターしたときの壁割り。多くの高さで成立する。", {kind:"対空",pos:"画面中央",oki:"壁割り後に攻めを継続。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/May/Combos"}),
+    r("may-dolphin-h-ch", "[4]6H", "カウンターヒット", "CH [4]6H > ダッシュ（2溜め） > 2H > [2]8H > j.S > 5K > 6H > [4]6S（壁張り付き） > 6[H]", 172, "H版イルカカウンターから壁割り。ダッシュ中に下溜めを維持する。", {kind:"カウンターヒット",pos:"画面中央",oki:"壁割り後に攻めを継続。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/May/Combos"})
+  ]);
+  addRoutes("ky", [
+    r("ky-2p-rc", "2P", "ゲージ使用", "2P > 6P > 214S > RRC > 5[D] > 近S > 2S > 5H > 214K", 106, "小技から50%テンションで追撃し、Shock Stateを付けて運ぶ。", {kind:"ゲージ使用",meter:50,version:"2.0",oki:"214K後に起き攻め。",sourceUrl:"https://mail.dustloop.com/w/GGST/Ky_Kiske/Combos"}),
+    r("ky-2d-ch", "2D", "カウンターヒット", "CH 2D > 近S > dc > 近S > 2S > 5H > 214K, 2K > 6H（壁張り付き） > 214S", 201, "ミッドスクリーンの2Dカウンターから壁割りを狙う。近Sが届かない距離なら214Kで締める。", {kind:"カウンターヒット",pos:"画面中央",oki:"壁割り後に攻めを継続。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Ky_Kiske/Combos"}),
+    r("ky-5h-ch", "5H", "カウンターヒット", "CH 5H > 214K > 2K > 2D > 遅らせ236H", 112, "2S > 5Hの連係がカウンターしたとき、低負担で起き攻めへ移行する。", {kind:"カウンターヒット",oki:"236H後に起き攻め。",version:"2.0",sourceUrl:"https://mail.dustloop.com/w/GGST/Ky_Kiske/Combos"})
+  ]);
+  addRoutes("robo-ky", [
+    r("roboky-dust", "5D", "ダスト", "5[D] > 8 > j.H > jc9 > j.H > j.K > j.H > j.K > jc9 > j.H > j.DD", 215, "全キャラ共通の溜めダスト追撃。Ver.2.02資料のルート。", {kind:"ダスト",version:"2.02",sourceUrl:"https://mail.dustloop.com/w/GGST/Robo-Ky/Combos"}),
+    r("roboky-2d-ch-opt", "2D", "カウンターヒット", "CH 2D > 2e.214H > j.S > j.D > adc > j.S > j.H > adc > j.S > j.H > 近S > 214S", 180, "カウンターからエネルギー技で浮かせ、空中ダッシュで伸ばす高火力候補。難度が高く、ゲージ残量に注意。", {kind:"カウンターヒット",oki:"214S後に起き攻め。",version:"現行ページ掲載・版表記なし",sourceUrl:"https://mail.dustloop.com/w/GGST/Robo-Ky/Combos"})
+  ]);
+  addRoutes("slayer", [
+    r("slayer-2d-ch-simple", "2D", "カウンターヒット", "CH 2D > 2S > 214K~P", 99, "Pilebunkerの簡単な追撃。追加入力を重ねてダメージを伸ばすルートより操作が短い。", {kind:"カウンターヒット",version:"2.0",oki:"Pilebunker後に起き攻め。",sourceUrl:"https://mail.dustloop.com/w/GGST/Slayer/Combos"}),
+    r("slayer-2d-ch-loop", "2D", "カウンターヒット", "CH 2D > 近S > 2S > 214K~P（追加入力）×1", 221, "Ver.2.03掲載の高火力ルート。近Sが届く距離限定で、Pilebunkerの追加入力が必要。", {kind:"カウンターヒット",version:"2.03",oki:"Pilebunker後に起き攻め。",sourceUrl:"https://mail.dustloop.com/w/GGST/Slayer/Combos"})
+  ]);
+  addRoutes("baiken", [
+    r("baiken-2h-safejump", "2H", "カウンターヒット", "2H > 41236H[X] > 2K > 6K > 236K > 前ジャンプj.H", null, "Ver.2.0専門プレイヤー動画の起き攻めルート。最後の前ジャンプ攻撃を安全飛びとして使う。", {kind:"カウンターヒット",oki:"前ジャンプj.Hで安全飛び。",version:"2.0",source:"AxolotlBaiken – Ver.2.0 combos/pressure",sourceUrl:"https://www.youtube.com/watch?v=lhsNb4G-UG4"})
+  ]);
 })();
