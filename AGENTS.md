@@ -1,8 +1,10 @@
-# GGST Combo Book
+# Fighting Game Combo Book
 
 ## Project scope
 
-- Maintain a simple combo reference web app for every currently playable Guilty Gear -Strive- character. Keep unreleased characters out until they are available and have current-version data.
+- Maintain one simple combo reference web app with an in-page GGST / Street Fighter 6 switch. Keep the two games' character lists, combo collections, and personal My Combos separate. Include currently playable characters only.
+- Keep GGST route data and its existing `${characterId}ComboBook` browser storage keys intact. SF6 data lives in `sf6.js` and its personal selections use `sf6-${characterId}ComboBook` keys.
+- SF6 uses Classic notation and character-specific Year4 sources; label the source and applicable patch date. A source-backed candidate is not the same as in-game lab verification.
 - Support desktop and iPhone Safari layouts. Combo learning progress tracking is out of scope.
 - Cover game version 2.0 and later. Keep source/version metadata available in the details, but do not show practical-rating or training-verification labels in the browsing UI.
 
@@ -29,6 +31,7 @@
 - Keep the interface simple and responsive. Show character, situation, route, damage and meter where known, execution or setup conditions, post-combo oki, and supporting source/video links without requiring progress tracking.
 - When modifying the app, run the relevant checks and tests, then commit the changes locally.
 - Push to GitHub only when the user has approved publishing. The user approved publishing in this conversation; that approval remains valid for this project.
+- Keep game switching visible above character selection. Use a distinct but restrained SF6 accent color, retain desktop/iPhone layouts, and ensure filters and backups apply to the active game only.
 
 ## Handoff status
 
@@ -42,3 +45,5 @@
 - Treat sourced routes as researched candidates rather than independent in-game tests. Keep route damage blank when the available source does not provide a directly usable value.
 - The Ramlethal collection retains its links to RedDitto/SQ match footage and the specialist RAMLETHAL COMBOS Ver.2.01 guide. The Sol collection links to a current practical-combo video, Sol player Tatuma's videos, a 2.0 route guide, Dustloop, and the official 2.03 patch notes. Other character sets link their routes to individual Dustloop combo references and specialist material when available.
 - Before app changes, compare the implementation with this plan and report the differences. This initial comparison has been reported; use it to guide the next work.
+- SF6 is now an additional game in the same page. `sf6.js` contains the Street Fighter 6 roster in official order and Year4/Classic route candidates with per-character source links. Routes currently seeded for the first implementation are a starter pool; fill out remaining characters over time from character-specific current references. Do not invent routes for empty character sets.
+
