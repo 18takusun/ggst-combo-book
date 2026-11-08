@@ -38,7 +38,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;color:v
 <body>
 <header><div class="game-switch" role="group" aria-label="ゲームを選択"><button type="button" data-game="ggst" aria-pressed="true">GUILTY GEAR -STRIVE-</button><button type="button" data-game="sf6" aria-pressed="false">STREET FIGHTER 6</button></div><div class="eyebrow" id="gameEyebrow">GUILTY GEAR -STRIVE- / COMBO DATABASE</div><h1 id="pageTitle">RAMLETHAL COMBO BOOK</h1><p id="pageDescription">状況別・始動技別に整理。主力候補を優先表示。</p><div class="collection-bar"><label class="character-picker" for="characterSelect">キャラクター<select id="characterSelect" aria-label="表示するキャラクター"></select></label></div><p class="notation-note" id="sf6Notation" hidden>クラシック操作・テンキー表記：5=ニュートラル、2=下、236=波動、623=昇龍。P=パンチ、K=キック、L/M/H=弱/中/強、OD=ドライブ2本、DR/CDR=ドライブラッシュ／キャンセルドライブラッシュ。</p></header>
 <main>
-<nav class="library-tabs" id="referenceNav" aria-label="GGSTの参照内容"><button type="button" data-view="combos" aria-pressed="true">コンボ</button><button type="button" data-view="oki" aria-pressed="false">起き攻め</button><button type="button" data-view="pressure" aria-pressed="false">連携</button></nav>
+<nav class="library-tabs" id="referenceNav" aria-label="参照内容"><button type="button" data-view="combos" aria-pressed="true">コンボ</button><button type="button" data-view="oki" aria-pressed="false">起き攻め</button><button type="button" data-view="pressure" aria-pressed="false">連携</button></nav>
 <div class="toolbar">
 <input id="search" placeholder="コンボ名・始動技・コマンドで検索">
 <button id="viewToggle" class="combo-only" aria-pressed="false">マイコンボだけ表示（0）</button>
@@ -241,7 +241,7 @@ let characterById=new Map([...allCharacters,...sf6Characters].map(c=>[c.id,c]));
 let activeGame="ggst";
 const storageKey=()=>`${activeCharacter}ComboBook`;
 const referenceStorageKey=()=>`${activeCharacter}ReferenceBook`;
-const referenceSeedVersion="pressure-20261108-v3";
+const referenceSeedVersion="reference-20261108-v4";
 const pressureSeeds={
  ram:[
   {id:"ram-pressure-low",kind:"pressure",name:"中距離の下段択",sequence:"5K > 2K > 2D",notes:"5Kから下段へ。2Dはガードされると反撃を受けるため、相手が固まる場面で使い、普段は5K・2Kの遅らせや投げも混ぜる。",source:"Dustloop・Ramlethal Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Ramlethal_Valentine/Strategy"},
@@ -268,6 +268,26 @@ const pressureSeeds={
   {id:"elphelt-pressure-reset",kind:"pressure",name:"Chain Lollipopから再始動する読み合い",sequence:"214S~P / 214S~K > 214S（再始動）",notes:"Chain Lollipopを再始動すると約6Fの隙間ができ、5Pや6Pで割り込まれる。相手が手を出さないと読んだ時の崩し直しとして使い、毎回は使わない。割り込みを誘ってガードや別の締めに変える選択肢もある。",source:"Dustloop・Elphelt Counterstrategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Counterstrategy"},
   {id:"elphelt-pressure-bomb",kind:"pressure",name:"ボムから空中攻撃で有利を維持",sequence:"214H > j.S / j.H",notes:"ボムの爆発に合わせて空中攻撃を重ねる。j.Sはガード後に有利を取りやすく、j.Hはさらに有利だが相手側を向いている必要がある。",source:"Dustloop・Elphelt Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Strategy"},
   {id:"elphelt-pressure-bomb-land",kind:"pressure",name:"ボムから着地下段・投げ",sequence:"214H > 空中攻撃 / 着地2K / 着地投げ",notes:"ボムに合わせてj.Hなどを重ねるか、攻撃せずに着地して下段・投げを狙う。ボムが起き上がりに重なれば着地2Kは連続ガードになる。ボムが遅れている時は割り込まれるので、タイミングに注意。",source:"Dustloop・Elphelt Strategy",sourceUrl:"https://mail.dustloop.com/w/GGST/Elphelt_Valentine/Strategy"}
+ ]
+};
+const sf6ReferenceSeeds={
+ "sf6-mai":[
+  {id:"mai-oki-weak-bee",kind:"oki",name:"弱忍蜂後の基本択",sequence:"236LK > 前ステップ（+9F）",notes:"密着で歩き投げ、4HK持続重ね、後ろ歩きシミーを選ぶ。相手の無敵技や投げ抜け傾向を見て散らす。",sourceUrl:maiSourceUrl},
+  {id:"mai-oki-strong-ryuenbu",kind:"oki",name:"強龍炎舞から弱忍蜂",sequence:"214HP > 236LK（空中ヒット） > 前ステップ（約+12F）",notes:"約+30Fの有利を取り、前ステップ後に投げ・打撃・シミー。距離や空中ヒットの高さで状況が変わる。",sourceUrl:maiSourceUrl},
+  {id:"mai-oki-hien",kind:"oki",name:"飛燕連脚からムササビの舞",sequence:"5LK > LK > LK > j.214P（約+41F） > 前ジャンプHK",notes:"詐欺飛びを狙う。6F以上の無敵技には着地ガードできる目安だが、5Fの無敵技には負ける場合がある。",sourceUrl:maiSourceUrl},
+  {id:"mai-oki-corner-throw",kind:"oki",name:"画面端の前投げ後",sequence:"LP+LK > 前ステップ（+3F）",notes:"画面端で投げを重ね直すほか、2MP・5LK・後ろ歩きシミーを使い分ける。",sourceUrl:maiSourceUrl},
+  {id:"mai-pressure-confirm",kind:"pressure",name:"2中Pからヒット確認",sequence:"2MP > 2LP > 236LK",notes:"2MPから2LPまで出してヒットを確認。ガード時は弱忍蜂まで入れ込むと反撃を受けるので止める。",sourceUrl:maiSourceUrl},
+  {id:"mai-pressure-od-ryuenbu",kind:"pressure",name:"OD龍炎舞を混ぜる",sequence:"2MP > 214PP（OD龍炎舞） / 2LP / ガード",notes:"OD龍炎舞はガードされても-3F。相手の暴れを読んだ時の選択肢にし、毎回出さず通常技止めやガードも混ぜる。ドライブを2本消費。",sourceUrl:maiSourceUrl},
+  {id:"mai-pressure-od-fan",kind:"pressure",name:"OD花蝶扇ホールド",sequence:"OD 236PP（ホールド） > 投げ / 2LK / 6MP",notes:"跳ね返りが当たると約+25F、ガードされても約+21Fの時間差攻め。ジャストパリィされると大きく不利なので連発しない。",sourceUrl:maiSourceUrl}
+ ],
+ "sf6-vega":[
+  {id:"vega-oki-strong-mine",kind:"oki",name:"画面端・強バックフィスト後",sequence:"214HP（+31F） > 前ステップ（+12F） > 4HK",notes:"イビルニーの持続を重ねる。ヒット時は+7Fで2MPへ、ガード時も+4Fで投げ間合い。投げ・2LP・シミー・再度4HKを選ぶ。",sourceUrl:vegaSourceUrl},
+  {id:"vega-oki-psycho",kind:"oki",name:"弱・中サイコクラッシャー締め",sequence:"236LP / 236MP > 前ステップ（密着+5F）",notes:"投げ、2LK、4HKを重ねる。シミーは最速投げ抜けに負けるため、投げ抜けを遅らせる相手に使う。",sourceUrl:vegaSourceUrl},
+  {id:"vega-oki-mine-explosion",kind:"oki",name:"サイコマイン誘爆後・中央",sequence:"サイコマイン誘爆（約+42F） > 前ステップ×2 > 投げ / 2MP",notes:"中央での基本的な誘爆後の攻め。画面端では前ステップ後に持続中段や詐欺飛びも候補。",sourceUrl:vegaSourceUrl},
+  {id:"vega-oki-throw-corner",kind:"oki",name:"画面端の弱・中バックフィスト後",sequence:"214LP / 214MP > 5HP+HK（最速DI）",notes:"ドライブインパクトを起き上がりに重ねる。相手のDI返しや無敵技には返されるため、相手のゲージと防御を見て使う。",sourceUrl:vegaSourceUrl},
+  {id:"vega-pressure-mine",kind:"pressure",name:"サイコマインをガード起爆",sequence:"サイコマイン付与 > 4~6LP / MP（サイコクラッシャー）",notes:"ガードさせて誘爆すると弱・中版は+6F、強版は+5F。普段は反撃される技でも、マイン起爆で有利を取れる。",sourceUrl:vegaSourceUrl},
+  {id:"vega-pressure-plus6",kind:"pressure",name:"誘爆後の+6Fから打撃・投げ",sequence:"誘爆で+6F > 4HK / 2MP / 遅らせ投げ",notes:"4HKは4F暴れと相打ちになっても2MPへつながる。最速投げは空振りする状況があるため、少し遅らせる。",sourceUrl:vegaSourceUrl},
+  {id:"vega-pressure-center-bf",kind:"pressure",name:"中央・弱中バックフィスト後の再接近",sequence:"214LP / 214MP > DR 2MK > 214MP",notes:"後ろ受け身には通常技が重ならないため、ドライブラッシュから下段を重ねてマインを誘爆させる。ガードされても誘爆後に有利を取りやすい。",sourceUrl:vegaSourceUrl}
  ]
 };
 function populateCharacterPicker(){
@@ -321,8 +341,8 @@ function loadCharacter(character){
   if(combos.length!==before)save();
  }
  combos.forEach(c=>delete c.favorite);
- references=pressureSeeds[character]||[];
- if(!isSF6)try{const key=referenceStorageKey(),savedReferences=JSON.parse(localStorage.getItem(key)||"[]"),versionKey=`${key}SeedVersion`;if(Array.isArray(savedReferences)){if(localStorage.getItem(versionKey)!==referenceSeedVersion){const seededIds=new Set(references.map(reference=>reference.id));references=[...references,...savedReferences.filter(reference=>!seededIds.has(reference.id))];localStorage.setItem(key,JSON.stringify(references));localStorage.setItem(versionKey,referenceSeedVersion)}else references=savedReferences}}catch(e){console.warn("参照データの読み込みに失敗",e)}
+ references=isSF6?(sf6ReferenceSeeds[character]||[]):(pressureSeeds[character]||[]);
+ try{const key=referenceStorageKey(),savedReferences=JSON.parse(localStorage.getItem(key)||"[]"),versionKey=`${key}SeedVersion`;if(Array.isArray(savedReferences)){if(localStorage.getItem(versionKey)!==referenceSeedVersion){const savedById=new Map(savedReferences.map(reference=>[reference.id,reference])),seededIds=new Set(references.map(reference=>reference.id));references=[...references.map(reference=>({...reference,...savedById.get(reference.id)})),...savedReferences.filter(reference=>!seededIds.has(reference.id))];localStorage.setItem(key,JSON.stringify(references));localStorage.setItem(versionKey,referenceSeedVersion)}else references=savedReferences}}catch(e){console.warn("参照データの読み込みに失敗",e)}
  selectedOnly=false;
  for(const id of ["search","situation","topicFilter","position"]){$(id).value=""}
  $("sort").value="recommended";
@@ -331,6 +351,8 @@ function loadCharacter(character){
 $("characterSelect").value=character;
  $("starter").placeholder=isSF6?"例：2LK / 5MP / 2MK":"例：近S / 2K / 6P";
  $("recipe").placeholder=isSF6?"例：2LK > 2LP > 236LK":"例：近S > 遠S > HS";
+ $("referenceName").placeholder=isSF6?"例：弱忍蜂後の前ステップ":"例：ダウロ締め後の近S重ね";
+ $("referenceSequence").placeholder=isSF6?"例：236LK > 前ステップ":"例：2H > 623P";
  $("filters").hidden=isSF6;
  $("sf6Notation").hidden=!isSF6;
  document.querySelectorAll(".game-switch [data-game]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.game===activeGame)));
@@ -338,7 +360,8 @@ $("characterSelect").value=character;
  $("solSources").hidden=true;
  $("otherSources").hidden=isRam;
  if(!isRam){$("otherSources").innerHTML=`<strong>${esc(meta.name)}の参考資料</strong><br><a href="${esc(meta.sourceUrl)}" target="_blank" rel="noreferrer">${esc(meta.sourceTitle||"キャラ別コンボ資料")}</a>${meta.videoUrl?` ／ <a href="${esc(meta.videoUrl)}" target="_blank" rel="noreferrer">${esc(meta.videoTitle||"解説・実戦動画")}</a>`:""}<br>${isSF6?"現行Year4資料をもとにした候補です。入力はクラシック操作のテンキー表記です。":"記載ルートは各キャラのコンボ資料をもとにした候補です。現行版との照合が未完了のルートは、詳細にその旨を表示しています。"}`}
- $("referenceNav").hidden=isSF6;
+ $("referenceNav").hidden=false;
+ $("referenceNav").setAttribute("aria-label",isSF6?"SF6の参照内容":"GGSTの参照内容");
  $("gameEyebrow").textContent=isSF6?"STREET FIGHTER 6 / COMBO DATABASE":"GUILTY GEAR -STRIVE- / COMBO DATABASE";
  document.title=`${isSF6?"SF6":"GGST"} ${meta.name} Combo Book`;
  render();
@@ -350,7 +373,7 @@ $("characterSelect").addEventListener("change",e=>loadCharacter(e.target.value))
 $("viewToggle").onclick=()=>{selectedOnly=!selectedOnly;render()};
 $("toggleGroups").onclick=()=>{const groups=[...document.querySelectorAll(".starter-details")];const shouldOpen=!groups.some(group=>group.open);groups.forEach(group=>group.open=shouldOpen);$("toggleGroups").textContent=shouldOpen?"すべてたたむ":"すべて開く"};
 function syncLibraryView(){const comboView=currentView==="combos";document.querySelectorAll(".combo-only").forEach(element=>element.hidden=!comboView);$("referenceAddBtn").hidden=comboView;$("referenceAddBtn").textContent=currentView==="oki"?"＋ 起き攻めを追加":"＋ 連携を追加";$("sectionTitle").textContent=currentView==="oki"?"起き攻め一覧":currentView==="pressure"?"連携一覧":"コンボ一覧";$("search").placeholder=currentView==="oki"?"起き攻め・始動技・コンボで検索":currentView==="pressure"?"連携名・手順・ポイントで検索":"コンボ名・始動技・コマンドで検索";document.querySelectorAll(".library-tabs [data-view]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.view===currentView)))}
-function renderReferences(){syncLibraryView();const query=$("search").value.trim().toLowerCase();let items=[];if(currentView==="oki"){items=combos.filter(combo=>combo.oki&&!/^(要検証|要確認)/.test(combo.oki)).map(combo=>({id:`combo-${combo.id}`,name:`${combo.starterLabel||combo.starter||"始動未設定"}始動後`,sequence:combo.recipe,notes:combo.oki,source:combo.sourceUrl,origin:"コンボ一覧から"}));items.push(...references.filter(reference=>reference.kind==="oki"))}else items=references.filter(reference=>reference.kind==="pressure");items=items.filter(item=>!query||[item.name,item.sequence,item.notes,item.origin].join(" ").toLowerCase().includes(query));$("resultCount").textContent=`${items.length} 件表示`;$("toggleGroups").hidden=true;$("cards").innerHTML=items.length?items.map(item=>{const sourceUrl=item.sourceUrl||item.source;return `<article class="card reference-card"><div class="route-main"><div class="recipe">${esc(item.name)}</div>${item.sequence?`<div class="reference-sequence">${esc(item.sequence)}</div>`:""}<p class="note">${esc(item.notes)}</p>${sourceUrl?`<p class="note"><a href="${esc(validSource(sourceUrl))}" target="_blank" rel="noreferrer">参考資料を開く</a></p>`:""}${item.origin?`<small class="reference-origin">${esc(item.origin)}</small>`:""}${item.kind?`<div class="cardtools"><button data-ref-action="edit" data-id="${esc(item.id)}">編集</button><button data-ref-action="delete" data-id="${esc(item.id)}">削除</button></div>`:""}</div></article>`}).join(""):currentView==="oki"?'<div class="empty">起き攻め情報はまだありません。コンボの詳細を確認するか、「起き攻めを追加」から登録できます。</div>':'<div class="empty">連携はまだ登録されていません。「連携を追加」から手順とポイントを登録できます。</div>'}
+function renderReferences(){syncLibraryView();const query=$("search").value.trim().toLowerCase();let items=[];if(currentView==="oki"){if(activeGame!=="sf6")items=combos.filter(combo=>combo.oki&&!/^(要検証|要確認)/.test(combo.oki)).map(combo=>({id:`combo-${combo.id}`,name:`${combo.starterLabel||combo.starter||"始動未設定"}始動後`,sequence:combo.recipe,notes:combo.oki,source:combo.sourceUrl,origin:"コンボ一覧から"}));items.push(...references.filter(reference=>reference.kind==="oki"))}else items=references.filter(reference=>reference.kind==="pressure");items=items.filter(item=>!query||[item.name,item.sequence,item.notes,item.origin].join(" ").toLowerCase().includes(query));$("resultCount").textContent=`${items.length} 件表示`;$("toggleGroups").hidden=true;$("cards").innerHTML=items.length?items.map(item=>{const sourceUrl=item.sourceUrl||item.source;return `<article class="card reference-card"><div class="route-main"><div class="recipe">${esc(item.name)}</div>${item.sequence?`<div class="reference-sequence">${esc(item.sequence)}</div>`:""}<p class="note">${esc(item.notes)}</p>${sourceUrl?`<p class="note"><a href="${esc(validSource(sourceUrl))}" target="_blank" rel="noreferrer">参考資料を開く</a></p>`:""}${item.origin?`<small class="reference-origin">${esc(item.origin)}</small>`:""}${item.kind?`<div class="cardtools"><button data-ref-action="edit" data-id="${esc(item.id)}">編集</button><button data-ref-action="delete" data-id="${esc(item.id)}">削除</button></div>`:""}</div></article>`}).join(""):currentView==="oki"?'<div class="empty">起き攻め情報はまだありません。コンボの詳細を確認するか、「起き攻めを追加」から登録できます。</div>':'<div class="empty">連携はまだ登録されていません。「連携を追加」から手順とポイントを登録できます。</div>'}
 function validSource(value){try{const url=new URL(value);return ["http:","https:"].includes(url.protocol)?url.href:""}catch{return ""}}
 function render(){
 if(currentView!=="combos"){renderReferences();return}
@@ -379,7 +402,7 @@ function editReference(id){const item=references.find(reference=>reference.id===
 function deleteReference(id){if(confirm("この参照項目を削除しますか？")){references=references.filter(reference=>reference.id!==id);try{localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}catch(e){console.warn("参照データの保存に失敗",e)}render()}}
 $("referenceAddBtn").onclick=()=>{$("referenceForm").reset();$("referenceId").value="";$("referenceDialogTitle").textContent=currentView==="oki"?"起き攻めを追加":"連携を追加";$("referenceEditor").showModal()};
 $("referenceCancel").onclick=()=>$("referenceEditor").close();
-$("referenceForm").onsubmit=e=>{e.preventDefault();const source=$("referenceSource").value.trim();if(source&&!validSource(source)){alert("参考URLは http または https のURLを入力してください。");return}const id=$("referenceId").value||`ref-${Date.now()}`,old=references.find(reference=>reference.id===id),item={...old,id,kind:currentView==="oki"?"oki":"pressure",name:$("referenceName").value.trim(),sequence:$("referenceSequence").value.trim(),notes:$("referenceNotes").value.trim(),source};references=old?references.map(reference=>reference.id===id?item:reference):[item,...references];try{localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}catch(error){console.warn("参照データの保存に失敗",error)}$("referenceEditor").close();render()};
+$("referenceForm").onsubmit=e=>{e.preventDefault();const source=$("referenceSource").value.trim();if(source&&!validSource(source)){alert("参考URLは http または https のURLを入力してください。");return}const id=$("referenceId").value||`ref-${Date.now()}`,old=references.find(reference=>reference.id===id),item={...old,id,kind:currentView==="oki"?"oki":"pressure",name:$("referenceName").value.trim(),sequence:$("referenceSequence").value.trim(),notes:$("referenceNotes").value.trim(),source,sourceUrl:source};references=old?references.map(reference=>reference.id===id?item:reference):[item,...references];try{localStorage.setItem(referenceStorageKey(),JSON.stringify(references))}catch(error){console.warn("参照データの保存に失敗",error)}$("referenceEditor").close();render()};
 $("cancelBtn").onclick=()=>$("editor").close();
 $("comboForm").onsubmit=e=>{e.preventDefault();let id=$("editId").value||("c"+Date.now()),old=combos.find(c=>c.id===id);let c={...old,id,name:$("name").value,starter:$("starter").value,kind:$("kind").value,topic:$("comboTopic").value,pos:$("pos").value,damage:$("damage").value===""?null:/^\d+$/.test($("damage").value)?+$("damage").value:$("damage").value,recipe:$("recipe").value,notes:$("notes").value,version:$("version").value,source:old?.source||"ユーザー登録",main:old?.main||false,difficulty:old?.difficulty||"未評価",meter:old?.meter??null,resources:old?.resources,oki:old?.oki||""};if(old)combos=combos.map(x=>x.id===id?c:x);else combos.unshift(c);save();$("editor").close();render()};
 ["search","situation","topicFilter","position","sort"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
