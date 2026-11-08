@@ -32,6 +32,7 @@
 - When modifying the app, run the relevant checks and tests, then commit the changes locally.
 - Push to GitHub only when the user has approved publishing. The user approved publishing in this conversation; that approval remains valid for this project.
 - Keep game switching visible above character selection. Use a distinct but restrained SF6 accent color, retain desktop/iPhone layouts, and ensure filters and backups apply to the active game only.
+- GGST also has separate Combo, Oki, and Pressure reference views. Derive Oki entries from non-placeholder combo `oki` data; store additional Oki and pressure notes per character in `${characterId}ReferenceBook`, and include them in GGST backups. Keep these views out of SF6 unless requested.
 
 ## Handoff status
 
